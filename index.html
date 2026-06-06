@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Elena Xiao — AI &amp; Data Product</title>
+<meta name="description" content="Elena Xiao — I build practical AI &amp; data products. FinTech / crypto risk, AI automation, data infrastructure." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg0:#04050d; --bg1:#0a0e22; --bg2:#0e1432;
+  --ink:#eaeefb; --muted:#9aa3cc; --faint:#5b6398;
+  --cyan:#3fe7ff; --violet:#a374ff; --pink:#ff7ad9; --gold:#ffd76a;
+  --line:rgba(120,150,255,.22);
+  --card:rgba(18,24,54,.72); --cardbd:rgba(120,150,255,.28);
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --sans:'Space Grotesk',system-ui,-apple-system,Segoe UI,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--bg0);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--cyan);text-decoration:none}
+#sky{position:fixed;inset:0;display:block;z-index:0}
+#field{position:fixed;inset:0;z-index:2;transform:translate(0,0);will-change:transform}
+
+/* ---------- intro ---------- */
+#intro{position:fixed;inset:0;z-index:30;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;background:radial-gradient(120% 90% at 50% 40%,rgba(14,20,50,.65),rgba(4,5,13,.92));
+  transition:opacity 1s ease, visibility 1s ease;padding:24px}
+#intro.gone{opacity:0;visibility:hidden;pointer-events:none}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.32em;color:var(--cyan);text-transform:uppercase;opacity:0;animation:rise .9s .15s forwards}
+#intro h1{font-size:clamp(38px,8vw,86px);font-weight:700;margin:.18em 0 .12em;letter-spacing:-.01em;
+  background:linear-gradient(100deg,#fff 10%,var(--cyan) 45%,var(--violet) 85%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  opacity:0;animation:rise 1s .3s forwards}
+#intro .tag{font-size:clamp(15px,2.4vw,20px);color:var(--muted);max-width:620px;opacity:0;animation:rise 1s .5s forwards}
+#intro .tag b{color:var(--ink);font-weight:600}
+.enter{margin-top:34px;font-family:var(--mono);font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);
+  border:1px solid var(--cardbd);background:rgba(20,28,62,.5);padding:14px 28px;border-radius:40px;cursor:pointer;
+  opacity:0;animation:rise 1s .7s forwards, pulse 2.6s 1.8s infinite;transition:transform .2s,border-color .2s,background .2s}
+.enter:hover{transform:translateY(-2px);border-color:var(--cyan);background:rgba(30,42,86,.7)}
+.hint{margin-top:18px;font-size:12px;color:var(--faint);font-family:var(--mono);opacity:0;animation:rise 1s .9s forwards}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(63,231,255,.0)}50%{box-shadow:0 0 26px 0 rgba(63,231,255,.18)}}
+
+/* ---------- nodes ---------- */
+.node{position:absolute;transform:translate(-50%,-50%);cursor:pointer;z-index:3;
+  display:flex;flex-direction:column;align-items:center;gap:7px;user-select:none;transition:filter .25s}
+.dot{border-radius:50%;position:relative;transition:transform .25s, box-shadow .25s}
+.dot::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:1px solid var(--line);opacity:.5;transition:opacity .25s,transform .25s}
+.node:hover .dot{transform:scale(1.18)}
+.node:hover .dot::after{opacity:1;transform:scale(1.12)}
+.node .nlabel{font-size:12.5px;font-weight:500;color:var(--muted);white-space:nowrap;letter-spacing:.01em;
+  background:rgba(6,9,24,.55);padding:2px 8px;border-radius:7px;transition:color .25s}
+.node:hover .nlabel{color:var(--ink)}
+.node.center{cursor:default}
+.node.center .dot{width:118px;height:118px;
+  background:radial-gradient(circle at 38% 32%,#bfefff,#3fe7ff 38%,#7a4dff 78%,#3a1d7a);
+  box-shadow:0 0 50px rgba(63,231,255,.55),0 0 120px rgba(140,90,255,.4)}
+.node.center .nlabel{font-family:var(--mono);font-size:13px;color:var(--cyan);background:none;letter-spacing:.15em;text-transform:uppercase}
+.node.center .cname{font-size:24px;font-weight:700;color:#fff;background:none;letter-spacing:-.01em}
+.node.project .dot{width:30px;height:30px;background:radial-gradient(circle at 36% 32%,#caf6ff,var(--cyan) 55%,#1a7fb8);
+  box-shadow:0 0 22px rgba(63,231,255,.5)}
+.node.project.gold .dot{background:radial-gradient(circle at 36% 32%,#fff2c8,var(--gold) 55%,#b8821a);box-shadow:0 0 26px rgba(255,215,106,.6)}
+.node.era .dot{width:17px;height:17px;background:radial-gradient(circle at 36% 32%,#e7d4ff,var(--violet) 60%,#5b34a8);box-shadow:0 0 16px rgba(163,116,255,.5)}
+.node.era .nlabel{font-size:11.5px;color:var(--faint)}
+.node.spark .dot{width:13px;height:13px;background:radial-gradient(circle at 36% 32%,#ffd9f1,var(--pink) 60%,#a93b86);box-shadow:0 0 16px rgba(255,122,217,.55)}
+.node.spark .nlabel{font-size:11px;color:var(--faint)}
+.node.pinged .dot{animation:ping 1.1s ease 3}
+@keyframes ping{0%,100%{transform:scale(1)}50%{transform:scale(1.45)}}
+
+/* ---------- detail panel ---------- */
+#scrim{position:fixed;inset:0;z-index:40;background:rgba(3,4,11,.55);backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:.3s}
+#scrim.show{opacity:1;visibility:visible}
+#panel{position:fixed;top:0;right:0;height:100%;width:min(460px,92vw);z-index:41;background:linear-gradient(180deg,var(--bg2),var(--bg1));
+  border-left:1px solid var(--cardbd);box-shadow:-30px 0 80px rgba(0,0,0,.5);transform:translateX(105%);transition:transform .42s cubic-bezier(.2,.8,.2,1);
+  padding:38px 34px;overflow-y:auto}
+#panel.show{transform:translateX(0)}
+#panel .ptag{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan)}
+#panel h2{font-size:27px;margin:.3em 0 .1em;line-height:1.12}
+#panel .sub{color:var(--violet);font-weight:500;font-size:14px;margin-bottom:18px}
+#panel .award{display:inline-block;font-family:var(--mono);font-size:12px;color:var(--gold);border:1px solid rgba(255,215,106,.4);
+  background:rgba(255,215,106,.08);padding:5px 11px;border-radius:30px;margin-bottom:16px}
+#panel p{color:var(--muted);line-height:1.62;font-size:15px}
+#panel .meta{font-family:var(--mono);font-size:12.5px;color:var(--faint);margin-top:16px}
+#panel .stack{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
+#panel .chip{font-family:var(--mono);font-size:11.5px;color:var(--ink);border:1px solid var(--cardbd);background:rgba(30,40,80,.4);padding:5px 10px;border-radius:8px}
+#panel .note{margin-top:16px;font-size:12px;color:var(--faint);font-style:italic}
+.repolink{display:inline-block;margin-top:18px;font-family:var(--mono);font-size:12.5px;color:var(--cyan);
+  border:1px solid rgba(63,231,255,.4);background:rgba(63,231,255,.08);padding:8px 14px;border-radius:9px;transition:.2s}
+.repolink:hover{background:rgba(63,231,255,.18);transform:translateY(-1px)}
+.rcard .repolink{margin-top:12px;padding:6px 11px;font-size:11.5px}
+.pclose{position:absolute;top:20px;right:22px;width:34px;height:34px;border-radius:50%;border:1px solid var(--cardbd);background:rgba(20,28,62,.5);
+  color:var(--muted);font-size:17px;cursor:pointer;line-height:1;transition:.2s}
+.pclose:hover{color:#fff;border-color:var(--cyan)}
+
+/* ---------- top corners ---------- */
+#brand{position:fixed;top:22px;left:26px;z-index:20;font-family:var(--mono);font-size:13px;letter-spacing:.14em;color:var(--muted);opacity:0;transition:opacity .6s}
+#brand b{color:var(--ink)}
+#links{position:fixed;top:20px;right:24px;z-index:20;display:flex;gap:10px;opacity:0;transition:opacity .6s}
+#links a{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--cardbd);background:rgba(16,22,50,.5);
+  padding:8px 13px;border-radius:9px;transition:.2s}
+#links a:hover{color:#fff;border-color:var(--cyan);transform:translateY(-1px)}
+.show-ui{opacity:1 !important}
+
+/* ---------- ask bar ---------- */
+#ask{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(30px);z-index:25;width:min(680px,94vw);
+  opacity:0;transition:opacity .6s,transform .6s}
+#ask.show-ui{opacity:1;transform:translateX(-50%) translateY(0)}
+#answer{background:var(--card);border:1px solid var(--cardbd);border-radius:16px;padding:0 18px;margin-bottom:10px;
+  max-height:0;overflow:hidden;transition:max-height .4s ease,padding .4s ease;backdrop-filter:blur(10px)}
+#answer.open{max-height:280px;padding:16px 18px;overflow-y:auto}
+#answer .who{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);margin-bottom:8px}
+#answer .txt{color:var(--ink);line-height:1.6;font-size:14.5px;white-space:pre-wrap}
+#answer .txt .cur{display:inline-block;width:8px;height:16px;background:var(--cyan);margin-left:2px;vertical-align:-3px;animation:blink 1s steps(1) infinite}
+#answer .jump{margin-top:12px}
+#answer .jump button{font-family:var(--mono);font-size:11.5px;color:var(--cyan);background:rgba(63,231,255,.08);border:1px solid rgba(63,231,255,.35);
+  padding:6px 12px;border-radius:8px;cursor:pointer;transition:.2s}
+#answer .jump button:hover{background:rgba(63,231,255,.18)}
+@keyframes blink{50%{opacity:0}}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:9px;justify-content:center}
+.chips button{font-family:var(--mono);font-size:12px;color:var(--muted);background:rgba(16,22,50,.62);border:1px solid var(--cardbd);
+  padding:8px 13px;border-radius:30px;cursor:pointer;transition:.2s;backdrop-filter:blur(8px)}
+.chips button:hover{color:#fff;border-color:var(--cyan);transform:translateY(-1px)}
+.inputwrap{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--cardbd);border-radius:30px;
+  padding:6px 6px 6px 18px;backdrop-filter:blur(10px)}
+.inputwrap .ic{color:var(--cyan);font-family:var(--mono)}
+#q{flex:1;background:none;border:none;outline:none;color:var(--ink);font-family:var(--sans);font-size:15px;padding:10px 0}
+#q::placeholder{color:var(--faint)}
+#send{border:none;background:linear-gradient(100deg,var(--cyan),var(--violet));color:#04050d;font-weight:700;
+  width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:17px;transition:.2s}
+#send:hover{transform:scale(1.06)}
+
+#hud{position:fixed;left:26px;bottom:24px;z-index:20;font-family:var(--mono);font-size:11px;color:var(--faint);opacity:0;transition:opacity .6s}
+
+@media (max-width:640px){
+  #brand{display:none}
+  .node.era .nlabel,.node.spark .nlabel{display:none}
+  #hud{display:none}
+  #panel{padding:30px 22px}
+  #ask{bottom:14px}
+  .chips{max-height:64px;overflow:hidden}
+}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001s!important;transition-duration:.05s!important}}
+
+/* ---------- links bar buttons ---------- */
+#links button{font-family:var(--mono);font-size:12px;cursor:pointer;border:1px solid var(--cardbd);background:rgba(16,22,50,.5);
+  color:var(--muted);padding:8px 13px;border-radius:9px;transition:.2s}
+#links button:hover,#links a:hover{color:#fff;border-color:var(--cyan);transform:translateY(-1px)}
+#links .primary{color:#04050d;font-weight:700;background:linear-gradient(100deg,var(--cyan),var(--violet));border-color:transparent}
+#links .primary:hover{color:#04050d;filter:brightness(1.08)}
+#links .cv{color:var(--gold);border-color:rgba(255,215,106,.4)}
+#links .cv:hover{border-color:var(--gold)}
+
+/* ---------- intro secondary actions ---------- */
+.introactions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:22px;opacity:0;animation:rise 1s .85s forwards}
+.introactions a,.introactions button{font-family:var(--mono);font-size:12.5px;color:var(--muted);background:none;border:none;cursor:pointer;
+  border-bottom:1px solid transparent;padding:2px 0;transition:.2s}
+.introactions a:hover,.introactions button:hover{color:var(--cyan);border-color:var(--cyan)}
+
+/* ---------- RESUME VIEW ---------- */
+#resume{position:fixed;inset:0;z-index:60;overflow-y:auto;opacity:0;visibility:hidden;transition:opacity .45s ease,visibility .45s ease;
+  background:radial-gradient(120% 80% at 50% 0%,#0e1432,#06081a 70%);}
+#resume.show{opacity:1;visibility:visible}
+.rwrap{max-width:880px;margin:0 auto;padding:64px 28px 120px}
+.rhead{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:1px solid var(--line);padding-bottom:34px;margin-bottom:14px}
+.rkick{font-family:var(--mono);font-size:11px;letter-spacing:.26em;color:var(--cyan);text-transform:uppercase}
+.rhead h1{font-size:clamp(34px,6vw,52px);margin:.18em 0 .14em;font-weight:700;letter-spacing:-.01em;
+  background:linear-gradient(100deg,#fff,var(--cyan) 60%,var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+.rtag{color:var(--muted);font-size:16px;max-width:560px;line-height:1.55;margin:0 0 16px}
+.rlinks{display:flex;gap:10px;flex-wrap:wrap}
+.rlinks a{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--cardbd);background:rgba(16,22,50,.5);
+  padding:8px 13px;border-radius:9px;transition:.2s}
+.rlinks a:hover{color:#fff;border-color:var(--cyan)}
+.rlinks .cv{color:#04050d;font-weight:700;background:linear-gradient(100deg,var(--cyan),var(--violet));border-color:transparent}
+.rtoggle{flex-shrink:0;font-family:var(--mono);font-size:12px;color:var(--ink);cursor:pointer;border:1px solid var(--cardbd);
+  background:rgba(20,28,62,.6);padding:11px 16px;border-radius:30px;transition:.2s;white-space:nowrap}
+.rtoggle:hover{border-color:var(--cyan);transform:translateY(-1px)}
+.rsec{margin-top:46px}
+.rsec .rh{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--violet);margin-bottom:18px;
+  display:flex;align-items:center;gap:12px}
+.rsec .rh::after{content:"";flex:1;height:1px;background:var(--line)}
+.rabout{color:var(--ink);font-size:17px;line-height:1.7;max-width:680px}
+.rabout b{color:var(--cyan);font-weight:600}
+.rgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.rcard{background:var(--card);border:1px solid var(--cardbd);border-radius:14px;padding:20px 20px 22px;transition:.2s}
+.rcard:hover{border-color:var(--cyan);transform:translateY(-3px)}
+.rcard .rt{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan)}
+.rcard.gold .rt{color:var(--gold)}
+.rcard h3{font-size:18px;margin:.4em 0 .3em}
+.rcard .rsub{color:var(--violet);font-size:13px;margin-bottom:10px}
+.rcard p{color:var(--muted);font-size:14px;line-height:1.55;margin:0 0 12px}
+.rcard .rstk{display:flex;flex-wrap:wrap;gap:6px}
+.rcard .rstk span{font-family:var(--mono);font-size:10.5px;color:var(--ink);border:1px solid var(--cardbd);background:rgba(30,40,80,.4);padding:4px 8px;border-radius:7px}
+.rexp{border-left:2px solid var(--line);padding:2px 0 2px 22px;margin-left:6px}
+.rexp .ritem{position:relative;padding-bottom:26px}
+.rexp .ritem::before{content:"";position:absolute;left:-29px;top:5px;width:11px;height:11px;border-radius:50%;
+  background:radial-gradient(circle at 36% 32%,#e7d4ff,var(--violet) 60%,#5b34a8);box-shadow:0 0 12px rgba(163,116,255,.6)}
+.rexp .ritem h3{font-size:17px;margin:0 0 2px}
+.rexp .ritem .rsub{color:var(--violet);font-family:var(--mono);font-size:12px;margin-bottom:8px}
+.rexp .ritem p{color:var(--muted);font-size:14px;line-height:1.55;margin:0;max-width:660px}
+.rskills{display:flex;flex-wrap:wrap;gap:9px}
+.rskills span{font-family:var(--mono);font-size:13px;color:var(--ink);border:1px solid var(--cardbd);background:rgba(24,32,66,.45);padding:8px 13px;border-radius:9px}
+.rcred{margin-top:14px;font-size:12.5px;color:var(--faint)}
+.rcontact{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.rcontact a{font-family:var(--mono);font-size:14px;color:var(--cyan);border:1px solid var(--cardbd);background:rgba(16,22,50,.5);padding:11px 18px;border-radius:10px;transition:.2s}
+.rcontact a:hover{border-color:var(--cyan);transform:translateY(-1px)}
+.rcontact .cv{color:#04050d;font-weight:700;background:linear-gradient(100deg,var(--cyan),var(--violet));border-color:transparent}
+@media (max-width:640px){.rgrid{grid-template-columns:1fr}.rhead{flex-direction:column}.rwrap{padding:40px 20px 100px}}
+</style>
+</head>
+<body>
+<canvas id="sky"></canvas>
+<div id="field"></div>
+
+<div id="brand"><b>ELENA XIAO</b> · AI &amp; Data Product</div>
+<div id="links">
+  <button id="resumeViewBtn" class="primary">▤ Resume View</button>
+  <a href="Elena_Xiao_CV.pdf" target="_blank" rel="noopener" class="cv">↓ CV</a>
+  <a href="https://www.linkedin.com/in/xiao-elena/" target="_blank" rel="noopener">LinkedIn</a>
+  <a href="https://github.com/leini8891" target="_blank" rel="noopener">GitHub</a>
+  <a href="mailto:leini8891@gmail.com">Email</a>
+</div>
+<div id="hud">drag to explore · click a star</div>
+
+<!-- intro -->
+<div id="intro">
+  <div class="kicker">AI &amp; Data Product · FinTech / Crypto</div>
+  <h1>Elena Xiao</h1>
+  <div class="tag">I build <b>practical AI &amp; data products</b>. 10+ years in product &amp; data, 5 in crypto — now shipping LLM &amp; agent-powered tools for risk, automation and consumer AI.</div>
+  <button class="enter" id="enterBtn">Explore my universe →</button>
+  <div class="introactions">
+    <a href="Elena_Xiao_CV.pdf" target="_blank" rel="noopener">↓ Download CV</a>
+    <button id="introResume">▤ Resume View</button>
+    <a href="mailto:leini8891@gmail.com">✉ Contact</a>
+  </div>
+  <div class="hint">drag to pan · click any star · or just ask me anything</div>
+</div>
+
+<!-- detail panel -->
+<div id="scrim"></div>
+<aside id="panel">
+  <button class="pclose" id="pclose">✕</button>
+  <div id="pbody"></div>
+</aside>
+
+<!-- ask bar -->
+<div id="ask">
+  <div id="answer"><div class="who">Elena · agent</div><div class="txt" id="atxt"></div><div class="jump" id="ajump"></div></div>
+  <div class="chips" id="chips"></div>
+  <div class="inputwrap">
+    <span class="ic">&gt;_</span>
+    <input id="q" placeholder="ask me anything — e.g. show me your best project" autocomplete="off"/>
+    <button id="send">↵</button>
+  </div>
+</div>
+
+<!-- resume / linear view -->
+<div id="resume">
+  <div class="rwrap">
+    <div class="rhead">
+      <div>
+        <div class="rkick">AI &amp; Data Product · FinTech / Crypto</div>
+        <h1>Elena Xiao</h1>
+        <p class="rtag">I build practical AI &amp; data products. 10+ years in product &amp; data, 5 in crypto — now shipping LLM &amp; agent-powered tools for risk, automation and consumer AI.</p>
+        <div class="rlinks">
+          <a href="Elena_Xiao_CV.pdf" target="_blank" rel="noopener" class="cv">↓ Download CV</a>
+          <a href="https://www.linkedin.com/in/xiao-elena/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/leini8891" target="_blank" rel="noopener">GitHub</a>
+          <a href="mailto:leini8891@gmail.com">Email</a>
+        </div>
+      </div>
+      <button class="rtoggle" id="closeResume">✦ Universe View</button>
+    </div>
+    <div id="rbody"></div>
+  </div>
+</div>
+
+<script>
+/* ============ DATA ============ */
+const NODES = [
+  {id:'center',type:'center',ang:0,rad:0,label:'I build practical AI & data products',cname:'Elena Xiao'},
+
+  {id:'auntie',type:'project',cls:'gold',ang:-58,rad:200,label:'Auntie AI 🏆',
+    tag:'AI Product · 1st place',title:'Auntie AI — Anti-Scam Co-Pilot',sub:'Tencent Cloud AI Coding Challenge · Winner',
+    award:'🏆 1st of 35 projects · 279 participants',
+    body:"A senior-friendly AI copilot that flags scam &amp; fraud signals before a risky transaction happens, explains the risk in plain language, and loops in family members. I owned the scam-detection logic, the explanation UX, the false-positive / false-negative tradeoffs and the AI safety guardrails — then shipped and demoed it.",
+    meta:'60-day national build · solo-owned the winning product',
+    repo:'https://github.com/leini8891/auntie-ai',
+    stack:['LLM','Prompt + Guardrails','Fraud detection','Product','Demo & pitch']},
+
+  {id:'listing',type:'project',ang:-8,rad:230,label:'Listing Monitor',
+    tag:'AI / Data · Python',title:'Listing Monitor',sub:'Cross-exchange listing intelligence',
+    body:"A Python pipeline that watches new token listings across 7+ exchanges and CoinGecko — ingestion, ETL and enrichment end to end — with a 4-tier RWA / token classifier (confidence-scored, with data provenance) feeding Lark alerts and a Streamlit dashboard.",
+    meta:'7+ venues · full ETL · built from scratch',
+    repo:'https://github.com/leini8891/Listing-Monitor',
+    stack:['Python','REST APIs','ETL','Classifier','Streamlit','Lark']},
+
+  {id:'tokenlab',type:'project',ang:40,rad:205,label:'Token Launch Lab',
+    tag:'AI · Risk',title:'Token Launch Lab',sub:'Adversarial AI risk harness',
+    body:"An adversarial AI harness that runs &ldquo;pre-mortems&rdquo; on crypto token launches — stress-testing a launch to surface risk signals, failure modes and go / no-go considerations before anything goes live. Paired with ApplyPilot, a small workflow-automation experiment.",
+    meta:'AI as a red-team, not just a chatbot',
+    repo:'https://github.com/leini8891/token-launch-lab',
+    stack:['LLM','Adversarial prompting','Risk modeling']},
+
+  {id:'aibi',type:'project',ang:92,rad:215,label:'AI + BI Risk Automation',
+    tag:'AI / Data · Project-based',title:'AI + BI Risk Reporting Automation',sub:'LLM-powered risk reporting',
+    body:"LLM / Dify reporting workflows over transaction, fund-flow, market-feed and user-behavior data that cut risk-report turnaround from <b>hours to minutes</b> for leadership decisions — and translated large withdrawals &amp; suspicious transfers into risk indicators and alert rules.",
+    meta:'Partnered with BI, data &amp; AI engineering on guardrails',
+    note:'Independent / project-based work',
+    stack:['LLM / Dify','SQL','AML signals','Alerting']},
+
+  {id:'dragon',type:'project',ang:150,rad:210,label:'Dragon Boat',
+    tag:'Data Platform · Bybit',title:'Dragon Boat — 0→1 Platform',sub:'Demand & automation platform @ Bybit',
+    body:"A 0→1 demand &amp; automation platform stitching Lark, Jira and Confluence into one flow — standardizing BI / product intake, SLA tracking, delivery alerts and a value-feedback loop across business teams — backed by 18 data-governance SOPs.",
+    meta:'Flagship 0→1 build at Bybit BI Center',
+    stack:['Automation','Data governance','Lark/Jira/Confluence','SOPs']},
+
+  {id:'compliance',type:'project',ang:205,rad:225,label:'Compliance Self-Service',
+    tag:'Risk · Bybit',title:'Compliance Self-Service Analytics',sub:'Legal / Compliance dashboards @ Bybit',
+    body:"Self-service dashboards for Legal &amp; Compliance across NL / CA / UK markets — surfacing KYC status, user holdings, fund size, product exposure and risk insights for auditable decisions — cutting ad-hoc data pulls from days to minutes.",
+    meta:'NL · CA · UK · KYC & risk insight',
+    stack:['Tableau','Data warehouse','KYC','Compliance']},
+
+  {id:'bybit',type:'era',ang:122,rad:330,label:'Bybit · 2022–24',
+    tag:'Experience',title:'Bybit Fintech',sub:'Lead Data Product Analyst, BI Center · 2022–2024',
+    body:"Five years deep in crypto. At Bybit I led the BI Center's product &amp; data work — the Dragon Boat platform, compliance self-service, AI customer-service analytics (KPI frameworks, user personas, 660+ CS hours saved / month, 80+ agents), a $3M campaign-cost analysis across 27 stakeholders and 9 systems, and the data-governance backbone.",
+    stack:['0→1 platforms','Risk & compliance','CS analytics','Data governance']},
+
+  {id:'binance',type:'era',ang:60,rad:355,label:'Binance · 2021–22',
+    tag:'Experience',title:'Binance',sub:'Senior Product Manager · 2021–2022',
+    body:"Worked on Binance's crypto market-data product line — building user-growth and loyalty mechanics including a points → reward → NFT-avatar loop, and running cross-platform delivery across web, mobile and admin for 60+ engineers.",
+    stack:['Growth','Loyalty / NFT','Cross-platform delivery']},
+
+  {id:'capgemini',type:'era',ang:235,rad:345,label:'Capgemini · 16–21',
+    tag:'Experience',title:'Capgemini China',sub:'Senior Product Manager · 2016–2021',
+    body:"Led agile teams delivering Starbucks &amp; McDonald's e-commerce / digital-transformation platforms across POS, OMS, CRM and payments — cutting order-loss risk by ~30% through better idempotency, callback compensation and monitoring. Plus market research across Japan, the US and Hong Kong.",
+    stack:['Enterprise product','E-commerce','−30% order-loss','Agile delivery']},
+
+  {id:'spark1',type:'spark',ang:18,rad:330,label:'🎤 applauded English talk',
+    tag:'Fun fact',title:'I gave a talk that got applause',sub:'…in my second language',
+    body:"English isn't my first language — I'm a native Chinese speaker — but I gave an English talk at a hackathon that earned a round of applause. I'm pushing hard toward English-first product roles and I love being in the room.",stack:['Native Chinese','Fluent English','Loves the stage']},
+
+  {id:'spark2',type:'spark',ang:172,rad:300,label:'📚 fast learner',
+    tag:'Fun fact',title:'Self-described 学霸',sub:'I pick up new stacks fast',
+    body:"I learn fast and I learn by building. In the last year I taught myself enough Python, LLM tooling and on-chain analytics to ship my own prototypes — Listing Monitor, Token Launch Lab, Auntie AI — instead of just writing specs for someone else to build.",stack:['Python','LLM tooling','On-chain analytics','0→1']},
+
+  {id:'spark3',type:'spark',ang:268,rad:300,label:'🌏 a bit about me',
+    tag:'Fun fact',title:'A bit about me',sub:'Singapore-based',
+    body:"Based in Singapore, with a finance background (B.A. Finance; CFA Level I &amp; PMP in the toolkit) that gives my risk &amp; data instincts their edge. But the work speaks louder than the credentials — the projects are the real story.",stack:['Singapore-based','Finance background','Builder at heart']},
+];
+
+/* ============ ASK-ME SCRIPT ============ */
+const ASK = [
+  {k:['best','strongest','proud','favorite','favourite','最','厉害','best project','win','won','award','tencent'],
+   focus:'auntie',
+   a:"My favorite is Auntie AI — an anti-scam AI copilot for elderly users. It catches scam signals before money moves and explains the risk in plain language.\n\nIt won 1st place out of 35 projects (279 participants) in a 60-day Tencent Cloud AI challenge — and I owned the whole thing, from the detection logic to the demo."},
+  {k:['hire','why','work with','collaborate','reason','合作','雇','recruit'],
+   focus:'center',
+   a:"I turn ambiguous business problems into practical AI &amp; data products — from problem framing to working prototypes and measurable outcomes.\n\n10+ years across Bybit, Binance and global enterprise. I go 0→1, I build my own prototypes, and I think in risk &amp; compliance — most recently 1st place in a national AI product challenge."},
+  {k:['now','building','currently','these days','present','在做','切'],
+   focus:'listing',
+   a:"Right now I'm going deep on hands-on AI — agent workflows, LLM apps and Python data pipelines like Listing Monitor and Token Launch Lab.\n\nI'm looking for AI product / AI-deployment roles where I get to ship real things. This whole site is part of that pivot."},
+  {k:['crypto','risk','compliance','aml','exchange','web3','bybit','fintech'],
+   focus:'compliance',
+   a:"Five years in crypto, mostly around risk. At Bybit I built compliance self-service dashboards (NL/CA/UK), AML &amp; large-withdrawal alert logic, and the data-governance backbone — plus an LLM workflow that cut risk reporting from hours to minutes."},
+  {k:['fun','surprise','random','interesting','cool','tell me something'],
+   focus:'spark1',
+   a:"Here's one: English isn't my first language, but I gave an English talk at a hackathon that got a round of applause. I'm a native Chinese speaker leaning all the way into English-first AI product work. (Click the pink stars for more.)"},
+  {k:['contact','reach','email','hire me','connect','linkedin','talk','touch','联系'],
+   focus:'center',
+   a:"Easiest is email: leini8891@gmail.com.\n\nOr find me on LinkedIn (@xiao-elena) and GitHub (@leini8891) — links are top-right. I'd love to hear what you're building."},
+  {k:['who','about','you','yourself','elena','介绍'],
+   focus:'center',
+   a:"I'm Elena — an AI &amp; data product builder. A decade in product and data across fintech and crypto (Bybit, Binance, Capgemini), and lately a hands-on AI builder shipping LLM &amp; agent tools.\n\nClick any star to dig in, or ask me something specific."},
+];
+const FALLBACK={focus:null,a:"Good question — I'm a simple site-agent, so try one of the chips below, or ask about my best project, why to hire me, what I'm building now, or how to reach me. You can also just click the stars."};
+
+const CHIPS=[
+  ['✦ Best project','show me your best project'],
+  ['Why hire you?','why should I hire you'],
+  ['Building now','what are you building now'],
+  ['Crypto & risk','tell me about your crypto risk work'],
+  ['Fun fact','tell me a fun fact'],
+  ['Reach you','how do I reach you'],
+];
+
+/* ============ RENDER NODES ============ */
+const field=document.getElementById('field');
+const els={};
+NODES.forEach(n=>{
+  const d=document.createElement('div');
+  d.className='node '+n.type+(n.cls?(' '+n.cls):'');
+  if(n.type==='center'){
+    d.innerHTML='<div class="dot"></div><div class="nlabel">'+n.label+'</div>';
+    const nm=document.createElement('div');nm.className='nlabel cname';nm.textContent=n.cname;
+    d.insertBefore(nm,d.children[1]);
+  }else{
+    d.innerHTML='<div class="dot"></div><div class="nlabel">'+n.label+'</div>';
+    d.addEventListener('click',e=>{e.stopPropagation();openPanel(n.id);});
+  }
+  field.appendChild(d);
+  els[n.id]=d;
+});
+
+/* ============ LAYOUT + ANIMATION ============ */
+const sky=document.getElementById('sky'),ctx=sky.getContext('2d');
+let W,H,DPR,stars=[],cx,cy,scale=1;
+function resize(){
+  DPR=Math.min(window.devicePixelRatio||1,2);
+  W=sky.width=innerWidth*DPR;H=sky.height=innerHeight*DPR;
+  sky.style.width=innerWidth+'px';sky.style.height=innerHeight+'px';
+  cx=innerWidth/2;cy=innerHeight/2;
+  scale=Math.min(1,Math.min(innerWidth,innerHeight)/720);
+  stars=[];const n=Math.round((innerWidth*innerHeight)/9000);
+  for(let i=0;i<n;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:(Math.random()*1.3+.2)*DPR,b:Math.random(),s:Math.random()*.02+.004});
+}
+addEventListener('resize',resize);resize();
+
+const pos={}; // computed pixel positions
+let t=0,panX=0,panY=0,tPanX=0,tPanY=0,mx=0,my=0;
+function loop(){
+  t+=0.016;
+  panX+=(tPanX-panX)*.08; panY+=(tPanY-panY)*.08;
+  const px=panX+mx*22, py=panY+my*22;
+  field.style.transform=`translate(${px}px,${py}px)`;
+  // stars
+  ctx.clearRect(0,0,W,H);
+  for(const s of stars){s.b+=s.s;const a=.35+Math.abs(Math.sin(s.b))*.6;
+    ctx.globalAlpha=a;ctx.fillStyle='#bcd0ff';ctx.beginPath();ctx.arc(s.x+px*.25*DPR,s.y+py*.25*DPR,s.r,0,7);ctx.fill();}
+  ctx.globalAlpha=1;
+  // node positions
+  NODES.forEach(n=>{
+    const drift=n.type==='center'?0:Math.sin(t*0.5+n.ang)*6;
+    const r=(n.rad*scale)+drift;
+    const a=n.ang*Math.PI/180;
+    const x=cx+Math.cos(a)*r, y=cy+Math.sin(a)*r;
+    pos[n.id]={x,y};
+    els[n.id].style.left=x+'px';els[n.id].style.top=y+'px';
+  });
+  // lines from center
+  const c=pos.center;const off=(px)*DPR,offy=(py)*DPR;
+  NODES.forEach(n=>{
+    if(n.id==='center')return;
+    const p=pos[n.id];
+    const grad=ctx.createLinearGradient(c.x*DPR,c.y*DPR,p.x*DPR,p.y*DPR);
+    let col=n.type==='project'?'63,231,255':n.type==='era'?'163,116,255':'255,122,217';
+    if(n.cls==='gold')col='255,215,106';
+    grad.addColorStop(0,'rgba('+col+',.30)');grad.addColorStop(1,'rgba('+col+',.04)');
+    ctx.strokeStyle=grad;ctx.lineWidth=(n.type==='project'?1.3:.8)*DPR;
+    ctx.beginPath();ctx.moveTo(c.x*DPR+off,c.y*DPR+offy);ctx.lineTo(p.x*DPR+off,p.y*DPR+offy);ctx.stroke();
+  });
+  requestAnimationFrame(loop);
+}
+loop();
+
+/* ============ INTERACTION: pan + parallax ============ */
+addEventListener('mousemove',e=>{mx=(e.clientX/innerWidth-.5);my=(e.clientY/innerHeight-.5);});
+let drag=false,sx,sy,sox,soy;
+const stage=document.body;
+function down(x,y){drag=true;sx=x;sy=y;sox=tPanX;soy=tPanY;}
+function move(x,y){if(!drag)return;tPanX=sox+(x-sx);tPanY=soy+(y-sy);
+  tPanX=Math.max(-260,Math.min(260,tPanX));tPanY=Math.max(-200,Math.min(200,tPanY));}
+function up(){drag=false;}
+sky.addEventListener('mousedown',e=>down(e.clientX,e.clientY));
+addEventListener('mousemove',e=>move(e.clientX,e.clientY));
+addEventListener('mouseup',up);
+sky.addEventListener('touchstart',e=>{down(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});
+addEventListener('touchmove',e=>{if(drag){move(e.touches[0].clientX,e.touches[0].clientY);}},{passive:true});
+addEventListener('touchend',up);
+
+/* ============ PANEL ============ */
+const scrim=document.getElementById('scrim'),panel=document.getElementById('panel'),pbody=document.getElementById('pbody');
+function openPanel(id){
+  const n=NODES.find(x=>x.id===id);if(!n||n.type==='center')return;
+  let h='<div class="ptag">'+(n.tag||'')+'</div><h2>'+(n.title||n.label)+'</h2>';
+  if(n.sub)h+='<div class="sub">'+n.sub+'</div>';
+  if(n.award)h+='<div class="award">'+n.award+'</div>';
+  h+='<p>'+n.body+'</p>';
+  if(n.meta)h+='<div class="meta">→ '+n.meta+'</div>';
+  if(n.stack)h+='<div class="stack">'+n.stack.map(s=>'<span class="chip">'+s+'</span>').join('')+'</div>';
+  if(n.repo)h+='<a class="repolink" href="'+n.repo+'" target="_blank" rel="noopener">↗ View on GitHub</a>';
+  if(n.note)h+='<div class="note">'+n.note+'</div>';
+  pbody.innerHTML=h;
+  scrim.classList.add('show');panel.classList.add('show');
+}
+function closePanel(){scrim.classList.remove('show');panel.classList.remove('show');}
+document.getElementById('pclose').onclick=closePanel;
+scrim.onclick=closePanel;
+addEventListener('keydown',e=>{if(e.key==='Escape')closePanel();});
+
+/* ============ INTRO ============ */
+const intro=document.getElementById('intro');
+function enter(){intro.classList.add('gone');
+  ['brand','links','hud','ask'].forEach(id=>document.getElementById(id).classList.add('show-ui'));
+}
+document.getElementById('enterBtn').onclick=enter;
+
+/* ============ ASK-ME ============ */
+const chips=document.getElementById('chips'),answer=document.getElementById('answer'),atxt=document.getElementById('atxt'),ajump=document.getElementById('ajump');
+CHIPS.forEach(([lbl,q])=>{const b=document.createElement('button');b.textContent=lbl;b.onclick=()=>ask(q);chips.appendChild(b);});
+let typing=null;
+function ask(qstr){
+  const q=qstr.toLowerCase();
+  let hit=FALLBACK;
+  for(const item of ASK){if(item.k.some(k=>q.includes(k))){hit=item;break;}}
+  answer.classList.add('open');ajump.innerHTML='';
+  typeOut(hit.a.replace(/&amp;/g,'&').replace(/&ldquo;|&rdquo;/g,'"'));
+  if(hit.focus){
+    const n=NODES.find(x=>x.id===hit.focus);
+    if(n&&n.type!=='center'){
+      const jb=document.createElement('button');jb.textContent='↗ open '+(n.label.replace(/[🏆🎤📚🌏]/g,'').trim());
+      jb.onclick=()=>openPanel(hit.focus);
+      ajump.appendChild(jb);
+    }
+    pingNode(hit.focus);
+  }
+}
+function typeOut(str){
+  if(typing)clearInterval(typing);
+  atxt.innerHTML='';let i=0;
+  const cur=document.createElement('span');cur.className='cur';atxt.appendChild(cur);
+  typing=setInterval(()=>{
+    if(i>=str.length){clearInterval(typing);cur.remove();return;}
+    cur.insertAdjacentText('beforebegin',str[i]);i++;
+    answer.scrollTop=answer.scrollHeight;
+  },14);
+}
+function pingNode(id){const el=els[id];if(!el)return;el.classList.add('pinged');
+  tPanX=0;tPanY=0;setTimeout(()=>el.classList.remove('pinged'),3500);}
+const qin=document.getElementById('q');
+document.getElementById('send').onclick=()=>{if(qin.value.trim()){ask(qin.value);qin.value='';}};
+qin.addEventListener('keydown',e=>{if(e.key==='Enter'&&qin.value.trim()){ask(qin.value);qin.value='';}});
+
+/* ============ RESUME / LINEAR VIEW ============ */
+const SKILLS=['AI product design','LLM / agent workflows','Dify · prompt + guardrails','Python','SQL','ETL & data pipelines',
+  'Streamlit','Tableau','On-chain analytics (Dune/Nansen)','Risk & AML signals','KYC / compliance analytics',
+  'Data governance & SOPs','0→1 product','KPI / metrics frameworks','Cross-functional delivery'];
+const ABOUT="I'm Elena — I build <b>practical AI &amp; data products</b>. Over the past decade I've worked across fintech and crypto, shipping everything from 0→1 data platforms and risk &amp; compliance analytics to LLM-assisted automation. Lately I'm hands-on with AI: agent workflows, an anti-fraud copilot, and Python data pipelines I build and ship myself. I frame ambiguous problems, prototype fast, and care about measurable outcomes. Native Chinese, fluent English, Singapore-based.";
+
+function buildResume(){
+  const proj=NODES.filter(n=>n.type==='project');
+  const eras=NODES.filter(n=>n.type==='era');
+  let h='';
+  h+='<div class="rsec"><div class="rh">About</div><p class="rabout">'+ABOUT+'</p></div>';
+  h+='<div class="rsec"><div class="rh">Featured Projects</div><div class="rgrid">';
+  proj.forEach(n=>{
+    h+='<div class="rcard'+(n.cls?(' '+n.cls):'')+'">';
+    h+='<div class="rt">'+n.tag+'</div><h3>'+n.title.replace(/ — /,' · ')+'</h3>';
+    if(n.award)h+='<div class="rsub" style="color:var(--gold)">'+n.award+'</div>';
+    else if(n.sub)h+='<div class="rsub">'+n.sub+'</div>';
+    h+='<p>'+n.body+'</p>';
+    h+='<div class="rstk">'+n.stack.map(s=>'<span>'+s+'</span>').join('')+'</div>';
+    if(n.repo)h+='<a class="repolink" href="'+n.repo+'" target="_blank" rel="noopener">↗ View on GitHub</a>';
+    h+='</div>';
+  });
+  h+='</div></div>';
+  h+='<div class="rsec"><div class="rh">Experience</div><div class="rexp">';
+  eras.forEach(n=>{h+='<div class="ritem"><h3>'+n.title+'</h3><div class="rsub">'+n.sub+'</div><p>'+n.body+'</p></div>';});
+  h+='</div></div>';
+  h+='<div class="rsec"><div class="rh">Skills</div><div class="rskills">'+SKILLS.map(s=>'<span>'+s+'</span>').join('')+'</div>';
+  h+='<div class="rcred">Finance background · B.A. Finance · CFA Level I · PMP · Chinese (native) · English (fluent)</div></div>';
+  h+='<div class="rsec"><div class="rh">Contact</div><div class="rcontact">'+
+     '<a href="mailto:leini8891@gmail.com" class="cv">✉ leini8891@gmail.com</a>'+
+     '<a href="https://www.linkedin.com/in/xiao-elena/" target="_blank" rel="noopener">LinkedIn</a>'+
+     '<a href="https://github.com/leini8891" target="_blank" rel="noopener">GitHub</a></div></div>';
+  document.getElementById('rbody').innerHTML=h;
+}
+buildResume();
+const resumeEl=document.getElementById('resume');
+function openResume(){enter();resumeEl.classList.add('show');resumeEl.scrollTop=0;}
+function closeResumeView(){resumeEl.classList.remove('show');}
+document.getElementById('resumeViewBtn').onclick=openResume;
+document.getElementById('introResume').onclick=openResume;
+document.getElementById('closeResume').onclick=closeResumeView;
+</script>
+</body>
+</html>
