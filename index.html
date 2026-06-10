@@ -29,23 +29,23 @@ a{color:var(--cyan);text-decoration:none}
   display:flex;flex-direction:column;align-items:center;gap:7px;user-select:none;transition:filter .25s}
 .dot{border-radius:50%;position:relative;transition:transform .25s, box-shadow .25s}
 .dot::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:1px solid var(--line);opacity:.5;transition:opacity .25s,transform .25s}
-.node:hover .dot{transform:scale(1.18)}
-.node:hover .dot::after{opacity:1;transform:scale(1.12)}
+.node:hover .dot{transform:scale(1.15)}
+.node:hover .dot::after{opacity:1;transform:scale(1.1)}
 .node .nlabel{font-size:12.5px;font-weight:500;color:var(--muted);white-space:nowrap;letter-spacing:.01em;
   background:rgba(6,9,24,.55);padding:2px 8px;border-radius:7px;transition:color .25s}
 .node:hover .nlabel{color:var(--ink)}
+.dot.c-cyan{background:radial-gradient(circle at 36% 32%,#caf6ff,var(--cyan) 55%,#1a7fb8);box-shadow:0 0 22px rgba(63,231,255,.5)}
+.dot.c-gold{background:radial-gradient(circle at 36% 32%,#fff2c8,var(--gold) 55%,#b8821a);box-shadow:0 0 26px rgba(255,215,106,.6)}
+.dot.c-violet{background:radial-gradient(circle at 36% 32%,#e7d4ff,var(--violet) 60%,#5b34a8);box-shadow:0 0 18px rgba(163,116,255,.5)}
+.dot.c-pink{background:radial-gradient(circle at 36% 32%,#ffd9f1,var(--pink) 60%,#a93b86);box-shadow:0 0 16px rgba(255,122,217,.55)}
 .node.center{cursor:default}
 .node.center .dot{width:118px;height:118px;
   background:radial-gradient(circle at 38% 32%,#bfefff,#3fe7ff 38%,#7a4dff 78%,#3a1d7a);
   box-shadow:0 0 50px rgba(63,231,255,.55),0 0 120px rgba(140,90,255,.4)}
 .node.center .nlabel{font-family:var(--mono);font-size:13px;color:var(--cyan);background:none;letter-spacing:.15em;text-transform:uppercase}
 .node.center .cname{font-size:24px;font-weight:700;color:#fff;background:none;letter-spacing:-.01em}
-.node.project .dot{width:30px;height:30px;background:radial-gradient(circle at 36% 32%,#caf6ff,var(--cyan) 55%,#1a7fb8);
-  box-shadow:0 0 22px rgba(63,231,255,.5)}
-.node.project.gold .dot{background:radial-gradient(circle at 36% 32%,#fff2c8,var(--gold) 55%,#b8821a);box-shadow:0 0 26px rgba(255,215,106,.6)}
-.node.era .dot{width:17px;height:17px;background:radial-gradient(circle at 36% 32%,#e7d4ff,var(--violet) 60%,#5b34a8);box-shadow:0 0 16px rgba(163,116,255,.5)}
-.node.era .nlabel{font-size:11.5px;color:var(--faint)}
-.node.spark .dot{width:13px;height:13px;background:radial-gradient(circle at 36% 32%,#ffd9f1,var(--pink) 60%,#a93b86);box-shadow:0 0 16px rgba(255,122,217,.55)}
+.node.group .nlabel{font-size:13.5px;font-weight:600;color:var(--ink)}
+.node.item .nlabel{font-size:11px;color:var(--faint)}
 .node.spark .nlabel{font-size:11px;color:var(--faint)}
 .node.pinged .dot{animation:ping 1.1s ease 3}
 @keyframes ping{0%,100%{transform:scale(1)}50%{transform:scale(1.45)}}
@@ -67,6 +67,15 @@ a{color:var(--cyan);text-decoration:none}
 #panel .stack{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
 #panel .chip{font-family:var(--mono);font-size:11.5px;color:var(--ink);border:1px solid var(--cardbd);background:rgba(30,40,80,.4);padding:5px 10px;border-radius:8px}
 #panel .note{margin-top:16px;font-size:12px;color:var(--faint);font-style:italic}
+.backbtn{display:block;font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:none;cursor:pointer;padding:0 0 16px;transition:.2s;text-align:left}
+.backbtn:hover{color:var(--cyan)}
+.glist{display:flex;flex-direction:column;gap:9px;margin-top:20px}
+.glist button{text-align:left;font-family:var(--sans);font-size:14.5px;color:var(--ink);background:rgba(30,40,80,.4);
+  border:1px solid var(--cardbd);padding:12px 15px;border-radius:11px;cursor:pointer;transition:.2s}
+.glist button:hover{border-color:var(--cyan);transform:translateX(3px)}
+.glist button .gt{font-family:var(--mono);font-size:10.5px;color:var(--faint);display:block;margin-top:3px}
+.soon{margin-top:18px;padding:13px 15px;border:1px dashed var(--cardbd);border-radius:11px;color:var(--faint);font-size:13.5px;line-height:1.6}
+.soon b{color:var(--muted);font-weight:500}
 .repolink{display:inline-block;margin-top:18px;font-family:var(--mono);font-size:12.5px;color:var(--cyan);
   border:1px solid rgba(63,231,255,.4);background:rgba(63,231,255,.08);padding:8px 14px;border-radius:9px;transition:.2s}
 .repolink:hover{background:rgba(63,231,255,.18);transform:translateY(-1px)}
@@ -116,7 +125,7 @@ a{color:var(--cyan);text-decoration:none}
 
 @media (max-width:640px){
   #brand{display:none}
-  .node.era .nlabel,.node.spark .nlabel{display:none}
+  .node.item .nlabel,.node.spark .nlabel{display:none}
   #hud{display:none}
   #panel{padding:30px 22px}
   #ask{bottom:14px}
@@ -133,7 +142,7 @@ a{color:var(--cyan);text-decoration:none}
 #links .cv{color:var(--gold);border-color:rgba(255,215,106,.4)}
 #links .cv:hover{border-color:var(--gold)}
 
-/* ---------- RESUME VIEW ---------- */
+/* ---------- PROFESSIONAL MODE (default) ---------- */
 #resume{position:fixed;inset:0;z-index:60;overflow-y:auto;opacity:0;visibility:hidden;transition:opacity .45s ease,visibility .45s ease;
   background:radial-gradient(120% 80% at 50% 0%,#0e1432,#06081a 70%);}
 #resume.show{opacity:1;visibility:visible}
@@ -191,13 +200,13 @@ a{color:var(--cyan);text-decoration:none}
 
 <div id="brand"><b>ELENA XIAO</b> · AI &amp; Data Product</div>
 <div id="links">
-  <button id="resumeViewBtn" class="primary">▤ Resume View</button>
+  <button id="resumeViewBtn" class="primary">▤ Professional Mode</button>
   <a href="Elena_Xiao_CV.pdf" target="_blank" rel="noopener" class="cv">↓ CV</a>
   <a href="https://www.linkedin.com/in/xiao-elena/" target="_blank" rel="noopener">LinkedIn</a>
   <a href="https://github.com/leini8891" target="_blank" rel="noopener">GitHub</a>
   <a href="mailto:leini8891@gmail.com">Email</a>
 </div>
-<div id="hud">drag to explore · click a star</div>
+<div id="hud">drag to explore · click a planet</div>
 
 <!-- detail panel -->
 <div id="scrim"></div>
@@ -208,7 +217,7 @@ a{color:var(--cyan);text-decoration:none}
 
 <!-- ask bar -->
 <div id="ask">
-  <div id="answer"><div class="who">Elena · agent</div><div class="txt" id="atxt"></div><div class="jump" id="ajump"></div></div>
+  <div id="answer"><div class="who">Elena's agent</div><div class="txt" id="atxt"></div><div class="jump" id="ajump"></div></div>
   <div class="chips" id="chips"></div>
   <div class="inputwrap">
     <span class="ic">&gt;_</span>
@@ -217,7 +226,7 @@ a{color:var(--cyan);text-decoration:none}
   </div>
 </div>
 
-<!-- resume / linear view (default) -->
+<!-- professional mode (default) -->
 <div id="resume" class="show">
   <div class="rwrap">
     <div class="rhead">
@@ -239,78 +248,120 @@ a{color:var(--cyan);text-decoration:none}
 </div>
 
 <script>
-/* ============ DATA ============ */
-const NODES = [
-  {id:'center',type:'center',ang:0,rad:0,label:'I build practical AI & data products',cname:'Elena Xiao'},
+/* ============ UNIVERSE DATA ============ */
+const CENTER={id:'center',label:'I build practical AI & data products',cname:'Elena Xiao'};
 
-  {id:'auntie',type:'project',cls:'gold',ang:-58,rad:200,label:'Auntie AI 🏆',
+const GROUPS=[
+  {id:'ailab',icon:'🤖',name:'AI Lab',ang:-62,rad:240,size:62,col:'cyan',
+   desc:"Where I build with LLMs end to end — products I designed, coded and shipped myself. The biggest planet on purpose: this is where I'm pointed."},
+  {id:'dataorbit',icon:'📊',name:'Data Orbit',ang:-2,rad:258,size:44,col:'cyan',
+   desc:"Pipelines and platforms — the data work that runs every day, from cross-exchange ingestion to a 0→1 demand &amp; automation platform."},
+  {id:'riskplanet',icon:'🛡️',name:'Risk Planet',ang:58,rad:240,size:42,col:'violet',
+   desc:"Five years of crypto risk — AML signals, compliance analytics and LLM-powered risk reporting. Turning regulatory pressure into product."},
+  {id:'growthmoon',icon:'🌙',name:'Growth Moon',ang:122,rad:248,size:34,col:'gold',
+   desc:"The business side of data — customer-service analytics, loyalty mechanics and campaign numbers leadership can actually trust."},
+  {id:'memory',icon:'📚',name:'Memory Archive',ang:182,rad:235,size:28,col:'pink',
+   desc:"Notes and stories from the pivot — writing in progress."},
+  {id:'signal',icon:'📡',name:'Signal Port',ang:240,rad:228,size:26,col:'violet',
+   desc:"Open channel. If you're building something interesting, I'd love to hear about it."},
+];
+
+const ITEMS=[
+  {id:'auntie',group:'ailab',ang:-100,rad:95,size:26,col:'gold',label:'Auntie AI 🏆',featured:true,
     tag:'AI Product · 1st place',title:'Auntie AI — Anti-Scam Co-Pilot',sub:'Tencent Cloud AI Coding Challenge · Winner',
     award:'🏆 1st of 35 projects · 279 participants',
     body:"A senior-friendly AI copilot that flags scam &amp; fraud signals before a risky transaction happens, explains the risk in plain language, and loops in family members. I owned the scam-detection logic, the explanation UX, the false-positive / false-negative tradeoffs and the AI safety guardrails — then shipped and demoed it.",
     meta:'60-day national build · solo-owned the winning product',
     repo:'https://github.com/leini8891/auntie-ai',
     stack:['LLM','Prompt + Guardrails','Fraud detection','Product','Demo & pitch']},
+  {id:'tokenlab',group:'ailab',ang:-25,rad:88,size:17,col:'cyan',label:'Token Launch Lab',featured:true,
+    tag:'AI · Risk',title:'Token Launch Lab',sub:'Adversarial AI risk harness',
+    body:"An adversarial AI harness that runs &ldquo;pre-mortems&rdquo; on crypto token launches — stress-testing a launch to surface risk signals, failure modes and go / no-go considerations before anything goes live.",
+    meta:'AI as a red-team, not just a chatbot',
+    repo:'https://github.com/leini8891/token-launch-lab',
+    stack:['LLM','Adversarial prompting','Risk modeling']},
+  {id:'applypilot',group:'ailab',ang:40,rad:74,size:12,col:'cyan',label:'ApplyPilot',featured:false,
+    tag:'AI · Experiment',title:'ApplyPilot',sub:'Workflow-automation experiment',
+    body:"A small agent-tooling experiment automating the repetitive parts of an application workflow — built fast, mostly to learn how far current agent stacks can really go.",
+    stack:['Agents','Automation','Python']},
 
-  {id:'listing',type:'project',ang:-8,rad:230,label:'Listing Monitor',
+  {id:'listing',group:'dataorbit',ang:-50,rad:88,size:17,col:'cyan',label:'Listing Monitor',featured:true,
     tag:'AI / Data · Python',title:'Listing Monitor',sub:'Cross-exchange listing intelligence',
     body:"A Python pipeline that watches new token listings across 7+ exchanges and CoinGecko — ingestion, ETL and enrichment end to end — with a 4-tier RWA / token classifier (confidence-scored, with data provenance) feeding Lark alerts and a Streamlit dashboard.",
     meta:'7+ venues · full ETL · built from scratch',
     repo:'https://github.com/leini8891/Listing-Monitor',
     stack:['Python','REST APIs','ETL','Classifier','Streamlit','Lark']},
+  {id:'dragon',group:'dataorbit',ang:38,rad:80,size:15,col:'cyan',label:'Dragon Boat',featured:true,
+    tag:'Data Platform · Bybit',title:'Dragon Boat — 0→1 Platform',sub:'Demand & automation platform @ Bybit',
+    body:"A 0→1 demand &amp; automation platform stitching Lark, Jira and Confluence into one flow — standardizing BI / product intake, SLA tracking, delivery alerts and a value-feedback loop across business teams — backed by 18 data-governance SOPs.",
+    meta:'Flagship 0→1 build at Bybit BI Center',
+    stack:['Automation','Data governance','Lark/Jira/Confluence','SOPs']},
 
-  {id:'tokenlab',type:'project',ang:40,rad:205,label:'Token Launch Lab',
-    tag:'AI · Risk',title:'Token Launch Lab',sub:'Adversarial AI risk harness',
-    body:"An adversarial AI harness that runs &ldquo;pre-mortems&rdquo; on crypto token launches — stress-testing a launch to surface risk signals, failure modes and go / no-go considerations before anything goes live. Paired with ApplyPilot, a small workflow-automation experiment.",
-    meta:'AI as a red-team, not just a chatbot',
-    repo:'https://github.com/leini8891/token-launch-lab',
-    stack:['LLM','Adversarial prompting','Risk modeling']},
-
-  {id:'aibi',type:'project',ang:92,rad:215,label:'AI + BI Risk Automation',
+  {id:'compliance',group:'riskplanet',ang:8,rad:88,size:15,col:'violet',label:'Compliance Self-Service',featured:true,
+    tag:'Risk · Bybit',title:'Compliance Self-Service Analytics',sub:'Legal / Compliance dashboards @ Bybit',
+    body:"Self-service dashboards for Legal &amp; Compliance across NL / CA / UK markets — surfacing KYC status, user holdings, fund size, product exposure and risk insights for auditable decisions — cutting ad-hoc data pulls from days to minutes.",
+    meta:'NL · CA · UK · KYC & risk insight',
+    stack:['Tableau','Data warehouse','KYC','Compliance']},
+  {id:'aibi',group:'riskplanet',ang:85,rad:78,size:15,col:'violet',label:'AI + BI Risk Automation',featured:true,
     tag:'AI / Data · Project-based',title:'AI + BI Risk Reporting Automation',sub:'LLM-powered risk reporting',
     body:"LLM / Dify reporting workflows over transaction, fund-flow, market-feed and user-behavior data that cut risk-report turnaround from <b>hours to minutes</b> for leadership decisions — and translated large withdrawals &amp; suspicious transfers into risk indicators and alert rules.",
     meta:'Partnered with BI, data &amp; AI engineering on guardrails',
     note:'Independent / project-based work',
     stack:['LLM / Dify','SQL','AML signals','Alerting']},
 
-  {id:'dragon',type:'project',ang:150,rad:210,label:'Dragon Boat',
-    tag:'Data Platform · Bybit',title:'Dragon Boat — 0→1 Platform',sub:'Demand & automation platform @ Bybit',
-    body:"A 0→1 demand &amp; automation platform stitching Lark, Jira and Confluence into one flow — standardizing BI / product intake, SLA tracking, delivery alerts and a value-feedback loop across business teams — backed by 18 data-governance SOPs.",
-    meta:'Flagship 0→1 build at Bybit BI Center',
-    stack:['Automation','Data governance','Lark/Jira/Confluence','SOPs']},
+  {id:'cs660',group:'growthmoon',ang:55,rad:85,size:14,col:'gold',label:'AI CS Analytics',featured:false,
+    tag:'Analytics · Bybit',title:'AI Customer-Service Analytics',sub:'KPI frameworks for an AI-assisted CS org',
+    body:"KPI frameworks, user personas and service analytics for Bybit's AI customer-service operation — 80+ agents, saving 660+ CS hours every month.",
+    stack:['KPI design','Personas','Service analytics']},
+  {id:'loyalty',group:'growthmoon',ang:125,rad:78,size:13,col:'gold',label:'Loyalty & NFT Loop',featured:false,
+    tag:'Growth · Binance',title:'Loyalty & NFT-Avatar Loop',sub:'Growth mechanics on market-data products',
+    body:"User-growth and loyalty mechanics on Binance's crypto market-data line — a points → reward → NFT-avatar loop — with cross-platform delivery across web, mobile and admin for 60+ engineers.",
+    stack:['Growth loops','NFT rewards','Cross-platform']},
+  {id:'campaign',group:'growthmoon',ang:185,rad:70,size:12,col:'gold',label:'$3M Campaign Analysis',featured:false,
+    tag:'Analytics · Bybit',title:'$3M Campaign-Cost Analysis',sub:'27 stakeholders · 9 systems',
+    body:"A campaign-cost analysis across 27 stakeholders and 9 systems, giving Bybit leadership a defensible, auditable view of $3M in marketing spend.",
+    stack:['Cost analysis','Stakeholder mgmt','BI']},
+];
 
-  {id:'compliance',type:'project',ang:205,rad:225,label:'Compliance Self-Service',
-    tag:'Risk · Bybit',title:'Compliance Self-Service Analytics',sub:'Legal / Compliance dashboards @ Bybit',
-    body:"Self-service dashboards for Legal &amp; Compliance across NL / CA / UK markets — surfacing KYC status, user holdings, fund size, product exposure and risk insights for auditable decisions — cutting ad-hoc data pulls from days to minutes.",
-    meta:'NL · CA · UK · KYC & risk insight',
-    stack:['Tableau','Data warehouse','KYC','Compliance']},
-
-  {id:'bybit',type:'era',ang:122,rad:330,label:'Bybit · 2022–24',
-    tag:'Experience',title:'Bybit Fintech',sub:'Lead Data Product Analyst, BI Center · 2022–2024',
-    body:"Five years deep in crypto. At Bybit I led the BI Center's product &amp; data work — the Dragon Boat platform, compliance self-service, AI customer-service analytics (KPI frameworks, user personas, 660+ CS hours saved / month, 80+ agents), a $3M campaign-cost analysis across 27 stakeholders and 9 systems, and the data-governance backbone.",
-    stack:['0→1 platforms','Risk & compliance','CS analytics','Data governance']},
-
-  {id:'binance',type:'era',ang:60,rad:355,label:'Binance · 2021–22',
-    tag:'Experience',title:'Binance',sub:'Senior Product Manager · 2021–2022',
-    body:"Worked on Binance's crypto market-data product line — building user-growth and loyalty mechanics including a points → reward → NFT-avatar loop, and running cross-platform delivery across web, mobile and admin for 60+ engineers.",
-    stack:['Growth','Loyalty / NFT','Cross-platform delivery']},
-
-  {id:'capgemini',type:'era',ang:235,rad:345,label:'Capgemini · 16–21',
-    tag:'Experience',title:'Capgemini China',sub:'Senior Product Manager · 2016–2021',
-    body:"Led agile teams delivering Starbucks &amp; McDonald's e-commerce / digital-transformation platforms across POS, OMS, CRM and payments — cutting order-loss risk by ~30% through better idempotency, callback compensation and monitoring. Plus market research across Japan, the US and Hong Kong.",
-    stack:['Enterprise product','E-commerce','−30% order-loss','Agile delivery']},
-
-  {id:'spark1',type:'spark',ang:18,rad:330,label:'🎤 applauded English talk',
+const SPARKS=[
+  {id:'spark1',ang:20,rad:360,size:13,label:'🎤 applauded English talk',
     tag:'Fun fact',title:'I gave a talk that got applause',sub:'…in my second language',
     body:"English isn't my first language — I'm a native Chinese speaker — but I gave an English talk at a hackathon that earned a round of applause. I'm pushing hard toward English-first product roles and I love being in the room.",stack:['Native Chinese','Fluent English','Loves the stage']},
-
-  {id:'spark2',type:'spark',ang:172,rad:300,label:'📚 fast learner',
+  {id:'spark2',ang:152,rad:340,size:13,label:'📚 fast learner',
     tag:'Fun fact',title:'Self-described 学霸',sub:'I pick up new stacks fast',
     body:"I learn fast and I learn by building. In the last year I taught myself enough Python, LLM tooling and on-chain analytics to ship my own prototypes — Listing Monitor, Token Launch Lab, Auntie AI — instead of just writing specs for someone else to build.",stack:['Python','LLM tooling','On-chain analytics','0→1']},
-
-  {id:'spark3',type:'spark',ang:268,rad:300,label:'🌏 a bit about me',
+  {id:'spark3',ang:272,rad:325,size:13,label:'🌏 a bit about me',
     tag:'Fun fact',title:'A bit about me',sub:'Singapore-based',
     body:"Based in Singapore, with a finance background (B.A. Finance; CFA Level I &amp; PMP in the toolkit) that gives my risk &amp; data instincts their edge. But the work speaks louder than the credentials — the projects are the real story.",stack:['Singapore-based','Finance background','Builder at heart']},
 ];
+
+const UPCOMING_NOTES=['From writing specs to shipping code','Risk is a product problem'];
+
+/* ============ PROFESSIONAL MODE DATA ============ */
+const EXPERIENCE=[
+  {title:'Independent / Project-based AI & Data Work',sub:'AI & Data Product Lead · Mar 2025 – Present',
+   body:"Building hands-on AI &amp; data products — Auntie AI, Listing Monitor, Token Launch Lab, ApplyPilot — plus project-based AI+BI risk automation. Designing, coding and shipping prototypes end to end; intensive English communication training for English-first product roles."},
+  {title:'Bybit Fintech',sub:'Lead Data Product Analyst, BI Center · 2022 – 2024',
+   body:"Led the BI Center's product &amp; data work: the Dragon Boat 0→1 platform, compliance self-service (NL/CA/UK), AI customer-service analytics (660+ CS hours saved/month, 80+ agents), a $3M campaign-cost analysis across 27 stakeholders and 9 systems, and the data-governance backbone (18 SOPs)."},
+  {title:'Binance',sub:'Senior Product Manager · 2021 – 2022',
+   body:"Worked on Binance's crypto market-data product line — user-growth and loyalty mechanics including a points → reward → NFT-avatar loop — and ran cross-platform delivery across web, mobile and admin for 60+ engineers."},
+  {title:'Capgemini China',sub:'Senior Product Manager · 2016 – 2021',
+   body:"Led agile teams delivering Starbucks &amp; McDonald's e-commerce / digital-transformation platforms across POS, OMS, CRM and payments — cutting order-loss risk by ~30%. Market research across Japan, the US and Hong Kong."},
+];
+
+const SERVICES=[
+  {t:'For teams shipping AI',h:'AI Product, 0→1',
+   d:"Hand me an ambiguous business problem — I'll frame it, design the prompts and guardrails, build the prototype myself, and define the metrics that tell you whether it actually works."},
+  {t:'For fintech &amp; crypto',h:'Risk &amp; Compliance Intelligence',
+   d:"I speak both risk and product. I turn regulatory pressure and fraud patterns into signals, rules and self-serve analytics that risk, legal and ops teams genuinely use."},
+  {t:'For data-heavy orgs',h:'Data Platforms &amp; Automation',
+   d:"I find where data work leaks time and trust, then design the workflows, SLAs and governance that fix it — and keep working after I'm gone."},
+];
+
+const SKILLS=['AI product design','LLM / agent workflows','Dify · prompt + guardrails','Python','SQL','ETL & data pipelines',
+  'Streamlit','Tableau','On-chain analytics (Dune/Nansen)','Risk & AML signals','KYC / compliance analytics',
+  'Data governance & SOPs','0→1 product','KPI / metrics frameworks','Cross-functional delivery'];
+const ABOUT="I'm Elena — I build <b>practical AI &amp; data products</b>. Over the past decade I've worked across fintech and crypto, shipping everything from 0→1 data platforms and risk &amp; compliance analytics to LLM-assisted automation. Lately I'm hands-on with AI: agent workflows, an anti-fraud copilot, and Python data pipelines I build and ship myself. I frame ambiguous problems, prototype fast, and care about measurable outcomes. Native Chinese, fluent English, Singapore-based.";
 
 /* ============ ASK-ME SCRIPT ============ */
 const ASK = [
@@ -321,22 +372,22 @@ const ASK = [
    focus:'center',
    a:"I turn ambiguous business problems into practical AI &amp; data products — from problem framing to working prototypes and measurable outcomes.\n\n10+ years across Bybit, Binance and global enterprise. I go 0→1, I build my own prototypes, and I think in risk &amp; compliance — most recently 1st place in a national AI product challenge."},
   {k:['now','building','currently','these days','present','在做','切'],
-   focus:'listing',
-   a:"Right now I'm going deep on hands-on AI — agent workflows, LLM apps and Python data pipelines like Listing Monitor and Token Launch Lab.\n\nI'm looking for AI product / AI-deployment roles where I get to ship real things. This whole site is part of that pivot."},
+   focus:'ailab',
+   a:"Right now I'm going deep on hands-on AI — agent workflows, LLM apps and Python data pipelines like Listing Monitor and Token Launch Lab. It all lives in the AI Lab planet.\n\nI'm looking for AI product / AI-deployment roles where I get to ship real things. This whole site is part of that pivot."},
   {k:['crypto','risk','compliance','aml','exchange','web3','bybit','fintech'],
-   focus:'compliance',
-   a:"Five years in crypto, mostly around risk. At Bybit I built compliance self-service dashboards (NL/CA/UK), AML &amp; large-withdrawal alert logic, and the data-governance backbone — plus an LLM workflow that cut risk reporting from hours to minutes."},
+   focus:'riskplanet',
+   a:"Five years in crypto, mostly around risk. At Bybit I built compliance self-service dashboards (NL/CA/UK), AML &amp; large-withdrawal alert logic, and the data-governance backbone — plus an LLM workflow that cut risk reporting from hours to minutes. It's all on Risk Planet."},
   {k:['fun','surprise','random','interesting','cool','tell me something'],
    focus:'spark1',
    a:"Here's one: English isn't my first language, but I gave an English talk at a hackathon that got a round of applause. I'm a native Chinese speaker leaning all the way into English-first AI product work. (Click the pink stars for more.)"},
   {k:['contact','reach','email','hire me','connect','linkedin','talk','touch','联系'],
-   focus:'center',
-   a:"Easiest is email: leini8891@gmail.com.\n\nOr find me on LinkedIn (@xiao-elena) and GitHub (@leini8891) — links are top-right. I'd love to hear what you're building."},
+   focus:'signal',
+   a:"Easiest is email: leini8891@gmail.com.\n\nOr find me on LinkedIn (@xiao-elena) and GitHub (@leini8891) — links are top-right, or open the Signal Port planet. I'd love to hear what you're building."},
   {k:['who','about','you','yourself','elena','介绍'],
    focus:'center',
-   a:"I'm Elena — an AI &amp; data product builder. A decade in product and data across fintech and crypto (Bybit, Binance, Capgemini), and lately a hands-on AI builder shipping LLM &amp; agent tools.\n\nClick any star to dig in, or ask me something specific."},
+   a:"I'm Elena — an AI &amp; data product builder. A decade in product and data across fintech and crypto (Bybit, Binance, Capgemini), and lately a hands-on AI builder shipping LLM &amp; agent tools.\n\nClick any planet to dig in, or ask me something specific."},
 ];
-const FALLBACK={focus:null,a:"Good question — I'm a simple site-agent, so try one of the chips below, or ask about my best project, why to hire me, what I'm building now, or how to reach me. You can also just click the stars."};
+const FALLBACK={focus:null,a:"Good question — I'm a simple site-agent, so try one of the chips below, or ask about my best project, why to hire me, what I'm building now, or how to reach me. You can also just click the planets."};
 
 const CHIPS=[
   ['✦ Best project','show me your best project'],
@@ -350,19 +401,31 @@ const CHIPS=[
 /* ============ RENDER NODES ============ */
 const field=document.getElementById('field');
 const els={};
-NODES.forEach(n=>{
+function makeNode(cls,dotHTML,labelHTML,onclick){
   const d=document.createElement('div');
-  d.className='node '+n.type+(n.cls?(' '+n.cls):'');
-  if(n.type==='center'){
-    d.innerHTML='<div class="dot"></div><div class="nlabel">'+n.label+'</div>';
-    const nm=document.createElement('div');nm.className='nlabel cname';nm.textContent=n.cname;
-    d.insertBefore(nm,d.children[1]);
-  }else{
-    d.innerHTML='<div class="dot"></div><div class="nlabel">'+n.label+'</div>';
-    d.addEventListener('click',e=>{e.stopPropagation();openPanel(n.id);});
-  }
+  d.className='node '+cls;
+  d.innerHTML=dotHTML+labelHTML;
+  if(onclick)d.addEventListener('click',e=>{e.stopPropagation();onclick();});
   field.appendChild(d);
-  els[n.id]=d;
+  return d;
+}
+els.center=makeNode('center',
+  '<div class="dot"></div>',
+  '<div class="nlabel cname">'+CENTER.cname+'</div><div class="nlabel">'+CENTER.label+'</div>',null);
+GROUPS.forEach(g=>{
+  els[g.id]=makeNode('group',
+    '<div class="dot c-'+g.col+'" style="width:'+g.size+'px;height:'+g.size+'px"></div>',
+    '<div class="nlabel">'+g.icon+' '+g.name+'</div>',()=>openGroup(g.id));
+});
+ITEMS.forEach(it=>{
+  els[it.id]=makeNode('item',
+    '<div class="dot c-'+it.col+'" style="width:'+it.size+'px;height:'+it.size+'px"></div>',
+    '<div class="nlabel">'+it.label+'</div>',()=>openItem(it.id));
+});
+SPARKS.forEach(s=>{
+  els[s.id]=makeNode('spark',
+    '<div class="dot c-pink" style="width:'+s.size+'px;height:'+s.size+'px"></div>',
+    '<div class="nlabel">'+s.label+'</div>',()=>openSpark(s.id));
 });
 
 /* ============ LAYOUT + ANIMATION ============ */
@@ -379,39 +442,50 @@ function resize(){
 }
 addEventListener('resize',resize);resize();
 
-const pos={}; // computed pixel positions
+const COLS={cyan:'63,231,255',violet:'163,116,255',pink:'255,122,217',gold:'255,215,106'};
+const pos={};
 let t=0,panX=0,panY=0,tPanX=0,tPanY=0,mx=0,my=0;
+function place(id,x,y){pos[id]={x,y};els[id].style.left=x+'px';els[id].style.top=y+'px';}
 function loop(){
   t+=0.016;
   panX+=(tPanX-panX)*.08; panY+=(tPanY-panY)*.08;
   const px=panX+mx*22, py=panY+my*22;
   field.style.transform=`translate(${px}px,${py}px)`;
-  // stars
+  // background stars
   ctx.clearRect(0,0,W,H);
   for(const s of stars){s.b+=s.s;const a=.35+Math.abs(Math.sin(s.b))*.6;
     ctx.globalAlpha=a;ctx.fillStyle='#bcd0ff';ctx.beginPath();ctx.arc(s.x+px*.25*DPR,s.y+py*.25*DPR,s.r,0,7);ctx.fill();}
   ctx.globalAlpha=1;
-  // node positions
-  NODES.forEach(n=>{
-    const drift=n.type==='center'?0:Math.sin(t*0.5+n.ang)*6;
-    const r=(n.rad*scale)+drift;
-    const a=n.ang*Math.PI/180;
-    const x=cx+Math.cos(a)*r, y=cy+Math.sin(a)*r;
-    pos[n.id]={x,y};
-    els[n.id].style.left=x+'px';els[n.id].style.top=y+'px';
+  // positions: center → groups → items, sparks
+  place('center',cx,cy);
+  GROUPS.forEach(g=>{
+    const drift=Math.sin(t*.45+g.ang)*7;
+    const r=g.rad*scale+drift, a=g.ang*Math.PI/180;
+    place(g.id,cx+Math.cos(a)*r,cy+Math.sin(a)*r);
   });
-  // lines from center
-  const c=pos.center;const off=(px)*DPR,offy=(py)*DPR;
-  NODES.forEach(n=>{
-    if(n.id==='center')return;
-    const p=pos[n.id];
-    const grad=ctx.createLinearGradient(c.x*DPR,c.y*DPR,p.x*DPR,p.y*DPR);
-    let col=n.type==='project'?'63,231,255':n.type==='era'?'163,116,255':'255,122,217';
-    if(n.cls==='gold')col='255,215,106';
-    grad.addColorStop(0,'rgba('+col+',.30)');grad.addColorStop(1,'rgba('+col+',.04)');
-    ctx.strokeStyle=grad;ctx.lineWidth=(n.type==='project'?1.3:.8)*DPR;
-    ctx.beginPath();ctx.moveTo(c.x*DPR+off,c.y*DPR+offy);ctx.lineTo(p.x*DPR+off,p.y*DPR+offy);ctx.stroke();
+  ITEMS.forEach(it=>{
+    const p=pos[it.group];
+    const drift=Math.sin(t*.8+it.ang)*4;
+    const r=it.rad*Math.max(scale,.78)+drift, a=it.ang*Math.PI/180;
+    place(it.id,p.x+Math.cos(a)*r,p.y+Math.sin(a)*r);
   });
+  SPARKS.forEach(s=>{
+    const drift=Math.sin(t*.5+s.ang)*6;
+    const r=s.rad*scale+drift, a=s.ang*Math.PI/180;
+    place(s.id,cx+Math.cos(a)*r,cy+Math.sin(a)*r);
+  });
+  // connection lines
+  const off=px*DPR,offy=py*DPR;
+  function line(x1,y1,x2,y2,col,a0,lw){
+    const grad=ctx.createLinearGradient(x1*DPR,y1*DPR,x2*DPR,y2*DPR);
+    grad.addColorStop(0,'rgba('+col+','+a0+')');grad.addColorStop(1,'rgba('+col+',.04)');
+    ctx.strokeStyle=grad;ctx.lineWidth=lw*DPR;
+    ctx.beginPath();ctx.moveTo(x1*DPR+off,y1*DPR+offy);ctx.lineTo(x2*DPR+off,y2*DPR+offy);ctx.stroke();
+  }
+  const c=pos.center;
+  GROUPS.forEach(g=>{const p=pos[g.id];line(c.x,c.y,p.x,p.y,COLS[g.col],.30,1.4);});
+  ITEMS.forEach(it=>{const gp=pos[it.group],p=pos[it.id];line(gp.x,gp.y,p.x,p.y,COLS[it.col],.22,.8);});
+  SPARKS.forEach(s=>{const p=pos[s.id];line(c.x,c.y,p.x,p.y,COLS.pink,.14,.6);});
   requestAnimationFrame(loop);
 }
 loop();
@@ -419,7 +493,6 @@ loop();
 /* ============ INTERACTION: pan + parallax ============ */
 addEventListener('mousemove',e=>{mx=(e.clientX/innerWidth-.5);my=(e.clientY/innerHeight-.5);});
 let drag=false,sx,sy,sox,soy;
-const stage=document.body;
 function down(x,y){drag=true;sx=x;sy=y;sox=tPanX;soy=tPanY;}
 function move(x,y){if(!drag)return;tPanX=sox+(x-sx);tPanY=soy+(y-sy);
   tPanX=Math.max(-260,Math.min(260,tPanX));tPanY=Math.max(-200,Math.min(200,tPanY));}
@@ -431,25 +504,59 @@ sky.addEventListener('touchstart',e=>{down(e.touches[0].clientX,e.touches[0].cli
 addEventListener('touchmove',e=>{if(drag){move(e.touches[0].clientX,e.touches[0].clientY);}},{passive:true});
 addEventListener('touchend',up);
 
-/* ============ PANEL ============ */
+/* ============ PANELS ============ */
 const scrim=document.getElementById('scrim'),panel=document.getElementById('panel'),pbody=document.getElementById('pbody');
-function openPanel(id){
-  const n=NODES.find(x=>x.id===id);if(!n||n.type==='center')return;
-  let h='<div class="ptag">'+(n.tag||'')+'</div><h2>'+(n.title||n.label)+'</h2>';
-  if(n.sub)h+='<div class="sub">'+n.sub+'</div>';
-  if(n.award)h+='<div class="award">'+n.award+'</div>';
-  h+='<p>'+n.body+'</p>';
-  if(n.meta)h+='<div class="meta">→ '+n.meta+'</div>';
-  if(n.stack)h+='<div class="stack">'+n.stack.map(s=>'<span class="chip">'+s+'</span>').join('')+'</div>';
-  if(n.repo)h+='<a class="repolink" href="'+n.repo+'" target="_blank" rel="noopener">↗ View on GitHub</a>';
-  if(n.note)h+='<div class="note">'+n.note+'</div>';
-  pbody.innerHTML=h;
-  scrim.classList.add('show');panel.classList.add('show');
-}
+function showPanel(html){pbody.innerHTML=html;scrim.classList.add('show');panel.classList.add('show');}
 function closePanel(){scrim.classList.remove('show');panel.classList.remove('show');}
 document.getElementById('pclose').onclick=closePanel;
 scrim.onclick=closePanel;
 addEventListener('keydown',e=>{if(e.key==='Escape')closePanel();});
+
+function openGroup(id){
+  const g=GROUPS.find(x=>x.id===id);if(!g)return;
+  let h='<div class="ptag">Dimension</div><h2>'+g.icon+' '+g.name+'</h2>';
+  h+='<p>'+g.desc+'</p>';
+  const kids=ITEMS.filter(it=>it.group===id);
+  if(kids.length){
+    h+='<div class="glist">'+kids.map(it=>
+      '<button data-item="'+it.id+'">'+it.label+'<span class="gt">'+it.tag+'</span></button>').join('')+'</div>';
+  }
+  if(id==='memory'){
+    h+='<div class="soon">✍️ Two notes in the works:<br>'+UPCOMING_NOTES.map(n=>'<b>· '+n+'</b>').join('<br>')+'<br>Coming soon.</div>';
+  }
+  if(id==='signal'){
+    h+='<div class="glist">'+
+      '<a class="repolink" href="mailto:leini8891@gmail.com">✉ leini8891@gmail.com</a>'+
+      '<a class="repolink" href="https://www.linkedin.com/in/xiao-elena/" target="_blank" rel="noopener">↗ LinkedIn</a>'+
+      '<a class="repolink" href="https://github.com/leini8891" target="_blank" rel="noopener">↗ GitHub</a>'+
+      '<a class="repolink" href="Elena_Xiao_CV.pdf" target="_blank" rel="noopener">↓ Download CV</a></div>';
+  }
+  showPanel(h);
+  pbody.querySelectorAll('[data-item]').forEach(b=>{b.onclick=()=>openItem(b.dataset.item);});
+}
+function openItem(id){
+  const it=ITEMS.find(x=>x.id===id);if(!it)return;
+  const g=GROUPS.find(x=>x.id===it.group);
+  let h='<button class="backbtn" id="backToGroup">← Back to '+g.icon+' '+g.name+'</button>';
+  h+='<div class="ptag">'+it.tag+'</div><h2>'+it.title+'</h2>';
+  if(it.sub)h+='<div class="sub">'+it.sub+'</div>';
+  if(it.award)h+='<div class="award">'+it.award+'</div>';
+  h+='<p>'+it.body+'</p>';
+  if(it.meta)h+='<div class="meta">→ '+it.meta+'</div>';
+  if(it.stack)h+='<div class="stack">'+it.stack.map(s=>'<span class="chip">'+s+'</span>').join('')+'</div>';
+  if(it.repo)h+='<a class="repolink" href="'+it.repo+'" target="_blank" rel="noopener">↗ View on GitHub</a>';
+  if(it.note)h+='<div class="note">'+it.note+'</div>';
+  showPanel(h);
+  document.getElementById('backToGroup').onclick=()=>openGroup(it.group);
+}
+function openSpark(id){
+  const s=SPARKS.find(x=>x.id===id);if(!s)return;
+  let h='<div class="ptag">'+s.tag+'</div><h2>'+s.title+'</h2>';
+  if(s.sub)h+='<div class="sub">'+s.sub+'</div>';
+  h+='<p>'+s.body+'</p>';
+  if(s.stack)h+='<div class="stack">'+s.stack.map(x=>'<span class="chip">'+x+'</span>').join('')+'</div>';
+  showPanel(h);
+}
 
 /* ============ UNIVERSE UI ============ */
 function showUniverseUI(){
@@ -457,6 +564,11 @@ function showUniverseUI(){
 }
 
 /* ============ ASK-ME ============ */
+const LOOKUP={};
+GROUPS.forEach(g=>LOOKUP[g.id]={label:g.icon+' '+g.name,open:()=>openGroup(g.id)});
+ITEMS.forEach(it=>LOOKUP[it.id]={label:it.label,open:()=>openItem(it.id)});
+SPARKS.forEach(s=>LOOKUP[s.id]={label:s.label,open:()=>openSpark(s.id)});
+
 const chips=document.getElementById('chips'),answer=document.getElementById('answer'),atxt=document.getElementById('atxt'),ajump=document.getElementById('ajump');
 CHIPS.forEach(([lbl,q])=>{const b=document.createElement('button');b.textContent=lbl;b.onclick=()=>ask(q);chips.appendChild(b);});
 let typing=null;
@@ -467,10 +579,11 @@ function ask(qstr){
   answer.classList.add('open');ajump.innerHTML='';
   typeOut(hit.a.replace(/&amp;/g,'&').replace(/&ldquo;|&rdquo;/g,'"'));
   if(hit.focus){
-    const n=NODES.find(x=>x.id===hit.focus);
-    if(n&&n.type!=='center'){
-      const jb=document.createElement('button');jb.textContent='↗ open '+(n.label.replace(/[🏆🎤📚🌏]/g,'').trim());
-      jb.onclick=()=>openPanel(hit.focus);
+    const target=LOOKUP[hit.focus];
+    if(target){
+      const jb=document.createElement('button');
+      jb.textContent='↗ open '+target.label.replace(/[🏆🎤📚🌏🤖📊🛡️🌙📡]/g,'').trim();
+      jb.onclick=target.open;
       ajump.appendChild(jb);
     }
     pingNode(hit.focus);
@@ -492,24 +605,9 @@ const qin=document.getElementById('q');
 document.getElementById('send').onclick=()=>{if(qin.value.trim()){ask(qin.value);qin.value='';}};
 qin.addEventListener('keydown',e=>{if(e.key==='Enter'&&qin.value.trim()){ask(qin.value);qin.value='';}});
 
-/* ============ RESUME / LINEAR VIEW ============ */
-const SKILLS=['AI product design','LLM / agent workflows','Dify · prompt + guardrails','Python','SQL','ETL & data pipelines',
-  'Streamlit','Tableau','On-chain analytics (Dune/Nansen)','Risk & AML signals','KYC / compliance analytics',
-  'Data governance & SOPs','0→1 product','KPI / metrics frameworks','Cross-functional delivery'];
-const ABOUT="I'm Elena — I build <b>practical AI &amp; data products</b>. Over the past decade I've worked across fintech and crypto, shipping everything from 0→1 data platforms and risk &amp; compliance analytics to LLM-assisted automation. Lately I'm hands-on with AI: agent workflows, an anti-fraud copilot, and Python data pipelines I build and ship myself. I frame ambiguous problems, prototype fast, and care about measurable outcomes. Native Chinese, fluent English, Singapore-based.";
-
-const SERVICES=[
-  {t:'For teams shipping AI',h:'AI Product, 0→1',
-   d:"I take an ambiguous business problem to a working LLM / agent product — problem framing, prompt &amp; guardrail design, rapid prototyping, and the metrics that prove it works."},
-  {t:'For fintech &amp; crypto',h:'Risk &amp; Compliance Intelligence',
-   d:"AML &amp; fraud signals, alert rules, compliance self-service dashboards, and LLM-powered risk reporting that cuts turnaround from hours to minutes."},
-  {t:'For data-heavy orgs',h:'Data Platforms &amp; Automation',
-   d:"Data pipelines, BI workflows and demand-management platforms built end to end — with the governance SOPs that keep them trustworthy."},
-];
-
+/* ============ PROFESSIONAL MODE ============ */
+const FEATURED=['auntie','listing','tokenlab','aibi','dragon','compliance'];
 function buildResume(){
-  const proj=NODES.filter(n=>n.type==='project');
-  const eras=NODES.filter(n=>n.type==='era');
   let h='';
   h+='<div class="rsec"><div class="rh">About</div><p class="rabout">'+ABOUT+'</p></div>';
   h+='<div class="rsec"><div class="rh">What I Can Do For You</div><div class="rgrid three">';
@@ -518,8 +616,8 @@ function buildResume(){
   });
   h+='</div><div class="rcred">Open to full-time AI product roles and project-based collaborations — <a href="mailto:leini8891@gmail.com">leini8891@gmail.com</a></div></div>';
   h+='<div class="rsec"><div class="rh">Featured Projects</div><div class="rgrid">';
-  proj.forEach(n=>{
-    h+='<div class="rcard'+(n.cls?(' '+n.cls):'')+'">';
+  FEATURED.map(id=>ITEMS.find(it=>it.id===id)).forEach(n=>{
+    h+='<div class="rcard'+(n.col==='gold'?' gold':'')+'">';
     h+='<div class="rt">'+n.tag+'</div><h3>'+n.title.replace(/ — /,' · ')+'</h3>';
     if(n.award)h+='<div class="rsub" style="color:var(--gold)">'+n.award+'</div>';
     else if(n.sub)h+='<div class="rsub">'+n.sub+'</div>';
@@ -530,7 +628,7 @@ function buildResume(){
   });
   h+='</div></div>';
   h+='<div class="rsec"><div class="rh">Experience</div><div class="rexp">';
-  eras.forEach(n=>{h+='<div class="ritem"><h3>'+n.title+'</h3><div class="rsub">'+n.sub+'</div><p>'+n.body+'</p></div>';});
+  EXPERIENCE.forEach(n=>{h+='<div class="ritem"><h3>'+n.title+'</h3><div class="rsub">'+n.sub+'</div><p>'+n.body+'</p></div>';});
   h+='</div></div>';
   h+='<div class="rsec"><div class="rh">Skills</div><div class="rskills">'+SKILLS.map(s=>'<span>'+s+'</span>').join('')+'</div>';
   h+='<div class="rcred">Finance background · B.A. Finance · CFA Level I · PMP · Chinese (native) · English (fluent)</div></div>';
