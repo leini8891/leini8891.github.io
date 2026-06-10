@@ -108,7 +108,9 @@ a{color:var(--cyan);text-decoration:none}
   padding:6px 12px;border-radius:8px;cursor:pointer;transition:.2s}
 #answer .jump button:hover{background:rgba(63,231,255,.18)}
 @keyframes blink{50%{opacity:0}}
-.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:9px;justify-content:center}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:9px;justify-content:center;
+  opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .3s,transform .3s}
+#ask:hover .chips,#ask:focus-within .chips{opacity:1;transform:translateY(0);pointer-events:auto}
 .chips button{font-family:var(--mono);font-size:12px;color:var(--muted);background:rgba(16,22,50,.62);border:1px solid var(--cardbd);
   padding:8px 13px;border-radius:30px;cursor:pointer;transition:.2s;backdrop-filter:blur(8px)}
 .chips button:hover{color:#fff;border-color:var(--cyan);transform:translateY(-1px)}
