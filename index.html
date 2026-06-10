@@ -98,8 +98,8 @@ a{color:var(--cyan);text-decoration:none}
   opacity:0;transition:opacity .6s,transform .6s}
 #ask.show-ui{opacity:1;transform:translateX(-50%) translateY(0)}
 #answer{background:var(--card);border:1px solid var(--cardbd);border-radius:16px;padding:0 18px;margin-bottom:10px;
-  max-height:0;overflow:hidden;transition:max-height .4s ease,padding .4s ease;backdrop-filter:blur(10px)}
-#answer.open{max-height:280px;padding:16px 18px;overflow-y:auto}
+  max-height:0;overflow:hidden;opacity:0;transition:max-height .4s ease,padding .4s ease,opacity .3s ease;backdrop-filter:blur(10px)}
+#answer.open{max-height:280px;padding:16px 18px;overflow-y:auto;opacity:1}
 #answer .who{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);margin-bottom:8px}
 #answer .txt{color:var(--ink);line-height:1.6;font-size:14.5px;white-space:pre-wrap}
 #answer .txt .cur{display:inline-block;width:8px;height:16px;background:var(--cyan);margin-left:2px;vertical-align:-3px;animation:blink 1s steps(1) infinite}
