@@ -24,25 +24,6 @@ a{color:var(--cyan);text-decoration:none}
 #sky{position:fixed;inset:0;display:block;z-index:0}
 #field{position:fixed;inset:0;z-index:2;transform:translate(0,0);will-change:transform}
 
-/* ---------- intro ---------- */
-#intro{position:fixed;inset:0;z-index:30;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;background:radial-gradient(120% 90% at 50% 40%,rgba(14,20,50,.65),rgba(4,5,13,.92));
-  transition:opacity 1s ease, visibility 1s ease;padding:24px}
-#intro.gone{opacity:0;visibility:hidden;pointer-events:none}
-.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.32em;color:var(--cyan);text-transform:uppercase;opacity:0;animation:rise .9s .15s forwards}
-#intro h1{font-size:clamp(38px,8vw,86px);font-weight:700;margin:.18em 0 .12em;letter-spacing:-.01em;
-  background:linear-gradient(100deg,#fff 10%,var(--cyan) 45%,var(--violet) 85%);-webkit-background-clip:text;background-clip:text;color:transparent;
-  opacity:0;animation:rise 1s .3s forwards}
-#intro .tag{font-size:clamp(15px,2.4vw,20px);color:var(--muted);max-width:620px;opacity:0;animation:rise 1s .5s forwards}
-#intro .tag b{color:var(--ink);font-weight:600}
-.enter{margin-top:34px;font-family:var(--mono);font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);
-  border:1px solid var(--cardbd);background:rgba(20,28,62,.5);padding:14px 28px;border-radius:40px;cursor:pointer;
-  opacity:0;animation:rise 1s .7s forwards, pulse 2.6s 1.8s infinite;transition:transform .2s,border-color .2s,background .2s}
-.enter:hover{transform:translateY(-2px);border-color:var(--cyan);background:rgba(30,42,86,.7)}
-.hint{margin-top:18px;font-size:12px;color:var(--faint);font-family:var(--mono);opacity:0;animation:rise 1s .9s forwards}
-@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(63,231,255,.0)}50%{box-shadow:0 0 26px 0 rgba(63,231,255,.18)}}
-
 /* ---------- nodes ---------- */
 .node{position:absolute;transform:translate(-50%,-50%);cursor:pointer;z-index:3;
   display:flex;flex-direction:column;align-items:center;gap:7px;user-select:none;transition:filter .25s}
@@ -152,12 +133,6 @@ a{color:var(--cyan);text-decoration:none}
 #links .cv{color:var(--gold);border-color:rgba(255,215,106,.4)}
 #links .cv:hover{border-color:var(--gold)}
 
-/* ---------- intro secondary actions ---------- */
-.introactions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:22px;opacity:0;animation:rise 1s .85s forwards}
-.introactions a,.introactions button{font-family:var(--mono);font-size:12.5px;color:var(--muted);background:none;border:none;cursor:pointer;
-  border-bottom:1px solid transparent;padding:2px 0;transition:.2s}
-.introactions a:hover,.introactions button:hover{color:var(--cyan);border-color:var(--cyan)}
-
 /* ---------- RESUME VIEW ---------- */
 #resume{position:fixed;inset:0;z-index:60;overflow-y:auto;opacity:0;visibility:hidden;transition:opacity .45s ease,visibility .45s ease;
   background:radial-gradient(120% 80% at 50% 0%,#0e1432,#06081a 70%);}
@@ -183,6 +158,7 @@ a{color:var(--cyan);text-decoration:none}
 .rabout{color:var(--ink);font-size:17px;line-height:1.7;max-width:680px}
 .rabout b{color:var(--cyan);font-weight:600}
 .rgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.rgrid.three{grid-template-columns:repeat(3,1fr)}
 .rcard{background:var(--card);border:1px solid var(--cardbd);border-radius:14px;padding:20px 20px 22px;transition:.2s}
 .rcard:hover{border-color:var(--cyan);transform:translateY(-3px)}
 .rcard .rt{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan)}
@@ -206,7 +182,7 @@ a{color:var(--cyan);text-decoration:none}
 .rcontact a{font-family:var(--mono);font-size:14px;color:var(--cyan);border:1px solid var(--cardbd);background:rgba(16,22,50,.5);padding:11px 18px;border-radius:10px;transition:.2s}
 .rcontact a:hover{border-color:var(--cyan);transform:translateY(-1px)}
 .rcontact .cv{color:#04050d;font-weight:700;background:linear-gradient(100deg,var(--cyan),var(--violet));border-color:transparent}
-@media (max-width:640px){.rgrid{grid-template-columns:1fr}.rhead{flex-direction:column}.rwrap{padding:40px 20px 100px}}
+@media (max-width:640px){.rgrid,.rgrid.three{grid-template-columns:1fr}.rhead{flex-direction:column}.rwrap{padding:40px 20px 100px}}
 </style>
 </head>
 <body>
@@ -222,20 +198,6 @@ a{color:var(--cyan);text-decoration:none}
   <a href="mailto:leini8891@gmail.com">Email</a>
 </div>
 <div id="hud">drag to explore · click a star</div>
-
-<!-- intro -->
-<div id="intro">
-  <div class="kicker">AI &amp; Data Product · FinTech / Crypto</div>
-  <h1>Elena Xiao</h1>
-  <div class="tag">I build <b>practical AI &amp; data products</b>. 10+ years in product &amp; data, 5 in crypto — now shipping LLM &amp; agent-powered tools for risk, automation and consumer AI.</div>
-  <button class="enter" id="enterBtn">Explore my universe →</button>
-  <div class="introactions">
-    <a href="Elena_Xiao_CV.pdf" target="_blank" rel="noopener">↓ Download CV</a>
-    <button id="introResume">▤ Resume View</button>
-    <a href="mailto:leini8891@gmail.com">✉ Contact</a>
-  </div>
-  <div class="hint">drag to pan · click any star · or just ask me anything</div>
-</div>
 
 <!-- detail panel -->
 <div id="scrim"></div>
@@ -255,8 +217,8 @@ a{color:var(--cyan);text-decoration:none}
   </div>
 </div>
 
-<!-- resume / linear view -->
-<div id="resume">
+<!-- resume / linear view (default) -->
+<div id="resume" class="show">
   <div class="rwrap">
     <div class="rhead">
       <div>
@@ -270,7 +232,7 @@ a{color:var(--cyan);text-decoration:none}
           <a href="mailto:leini8891@gmail.com">Email</a>
         </div>
       </div>
-      <button class="rtoggle" id="closeResume">✦ Universe View</button>
+      <button class="rtoggle" id="closeResume">✦ Explore my universe</button>
     </div>
     <div id="rbody"></div>
   </div>
@@ -489,12 +451,10 @@ document.getElementById('pclose').onclick=closePanel;
 scrim.onclick=closePanel;
 addEventListener('keydown',e=>{if(e.key==='Escape')closePanel();});
 
-/* ============ INTRO ============ */
-const intro=document.getElementById('intro');
-function enter(){intro.classList.add('gone');
+/* ============ UNIVERSE UI ============ */
+function showUniverseUI(){
   ['brand','links','hud','ask'].forEach(id=>document.getElementById(id).classList.add('show-ui'));
 }
-document.getElementById('enterBtn').onclick=enter;
 
 /* ============ ASK-ME ============ */
 const chips=document.getElementById('chips'),answer=document.getElementById('answer'),atxt=document.getElementById('atxt'),ajump=document.getElementById('ajump');
@@ -538,11 +498,25 @@ const SKILLS=['AI product design','LLM / agent workflows','Dify · prompt + guar
   'Data governance & SOPs','0→1 product','KPI / metrics frameworks','Cross-functional delivery'];
 const ABOUT="I'm Elena — I build <b>practical AI &amp; data products</b>. Over the past decade I've worked across fintech and crypto, shipping everything from 0→1 data platforms and risk &amp; compliance analytics to LLM-assisted automation. Lately I'm hands-on with AI: agent workflows, an anti-fraud copilot, and Python data pipelines I build and ship myself. I frame ambiguous problems, prototype fast, and care about measurable outcomes. Native Chinese, fluent English, Singapore-based.";
 
+const SERVICES=[
+  {t:'For teams shipping AI',h:'AI Product, 0→1',
+   d:"I take an ambiguous business problem to a working LLM / agent product — problem framing, prompt &amp; guardrail design, rapid prototyping, and the metrics that prove it works."},
+  {t:'For fintech &amp; crypto',h:'Risk &amp; Compliance Intelligence',
+   d:"AML &amp; fraud signals, alert rules, compliance self-service dashboards, and LLM-powered risk reporting that cuts turnaround from hours to minutes."},
+  {t:'For data-heavy orgs',h:'Data Platforms &amp; Automation',
+   d:"Data pipelines, BI workflows and demand-management platforms built end to end — with the governance SOPs that keep them trustworthy."},
+];
+
 function buildResume(){
   const proj=NODES.filter(n=>n.type==='project');
   const eras=NODES.filter(n=>n.type==='era');
   let h='';
   h+='<div class="rsec"><div class="rh">About</div><p class="rabout">'+ABOUT+'</p></div>';
+  h+='<div class="rsec"><div class="rh">What I Can Do For You</div><div class="rgrid three">';
+  SERVICES.forEach(s=>{
+    h+='<div class="rcard"><div class="rt">'+s.t+'</div><h3>'+s.h+'</h3><p>'+s.d+'</p></div>';
+  });
+  h+='</div><div class="rcred">Open to full-time AI product roles and project-based collaborations — <a href="mailto:leini8891@gmail.com">leini8891@gmail.com</a></div></div>';
   h+='<div class="rsec"><div class="rh">Featured Projects</div><div class="rgrid">';
   proj.forEach(n=>{
     h+='<div class="rcard'+(n.cls?(' '+n.cls):'')+'">';
@@ -568,10 +542,9 @@ function buildResume(){
 }
 buildResume();
 const resumeEl=document.getElementById('resume');
-function openResume(){enter();resumeEl.classList.add('show');resumeEl.scrollTop=0;}
-function closeResumeView(){resumeEl.classList.remove('show');}
+function openResume(){resumeEl.classList.add('show');resumeEl.scrollTop=0;}
+function closeResumeView(){showUniverseUI();resumeEl.classList.remove('show');}
 document.getElementById('resumeViewBtn').onclick=openResume;
-document.getElementById('introResume').onclick=openResume;
 document.getElementById('closeResume').onclick=closeResumeView;
 </script>
 </body>
