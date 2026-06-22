@@ -5,6 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Elena Xiao — AI &amp; Data Product</title>
 <meta name="description" content="Elena Xiao — I build practical AI &amp; data products. FinTech / crypto risk, AI automation, data infrastructure." />
+<link rel="canonical" href="https://leini8891.github.io/" />
+
+<!-- Open Graph / social share cards -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://leini8891.github.io/" />
+<meta property="og:title" content="Elena Xiao — AI &amp; Data Product" />
+<meta property="og:description" content="I build practical AI &amp; data products. LLM &amp; agent tools, FinTech / crypto risk, 0→1 data platforms." />
+<meta property="og:image" content="https://leini8891.github.io/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Elena Xiao — AI &amp; Data Product" />
+<meta name="twitter:description" content="I build practical AI &amp; data products. LLM &amp; agent tools, FinTech / crypto risk, 0→1 data platforms." />
+<meta name="twitter:image" content="https://leini8891.github.io/og-image.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -39,6 +53,9 @@ a{color:var(--cyan);text-decoration:none}
   mix-blend-mode:soft-light}
 .node:hover .dot{transform:scale(1.15)}
 .node:hover .dot::after{opacity:1;transform:scale(1.1)}
+.node:focus-visible{outline:none}
+.node:focus-visible .dot{transform:scale(1.15)}
+.node:focus-visible .dot::after{opacity:1;transform:scale(1.25);border-color:#fff}
 .node .nlabel{font-size:12.5px;font-weight:500;color:var(--muted);white-space:nowrap;letter-spacing:.01em;
   background:rgba(6,9,24,.55);padding:2px 8px;border-radius:7px;transition:color .25s}
 .node:hover .nlabel{color:var(--ink)}
@@ -155,6 +172,9 @@ a{color:var(--cyan);text-decoration:none}
   #panel{padding:30px 22px}
   #ask{bottom:14px}
   .chips{max-height:64px;overflow:hidden}
+  #links{flex-wrap:wrap;justify-content:flex-end;max-width:calc(100vw - 36px);gap:8px}
+  .rhead{flex-direction:column;gap:18px}
+  .rwrap{padding:48px 20px 110px}
 }
 @media (prefers-reduced-motion:reduce){*{animation-duration:.001s!important;transition-duration:.05s!important}}
 
@@ -269,6 +289,22 @@ a{color:var(--cyan);text-decoration:none}
       <button class="rtoggle" id="closeResume">✦ Explore my universe</button>
     </div>
     <div id="rbody"></div>
+    <noscript>
+      <p style="color:#cfd6f5;max-width:680px;line-height:1.6">
+        I'm an AI &amp; data product builder — a decade across FinTech and crypto (Bybit, Binance, Capgemini),
+        now shipping LLM &amp; agent-powered tools. <b>Open to full-time AI product / AI-deployment roles and
+        project-based collaborations.</b> Reach me at <a href="mailto:leini8891@gmail.com">leini8891@gmail.com</a>.
+      </p>
+      <h2 style="color:#eaeefb">Selected projects</h2>
+      <ul style="color:#cfd6f5;line-height:1.7;max-width:680px">
+        <li><a href="https://github.com/leini8891/auntie-ai">Auntie AI</a> — anti-scam AI copilot, 1st place at the Tencent Cloud AI Coding Challenge (35 projects, 279 participants).</li>
+        <li><a href="https://github.com/leini8891/token-launch-lab">Token Launch Lab</a> — adversarial AI harness that stress-tests crypto token launches.</li>
+        <li><a href="https://github.com/leini8891/Listing-Monitor">Listing Monitor</a> — Python pipeline watching new listings across 7+ exchanges, with a classifier, alerts and a Streamlit dashboard.</li>
+        <li><a href="https://github.com/leini8891/ApplyPilot">ApplyPilot</a> — job-application agent copilot (Next.js + Chrome extension + Supabase) with a human-in-the-loop review queue.</li>
+        <li>Bybit / Binance — 0→1 data &amp; automation platform, compliance self-service analytics, LLM-powered risk reporting, growth &amp; loyalty mechanics.</li>
+      </ul>
+      <p><a href="Elena_Xiao_CV.pdf">Download CV</a> · <a href="https://www.linkedin.com/in/xiao-elena/">LinkedIn</a> · <a href="https://github.com/leini8891">GitHub</a></p>
+    </noscript>
   </div>
 </div>
 
@@ -305,10 +341,12 @@ const ITEMS=[
     meta:'AI as a red-team, not just a chatbot',
     repo:'https://github.com/leini8891/token-launch-lab',
     stack:['LLM','Adversarial prompting','Risk modeling']},
-  {id:'applypilot',group:'ailab',ang:40,rad:74,size:12,col:'cyan',label:'ApplyPilot',featured:false,
-    tag:'AI · Experiment',title:'ApplyPilot',sub:'Workflow-automation experiment',
-    body:"A small agent-tooling experiment automating the repetitive parts of an application workflow — built fast, mostly to learn how far current agent stacks can really go.",
-    stack:['Agents','Automation','Python']},
+  {id:'applypilot',group:'ailab',ang:40,rad:74,size:13,col:'cyan',label:'ApplyPilot',featured:true,
+    tag:'AI Product · Agent',title:'ApplyPilot — Job-Application Copilot',sub:'Next.js + Chrome extension + Supabase',
+    body:"An agent copilot that automates the repetitive parts of the LinkedIn job-application flow — a Next.js dashboard plus a Chrome MV3 extension on Supabase, with a human-in-the-loop review queue that pauses on risky or ambiguous cases instead of blindly auto-applying.",
+    meta:'pnpm monorepo · Playwright + Vitest · human-in-the-loop by design',
+    repo:'https://github.com/leini8891/ApplyPilot',
+    stack:['Agents','Next.js','Chrome MV3','Supabase','Playwright']},
 
   {id:'listing',group:'dataorbit',ang:-50,rad:88,size:17,col:'cyan',label:'Listing Monitor',featured:true,
     tag:'AI / Data · Python',title:'Listing Monitor',sub:'Cross-exchange listing intelligence',
@@ -425,12 +463,20 @@ const CHIPS=[
 
 /* ============ RENDER NODES ============ */
 const field=document.getElementById('field');
+field.inert=true; // professional mode is the default view; reveal universe enables focus
 const els={};
 function makeNode(cls,dotHTML,labelHTML,onclick){
   const d=document.createElement('div');
   d.className='node '+cls;
   d.innerHTML=dotHTML+labelHTML;
-  if(onclick)d.addEventListener('click',e=>{e.stopPropagation();onclick();});
+  if(onclick){
+    d.setAttribute('role','button');
+    d.setAttribute('tabindex','0');
+    const txt=labelHTML.replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();
+    if(txt)d.setAttribute('aria-label',txt);
+    d.addEventListener('click',e=>{e.stopPropagation();onclick();});
+    d.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();onclick();}});
+  }
   field.appendChild(d);
   return d;
 }
@@ -742,10 +788,20 @@ function buildResume(){
 }
 buildResume();
 const resumeEl=document.getElementById('resume');
-function openResume(){resumeEl.classList.add('show');resumeEl.scrollTop=0;}
-function closeResumeView(){showUniverseUI();resumeEl.classList.remove('show');}
+function openResume(){resumeEl.classList.add('show');resumeEl.scrollTop=0;field.inert=true;}
+function closeResumeView(){showUniverseUI();resumeEl.classList.remove('show');field.inert=false;}
 document.getElementById('resumeViewBtn').onclick=openResume;
 document.getElementById('closeResume').onclick=closeResumeView;
 </script>
+
+<!-- ============================================================
+  PRIVACY-FRIENDLY ANALYTICS (GoatCounter) — currently OFF.
+  To turn on (free, no cookies, no banner needed):
+    1. Sign up at https://www.goatcounter.com/  (pick a code, e.g. "elenaxiao")
+    2. Replace MYCODE below with that code
+    3. Delete this comment's opening/closing markers to activate the <script> line
+  <script data-goatcounter="https://MYCODE.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+============================================================ -->
 </body>
 </html>
