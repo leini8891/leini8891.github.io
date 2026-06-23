@@ -150,10 +150,13 @@ a{color:var(--cyan);text-decoration:none}
 #answer .who{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);margin-bottom:8px}
 #answer .txt{color:var(--ink);line-height:1.6;font-size:14.5px;white-space:pre-wrap}
 #answer .txt .cur{display:inline-block;width:8px;height:16px;background:var(--cyan);margin-left:2px;vertical-align:-3px;animation:blink 1s steps(1) infinite}
-#answer .jump{margin-top:12px}
+#answer .jump{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 #answer .jump button{font-family:var(--mono);font-size:11.5px;color:var(--cyan);background:rgba(63,231,255,.08);border:1px solid rgba(63,231,255,.35);
   padding:6px 12px;border-radius:8px;cursor:pointer;transition:.2s}
 #answer .jump button:hover{background:rgba(63,231,255,.18)}
+#answer .jump button.followup{color:var(--muted);background:rgba(120,150,255,.07);border-color:var(--cardbd)}
+#answer .jump button.followup:hover{color:#fff;border-color:var(--violet);background:rgba(163,116,255,.14)}
+#answer .think{font-family:var(--mono);font-size:14px;color:var(--faint);animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
 .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:9px;justify-content:center;
   opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .3s,transform .3s}
@@ -512,33 +515,74 @@ const ABOUT="I'm Elena — I build <b>practical AI &amp; data products</b>. Over
 
 /* ============ ASK-ME SCRIPT ============ */
 const ASK = [
-  {k:['best','strongest','proud','favorite','favourite','最','厉害','best project','win','won','award','tencent'],
+  {k:['best','strongest','proud','favorite','favourite','最','厉害','best project','win','won','award','tencent','auntie'],
    focus:'auntie',
-   a:"My favorite is Auntie AI — an anti-scam AI copilot for elderly users. It catches scam signals before money moves and explains the risk in plain language.\n\nIt won 1st place out of 35 projects (279 participants) in a 60-day Tencent Cloud AI challenge — and I owned the whole thing, from the detection logic to the demo."},
-  {k:['hire','why','work with','collaborate','reason','合作','雇','recruit'],
+   next:[['Why hire you?','why hire you'],['What are you building now?','building now']],
+   a:"My favorite is Auntie AI — an anti-scam AI copilot for elderly users. It catches scam signals before money moves and explains the risk in plain language.\n\nIt won 1st place out of 35 projects (279 participants) in a 60-day Tencent Cloud AI challenge — and I owned the whole thing, from the detection logic to the demo. Open its planet for the live demo."},
+  {k:['hire','why should','work with','collaborate','reason','合作','雇','recruit','value'],
    focus:'center',
+   next:[['See your best project','best project'],['How do I reach you?','reach you']],
    a:"I turn ambiguous business problems into practical AI &amp; data products — from problem framing to working prototypes and measurable outcomes.\n\n10+ years across Bybit, Binance and global enterprise. I go 0→1, I build my own prototypes, and I think in risk &amp; compliance — most recently 1st place in a national AI product challenge."},
-  {k:['now','building','currently','these days','present','在做','切'],
-   focus:'ailab',
-   a:"Right now I'm going deep on hands-on AI — agent workflows, LLM apps and Python data pipelines like Listing Monitor and Token Launch Lab. It all lives in the AI Lab planet.\n\nI'm looking for AI product / AI-deployment roles where I get to ship real things. This whole site is part of that pivot."},
-  {k:['crypto','risk','compliance','aml','exchange','web3','bybit','fintech'],
-   focus:'riskplanet',
-   a:"Five years in crypto, mostly around risk. At Bybit I built compliance self-service dashboards (NL/CA/UK), AML &amp; large-withdrawal alert logic, and the data-governance backbone — plus an LLM workflow that cut risk reporting from hours to minutes. It's all on Risk Planet."},
-  {k:['fun','surprise','random','interesting','cool','tell me something'],
-   focus:'spark1',
-   a:"Here's one: English isn't my first language, but I gave an English talk at a hackathon that got a round of applause. I'm a native Chinese speaker leaning all the way into English-first AI product work. (Click the pink stars for more.)"},
-  {k:['contact','reach','email','hire me','connect','linkedin','talk','touch','联系'],
-   focus:'signal',
-   a:"Easiest is email: leini8891@gmail.com.\n\nOr find me on LinkedIn (@xiao-elena) and GitHub (@leini8891) — links are top-right, or open the Signal Port planet. I'd love to hear what you're building."},
-  {k:['who','about','you','yourself','elena','介绍'],
+  {k:['role','roles','looking for','job','position','hiring','open to','opportunit','availab','full-time','fulltime','岗位','找工作','机会'],
    focus:'center',
+   next:[['How do I reach you?','reach you'],['Are you self-taught?','are you self taught']],
+   a:"I'm after <b>AI product / AI-deployment roles</b> where I get to ship real things — frame the problem, build the prototype, own the outcome.\n\nOpen to full-time roles and project-based work. Based in Singapore. If that sounds like your team, let's talk."},
+  {k:['now','building','currently','these days','present','在做','切','working on'],
+   focus:'ailab',
+   next:[['Are you self-taught?','are you self taught'],['What roles?','what roles']],
+   a:"Right now I'm going deep on hands-on AI — agent workflows, LLM apps and Python data pipelines like Listing Monitor and Token Launch Lab. It all lives in the AI Lab planet.\n\nI'm looking for AI product / AI-deployment roles where I get to ship real things. This whole site is part of that pivot."},
+  {k:['self','taught','pivot','transition','career change','career-chang','new to ai','bootcamp','trust','转型','自学'],
+   focus:'ailab',
+   next:[['See your best project','best project'],['What are you building now?','building now']],
+   a:"Fair question. I spent a decade in product &amp; data — then taught myself to build instead of just writing specs. In the last year I've shipped my own LLM &amp; agent prototypes end to end, and one of them won a national AI challenge.\n\nSo it's not a blank-slate switch — it's a decade of product judgment, now paired with actually building the thing."},
+  {k:['crypto','risk','compliance','aml','exchange','web3','bybit','fintech','风控','风险'],
+   focus:'riskplanet',
+   next:[['What are you building now?','building now']],
+   a:"Five years in crypto, mostly around risk. At Bybit I built compliance self-service dashboards (NL/CA/UK), AML &amp; large-withdrawal alert logic, and the data-governance backbone — plus an LLM workflow that cut risk reporting from ~8 hours to ~3 minutes. It's all on Risk Planet."},
+  {k:['tech','stack','code','coding','python','tools','technical','engineer','sql','技术'],
+   focus:'ailab',
+   next:[['Show me a project','best project']],
+   a:"Hands-on: Python, SQL, LLM / agent workflows (Dify, prompts + guardrails), ETL &amp; data pipelines, Streamlit, plus Tableau and on-chain analytics. I design the product AND build the prototype — Listing Monitor, Token Launch Lab and Auntie AI are all things I coded and shipped myself."},
+  {k:['language','english','chinese','mandarin','bilingual','英文','中文','语言'],
+   focus:null,
+   next:[['A bit about you?','who are you']],
+   a:"Native Chinese, fluent English — leaning all the way into English-first AI product work. I once gave an English talk at a hackathon that earned a round of applause. Comfortable presenting, writing and shipping in English."},
+  {k:['where','located','location','based','singapore','remote','relocat','onsite','time zone','timezone','坐标','哪里'],
+   focus:'signal',
+   next:[['How do I reach you?','reach you']],
+   a:"Based in <b>Singapore</b>. Happy to talk through how we'd work together — easiest is the Signal Port planet or leini8891@gmail.com."},
+  {k:['fun','surprise','random','interesting','cool','tell me something','趣'],
+   focus:'spark1',
+   next:[['A bit about you?','who are you'],['Why hire you?','why hire you']],
+   a:"Here's one: English isn't my first language, but I gave an English talk at a hackathon that got a round of applause. I'm a native Chinese speaker leaning all the way into English-first AI product work. (Click the pink stars for more.)"},
+  {k:['contact','reach','email','connect','linkedin','talk','touch','联系','约','call','meeting'],
+   focus:'signal',
+   next:[['Why hire you?','why hire you']],
+   a:"Easiest is email: leini8891@gmail.com — or hit the 📅 Book a call button in Professional Mode.\n\nYou'll also find LinkedIn (@xiao-elena) and GitHub (@leini8891) top-right, or open the Signal Port planet. I'd love to hear what you're building."},
+  {k:['thank','谢谢','thx','cheers','appreciate'],
+   focus:null,
+   a:"Anytime! If you're hiring or building with AI, the fastest path is the 📅 Book a call button or leini8891@gmail.com. 👋"},
+  {k:['are you real','real person','a bot','are you ai','are you an ai','chatgpt',' gpt','robot','是真人','机器人','你是ai','是不是ai'],
+   focus:null,
+   next:[['Ok — why hire you?','why hire you']],
+   a:"Ha — I'm a tiny hand-built site-agent, not a real LLM (Elena wired me up with plain keywords). Elena, on the other hand, is very real and very much shipping AI products. Ask about her best project, or click a planet."},
+  {k:['who','about','yourself','elena','介绍','你是谁'],
+   focus:'center',
+   next:[['Why hire you?','why hire you'],['What are you building now?','building now']],
    a:"I'm Elena — an AI &amp; data product builder. A decade in product and data across fintech and crypto (Bybit, Binance, Capgemini), and lately a hands-on AI builder shipping LLM &amp; agent tools.\n\nClick any planet to dig in, or ask me something specific."},
 ];
-const FALLBACK={focus:null,a:"Good question — I'm a simple site-agent, so try one of the chips below, or ask about my best project, why to hire me, what I'm building now, or how to reach me. You can also just click the planets."};
+const GREETING={focus:null,
+  next:[['✦ Best project','best project'],['Why hire you?','why hire you'],['What roles?','what roles']],
+  a:"Hey! 👋 I'm Elena's site-agent. Ask about her best project, why to hire her, what she's building now, or how to reach her — or just click a planet to explore."};
+const FALLBACK={focus:null,
+  next:[['Best project','best project'],['Why hire you?','why hire you'],['Self-taught?','are you self taught'],['Reach you','reach you']],
+  a:"Good question — I'm a hand-built site-agent, so I'm sharpest on a few topics. Try one of these, or just click any planet."};
 
 const CHIPS=[
   ['✦ Best project','show me your best project'],
   ['Why hire you?','why should I hire you'],
+  ['What roles?','what roles are you looking for'],
+  ['Self-taught?','are you self taught'],
   ['Building now','what are you building now'],
   ['Crypto & risk','tell me about your crypto risk work'],
   ['Fun fact','tell me a fun fact'],
@@ -806,12 +850,8 @@ SPARKS.forEach(s=>LOOKUP[s.id]={label:s.label,open:()=>openSpark(s.id)});
 const chips=document.getElementById('chips'),answer=document.getElementById('answer'),atxt=document.getElementById('atxt'),ajump=document.getElementById('ajump');
 CHIPS.forEach(([lbl,q])=>{const b=document.createElement('button');b.textContent=lbl;b.onclick=()=>ask(q);chips.appendChild(b);});
 let typing=null;
-function ask(qstr){
-  const q=qstr.toLowerCase();
-  let hit=FALLBACK;
-  for(const item of ASK){if(item.k.some(k=>q.includes(k))){hit=item;break;}}
-  answer.classList.add('open');ajump.innerHTML='';
-  typeOut(hit.a.replace(/&amp;/g,'&').replace(/&ldquo;|&rdquo;/g,'"'));
+function renderJumps(hit){
+  ajump.innerHTML='';
   if(hit.focus){
     const target=LOOKUP[hit.focus];
     if(target){
@@ -822,6 +862,22 @@ function ask(qstr){
     }
     pingNode(hit.focus);
   }
+  (hit.next||[]).forEach(([lbl,qq])=>{
+    const b=document.createElement('button');
+    b.className='followup';b.textContent=lbl;
+    b.onclick=()=>ask(qq);
+    ajump.appendChild(b);
+  });
+}
+function ask(qstr){
+  const q=qstr.toLowerCase(),qt=q.trim();
+  let hit=FALLBACK;
+  if(/^(hi|hey|hello|yo|hiya|hallo|howdy|sup|greetings)\b/.test(qt)||qt.startsWith('你好')||qt.startsWith('哈喽')||qt.startsWith('嗨')){hit=GREETING;}
+  else{for(const item of ASK){if(item.k.some(k=>q.includes(k))){hit=item;break;}}}
+  answer.classList.add('open');ajump.innerHTML='';
+  const render=()=>{typeOut(hit.a.replace(/&amp;/g,'&').replace(/&ldquo;|&rdquo;/g,'"'));renderJumps(hit);};
+  if(reduce){render();}
+  else{atxt.innerHTML='<span class="think">▌ thinking…</span>';setTimeout(render,420);}
 }
 function typeOut(str){
   if(typing)clearInterval(typing);
