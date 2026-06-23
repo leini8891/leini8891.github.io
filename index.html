@@ -243,7 +243,36 @@ a{color:var(--cyan);text-decoration:none}
 .rcontact a{font-family:var(--mono);font-size:14px;color:var(--cyan);border:1px solid var(--cardbd);background:rgba(16,22,50,.5);padding:11px 18px;border-radius:10px;transition:.2s}
 .rcontact a:hover{border-color:var(--cyan);transform:translateY(-1px)}
 .rcontact .cv{color:#04050d;font-weight:700;background:linear-gradient(100deg,var(--cyan),var(--violet));border-color:transparent}
-@media (max-width:640px){.rgrid,.rgrid.three{grid-template-columns:1fr}.rhead{flex-direction:column}.rwrap{padding:40px 20px 100px}}
+.rcontact .book{color:#04050d;font-weight:700;background:linear-gradient(100deg,var(--gold),#ffb86a);border-color:transparent}
+/* hero spike + trust band */
+.rhero{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:22px 0 18px;padding:15px 18px;
+  border:1px solid rgba(255,215,106,.4);background:rgba(255,215,106,.07);border-radius:14px}
+.rhero .medal{font-size:26px;line-height:1}
+.rhero .htxt{flex:1;min-width:240px;font-size:15px;color:var(--ink);line-height:1.55}
+.rhero .htxt b{color:var(--gold);font-weight:700}
+.rlogos{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin:0 0 6px}
+.rlogos .lg{font-family:var(--mono);font-size:13px;letter-spacing:.03em;color:var(--ink);opacity:.9}
+.rlogos .sep{color:var(--faint)}
+.rstats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0 4px}
+.rstat{background:var(--card);border:1px solid var(--cardbd);border-radius:12px;padding:16px 12px;text-align:center}
+.rstat .num{font-size:23px;font-weight:700;background:linear-gradient(100deg,#fff,var(--cyan) 70%,var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+.rstat .lbl{font-size:11.5px;color:var(--muted);margin-top:6px;line-height:1.35}
+.rnarr{color:var(--ink);font-size:16px;line-height:1.78;max-width:690px;border-left:3px solid var(--cyan);padding-left:18px}
+.rnarr b{color:var(--cyan);font-weight:600}
+/* STAR block (featured cards + panels) */
+.star{display:flex;flex-direction:column;gap:9px;margin:2px 0 13px}
+.star .row{display:grid;grid-template-columns:78px 1fr;gap:10px;align-items:start}
+.star .k{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--violet);padding-top:3px}
+.star .v{font-size:13.5px;color:var(--muted);line-height:1.5}
+.star .v b{color:var(--ink);font-weight:600}
+#panel .star .v{font-size:14.5px;line-height:1.55}
+#panel .star{margin:6px 0 4px}
+/* live demo button (primary — stands out vs repo link) */
+.demolink{display:inline-block;margin-top:18px;margin-right:10px;font-family:var(--mono);font-size:12.5px;font-weight:700;
+  color:#04050d;background:linear-gradient(100deg,var(--cyan),var(--violet));padding:9px 15px;border-radius:9px;transition:.2s}
+.demolink:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.rcard .demolink{margin-top:12px;padding:7px 12px;font-size:11.5px}
+@media (max-width:640px){.rgrid,.rgrid.three{grid-template-columns:1fr}.rhead{flex-direction:column}.rwrap{padding:40px 20px 100px}.rstats{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
@@ -319,6 +348,13 @@ a{color:var(--cyan);text-decoration:none}
 /* ============ UNIVERSE DATA ============ */
 const CENTER={id:'center',label:'I build practical AI & data products',cname:'Elena Xiao'};
 
+/* Paste your Calendly link here to enable one-click booking everywhere.
+   e.g. 'https://calendly.com/elena-xiao/15min' — until then the button falls back to email. */
+const CALENDLY='';
+
+/* The pivot narrative — answers a recruiter's first doubt about a career-changer. */
+const NARRATIVE="For a decade I shipped products and data systems across fintech and crypto — but the highest-leverage work kept turning into AI, and I didn't want to just write specs for it. So I taught myself to build. In the last year I've shipped my own LLM &amp; agent prototypes — an anti-scam copilot that <b>won a national AI challenge</b>, a cross-exchange data pipeline, an adversarial risk harness — coding and deploying them end to end. I bring a decade of product judgment and risk instinct; what's new is that now <b>I build the thing myself</b>.";
+
 const GROUPS=[
   {id:'ailab',icon:'🤖',name:'AI Lab',ang:-62,rad:240,size:62,col:'cyan',
    desc:"Where I build with LLMs end to end — products I designed, coded and shipped myself. The biggest planet on purpose: this is where I'm pointed."},
@@ -339,7 +375,12 @@ const ITEMS=[
     tag:'AI Product · 1st place',title:'Auntie AI — Anti-Scam Co-Pilot',sub:'Tencent Cloud AI Coding Challenge · Winner',
     award:'🏆 1st of 35 projects · 279 participants',
     body:"A senior-friendly AI copilot that flags scam &amp; fraud signals before a risky transaction happens, explains the risk in plain language, and loops in family members. I owned the scam-detection logic, the explanation UX, the false-positive / false-negative tradeoffs and the AI safety guardrails — then shipped and demoed it.",
+    star:{p:"Elderly users are the #1 target for scams, but fraud warnings are technical and arrive too late.",
+      a:"An AI copilot that reads a message or screenshot, scores scam risk across 7 dimensions, explains it in plain language, and loops in family.",
+      r:"<b>🏆 1st of 35 projects</b> (279 participants) in a 60-day national Tencent Cloud AI challenge.",
+      role:"Solo-owned the detection logic, explanation UX, false-positive/negative tradeoffs and AI guardrails — then shipped &amp; demoed it."},
     meta:'60-day national build · solo-owned the winning product',
+    demo:'https://auntie-ai.vercel.app/',
     repo:'https://github.com/leini8891/auntie-ai',
     stack:['LLM','Prompt + Guardrails','Fraud detection','Product','Demo & pitch']},
   {id:'tokenlab',group:'ailab',ang:-25,rad:88,size:17,col:'cyan',label:'Token Launch Lab',featured:true,
@@ -358,6 +399,10 @@ const ITEMS=[
   {id:'listing',group:'dataorbit',ang:-50,rad:88,size:17,col:'cyan',label:'Listing Monitor',featured:true,
     tag:'AI / Data · Python',title:'Listing Monitor',sub:'Cross-exchange listing intelligence',
     body:"A Python pipeline that watches new token listings across 7+ exchanges and CoinGecko — ingestion, ETL and enrichment end to end — with a 4-tier RWA / token classifier (confidence-scored, with data provenance) feeding Lark alerts and a Streamlit dashboard.",
+    star:{p:"New token listings move across 7+ exchanges with no single, trustworthy, real-time view.",
+      a:"A Python pipeline end to end — ingestion, ETL, enrichment — with a 4-tier RWA/token classifier (confidence-scored, with provenance) feeding Lark alerts and a Streamlit dashboard.",
+      r:"One source of truth across <b>7+ venues</b>, with resilient retry/fallback — built from scratch.",
+      role:"Designed and coded the whole pipeline, classifier and dashboard myself."},
     meta:'7+ venues · full ETL · built from scratch',
     repo:'https://github.com/leini8891/Listing-Monitor',
     stack:['Python','REST APIs','ETL','Classifier','Streamlit','Lark']},
@@ -375,6 +420,10 @@ const ITEMS=[
   {id:'aibi',group:'riskplanet',ang:85,rad:78,size:15,col:'violet',label:'AI + BI Risk Automation',featured:true,
     tag:'AI / Data · Project-based',title:'AI + BI Risk Reporting Automation',sub:'LLM-powered risk reporting',
     body:"LLM / Dify reporting workflows over transaction, fund-flow, market-feed and user-behavior data that cut risk-report turnaround from <b>hours to minutes</b> for leadership decisions — and translated large withdrawals &amp; suspicious transfers into risk indicators and alert rules.",
+    star:{p:"Risk reporting took hours of manual data pulls before leadership could act on large withdrawals &amp; suspicious flows.",
+      a:"LLM/Dify reporting workflows over transaction, fund-flow, market and behavior data; turned big withdrawals &amp; suspicious transfers into risk indicators and alert rules.",
+      r:"Cut risk-report turnaround from <b>hours to minutes</b> for leadership decisions.",
+      role:"Owned the workflow design and guardrails, partnering with BI, data &amp; AI engineering."},
     meta:'Partnered with BI, data &amp; AI engineering on guardrails',
     note:'Independent / project-based work',
     stack:['LLM / Dify','SQL','AML signals','Alerting']},
@@ -681,6 +730,7 @@ function openGroup(id){
   }
   if(id==='signal'){
     h+='<div class="glist">'+
+      '<a class="repolink" href="'+bookHref()+'"'+(CALENDLY?' target="_blank" rel="noopener"':'')+'>📅 Book a 15-min call</a>'+
       '<a class="repolink" href="mailto:leini8891@gmail.com">✉ leini8891@gmail.com</a>'+
       '<a class="repolink" href="https://www.linkedin.com/in/xiao-elena/" target="_blank" rel="noopener">↗ LinkedIn</a>'+
       '<a class="repolink" href="https://github.com/leini8891" target="_blank" rel="noopener">↗ GitHub</a>'+
@@ -696,9 +746,10 @@ function openItem(id){
   h+='<div class="ptag">'+it.tag+'</div><h2>'+it.title+'</h2>';
   if(it.sub)h+='<div class="sub">'+it.sub+'</div>';
   if(it.award)h+='<div class="award">'+it.award+'</div>';
-  h+='<p>'+it.body+'</p>';
+  if(it.star)h+=starHTML(it.star); else h+='<p>'+it.body+'</p>';
   if(it.meta)h+='<div class="meta">→ '+it.meta+'</div>';
   if(it.stack)h+='<div class="stack">'+it.stack.map(s=>'<span class="chip">'+s+'</span>').join('')+'</div>';
+  if(it.demo)h+='<a class="demolink" href="'+it.demo+'" target="_blank" rel="noopener">▶ Live Demo</a>';
   if(it.repo)h+='<a class="repolink" href="'+it.repo+'" target="_blank" rel="noopener">↗ View on GitHub</a>';
   if(it.note)h+='<div class="note">'+it.note+'</div>';
   showPanel(h);
@@ -762,8 +813,26 @@ qin.addEventListener('keydown',e=>{if(e.key==='Enter'&&qin.value.trim()){ask(qin
 
 /* ============ PROFESSIONAL MODE ============ */
 const FEATURED=['auntie','listing','tokenlab','aibi','dragon','compliance'];
+function bookHref(){return CALENDLY||"mailto:leini8891@gmail.com?subject=Let's%20talk%20%E2%80%94%2015%20min%3F";}
+function starHTML(s){
+  return '<div class="star">'+
+    '<div class="row"><span class="k">Problem</span><span class="v">'+s.p+'</span></div>'+
+    '<div class="row"><span class="k">What I did</span><span class="v">'+s.a+'</span></div>'+
+    '<div class="row"><span class="k">Result</span><span class="v">'+s.r+'</span></div>'+
+    '<div class="row"><span class="k">My role</span><span class="v">'+s.role+'</span></div></div>';
+}
 function buildResume(){
   let h='';
+  // hero spike + trust band
+  h+='<div class="rhero"><span class="medal">🏆</span><div class="htxt"><b>1st place</b> — Tencent Cloud AI Coding Challenge (35 projects · 279 participants). I designed, coded and shipped the winning product, <b>Auntie&nbsp;AI</b>, solo.</div></div>';
+  h+='<div class="rlogos"><span class="lg">Bybit</span><span class="sep">·</span><span class="lg">Binance</span><span class="sep">·</span><span class="lg">Capgemini</span><span class="sep">·</span><span class="lg" style="color:var(--gold)">🏆 Tencent&nbsp;AI&nbsp;Winner</span></div>';
+  h+='<div class="rstats">'
+    +'<div class="rstat"><div class="num">1st</div><div class="lbl">of 35 · national AI challenge</div></div>'
+    +'<div class="rstat"><div class="num">660+</div><div class="lbl">CS hours saved / month</div></div>'
+    +'<div class="rstat"><div class="num">$3M</div><div class="lbl">marketing spend analyzed</div></div>'
+    +'<div class="rstat"><div class="num">hrs→min</div><div class="lbl">risk reporting turnaround</div></div>'
+    +'</div>';
+  h+='<div class="rsec"><div class="rh">Why AI, Why Now</div><p class="rnarr">'+NARRATIVE+'</p></div>';
   h+='<div class="rsec"><div class="rh">About</div><p class="rabout">'+ABOUT+'</p></div>';
   h+='<div class="rsec"><div class="rh">What I Can Do For You</div><div class="rgrid three">';
   SERVICES.forEach(s=>{
@@ -776,8 +845,9 @@ function buildResume(){
     h+='<div class="rt">'+n.tag+'</div><h3>'+n.title.replace(/ — /,' · ')+'</h3>';
     if(n.award)h+='<div class="rsub" style="color:var(--gold)">'+n.award+'</div>';
     else if(n.sub)h+='<div class="rsub">'+n.sub+'</div>';
-    h+='<p>'+n.body+'</p>';
+    if(n.star)h+=starHTML(n.star); else h+='<p>'+n.body+'</p>';
     h+='<div class="rstk">'+n.stack.map(s=>'<span>'+s+'</span>').join('')+'</div>';
+    if(n.demo)h+='<a class="demolink" href="'+n.demo+'" target="_blank" rel="noopener">▶ Live Demo</a>';
     if(n.repo)h+='<a class="repolink" href="'+n.repo+'" target="_blank" rel="noopener">↗ View on GitHub</a>';
     h+='</div>';
   });
@@ -788,6 +858,7 @@ function buildResume(){
   h+='<div class="rsec"><div class="rh">Skills</div><div class="rskills">'+SKILLS.map(s=>'<span>'+s+'</span>').join('')+'</div>';
   h+='<div class="rcred">Finance background · B.A. Finance · CFA Level I · PMP · Chinese (native) · English (fluent)</div></div>';
   h+='<div class="rsec"><div class="rh">Contact</div><div class="rcontact">'+
+     '<a href="'+bookHref()+'"'+(CALENDLY?' target="_blank" rel="noopener"':'')+' class="book">📅 Book a 15-min call</a>'+
      '<a href="mailto:leini8891@gmail.com" class="cv">✉ leini8891@gmail.com</a>'+
      '<a href="https://www.linkedin.com/in/xiao-elena/" target="_blank" rel="noopener">LinkedIn</a>'+
      '<a href="https://github.com/leini8891" target="_blank" rel="noopener">GitHub</a></div></div>';
