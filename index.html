@@ -337,6 +337,7 @@ a{color:var(--cyan);text-decoration:none}
       <h2 style="color:#eaeefb">Selected projects</h2>
       <ul style="color:#cfd6f5;line-height:1.7;max-width:680px">
         <li><a href="https://github.com/leini8891/auntie-ai">Auntie AI</a> — anti-scam AI copilot, 1st place at the Tencent Cloud AI Coding Challenge (35 projects, 279 participants).</li>
+        <li><a href="https://hackathon-ba0ba0-mu.vercel.app">BaoBao</a> — elderly wellness companion for families: smart ring/watch readings, reminders, companion flows and a calm health dashboard. Healthcare hackathon final demo, live on Vercel.</li>
         <li><a href="https://github.com/leini8891/token-launch-lab">Token Launch Lab</a> — adversarial AI harness that stress-tests crypto token launches.</li>
         <li><a href="https://github.com/leini8891/Listing-Monitor">Listing Monitor</a> — Python pipeline watching new listings across 7+ exchanges, with a classifier, alerts and a Streamlit dashboard.</li>
         <li><a href="https://github.com/leini8891/ApplyPilot">ApplyPilot</a> — job-application agent copilot (Next.js + Chrome extension + Supabase) with a human-in-the-loop review queue.</li>
@@ -406,6 +407,16 @@ const ITEMS=[
     meta:'pnpm monorepo · Playwright + Vitest · human-in-the-loop by design',
     repo:'https://github.com/leini8891/ApplyPilot',
     stack:['Agents','Next.js','Chrome MV3','Supabase','Playwright']},
+  {id:'baobao',group:'ailab',ang:108,rad:90,size:16,col:'cyan',label:'BaoBao 💙',featured:true,
+    tag:'AI Product · Health',title:'BaoBao — Elderly Wellness Companion',sub:'Family health dashboard · smart ring / watch + companion flows',
+    body:"An elderly wellness companion for families — wearable readings from a smart ring / watch, gentle reminders, humanoid-companion support flows and a calm health dashboard the whole family can read at a glance. Next.js, running in Vercel production; demoed in a healthcare hackathon final.",
+    star:{p:"Families worry about ageing parents' health, but wearable data is scattered, alarming, and unreadable for seniors.",
+      a:"An elderly wellness companion — smart ring / watch readings, gentle reminders, humanoid-companion support flows and a calm family health dashboard, built on Next.js.",
+      r:"<b>Healthcare hackathon final demo</b> — live in Vercel production.",
+      role:"Designed and built the dashboard and companion flows end to end."},
+    meta:'With Auntie AI, the second half of my senior-care AI pair',
+    demo:'https://hackathon-ba0ba0-mu.vercel.app',
+    stack:['LLM','Next.js','Wearables','Companion UX','Health dashboard']},
 
   {id:'listing',group:'dataorbit',ang:-50,rad:88,size:17,col:'cyan',label:'Listing Monitor',featured:true,
     tag:'AI / Data · Python',title:'Listing Monitor',sub:'Cross-exchange listing intelligence',
@@ -490,7 +501,7 @@ const UPCOMING_NOTES=['From writing specs to shipping code','Risk is a product p
 /* ============ PROFESSIONAL MODE DATA ============ */
 const EXPERIENCE=[
   {title:'Independent / Project-based AI & Data Work',sub:'AI & Data Product Lead · 2025 – Present',
-   body:"Building hands-on AI &amp; data products — Auntie AI, Listing Monitor, Token Launch Lab, ApplyPilot — plus project-based AI+BI risk automation. Designing, coding and shipping prototypes end to end; intensive English communication training for English-first product roles."},
+   body:"Building hands-on AI &amp; data products — Auntie AI, BaoBao, Listing Monitor, Token Launch Lab, ApplyPilot — plus project-based AI+BI risk automation. Designing, coding and shipping prototypes end to end; intensive English communication training for English-first product roles."},
   {title:'Bybit Fintech',sub:'Lead Data Product Analyst, BI Center · 2022 – 2024',
    body:"Led the BI Center's product &amp; data work: the Dragon Boat 0→1 platform, compliance self-service (NL/CA/UK), AI customer-service analytics (660+ CS hours saved/month, 80+ agents), a $3M campaign-cost analysis across 27 stakeholders and 9 systems, and the data-governance backbone (18 SOPs)."},
   {title:'Binance',sub:'Senior Product Manager · 2021 – 2022',
@@ -530,7 +541,7 @@ const ASK = [
   {k:['now','building','currently','these days','present','在做','切','working on'],
    focus:'ailab',
    next:[['Are you self-taught?','are you self taught'],['What roles?','what roles']],
-   a:"Right now I'm going deep on hands-on AI — agent workflows, LLM apps and Python data pipelines like Listing Monitor and Token Launch Lab. It all lives in the AI Lab planet.\n\nI'm looking for AI product / AI-deployment roles where I get to ship real things. This whole site is part of that pivot."},
+   a:"Right now I'm going deep on hands-on AI — the newest is BaoBao 💙, an elderly wellness companion that made a healthcare hackathon final, alongside agent workflows and data pipelines like Listing Monitor and Token Launch Lab. It all lives in the AI Lab planet.\n\nI'm looking for AI product / AI-deployment roles where I get to ship real things. This whole site is part of that pivot."},
   {k:['self','taught','pivot','transition','career change','career-chang','new to ai','bootcamp','trust','转型','自学'],
    focus:'ailab',
    next:[['See your best project','best project'],['What are you building now?','building now']],
@@ -539,6 +550,10 @@ const ASK = [
    focus:'riskplanet',
    next:[['What are you building now?','building now']],
    a:"Five years in crypto, mostly around risk. At Bybit I built compliance self-service dashboards (NL/CA/UK), AML &amp; large-withdrawal alert logic, and the data-governance backbone — plus an LLM workflow that cut risk reporting from ~8 hours to ~3 minutes. It's all on Risk Planet."},
+  {k:['baobao','health','elder','wellness','wearable','医疗','健康','养老','宝宝'],
+   focus:'baobao',
+   next:[['See your best project','best project'],['What are you building now?','building now']],
+   a:"BaoBao 💙 is my newest build — an elderly wellness companion for families: smart ring / watch readings, gentle reminders, humanoid-companion support flows and a calm health dashboard. It reached a healthcare hackathon final and runs in Vercel production.\n\nTogether with Auntie AI it's my senior-care AI pair — open its planet for the live demo."},
   {k:['tech','stack','code','coding','python','tools','technical','engineer','sql','技术'],
    focus:'ailab',
    next:[['Show me a project','best project']],
@@ -896,7 +911,7 @@ document.getElementById('send').onclick=()=>{if(qin.value.trim()){ask(qin.value)
 qin.addEventListener('keydown',e=>{if(e.key==='Enter'&&qin.value.trim()){ask(qin.value);qin.value='';}});
 
 /* ============ PROFESSIONAL MODE ============ */
-const FEATURED=['auntie','listing','tokenlab','aibi','dragon','compliance'];
+const FEATURED=['auntie','baobao','listing','tokenlab','aibi','dragon','compliance','applypilot'];
 function bookHref(){return CALENDLY||"mailto:leini8891@gmail.com?subject=Let's%20talk%20%E2%80%94%2015%20min%3F";}
 function starHTML(s){
   return '<div class="star">'+
