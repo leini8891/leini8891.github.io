@@ -277,23 +277,39 @@ a{color:var(--cyan);text-decoration:none}
 .rcard .demolink{margin-top:12px;padding:7px 12px;font-size:11.5px}
 @media (max-width:640px){.rgrid,.rgrid.three{grid-template-columns:1fr}.rhead{flex-direction:column}.rwrap{padding:40px 20px 100px}.rstats{grid-template-columns:repeat(2,1fr)}}
 
-/* ---------- share + easter eggs ---------- */
-#toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%) translateY(14px);z-index:70;font-family:var(--mono);font-size:12.5px;color:var(--ink);
+/* ---------- share + delight ---------- */
+#toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%) translateY(14px);z-index:90;font-family:var(--mono);font-size:12.5px;color:var(--ink);
   background:rgba(14,20,50,.94);border:1px solid var(--cardbd);padding:9px 16px;border-radius:30px;opacity:0;pointer-events:none;transition:.3s;max-width:88vw;text-align:center}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .sharebtn{display:inline-block;margin-top:18px;margin-right:10px;font-family:var(--mono);font-size:12.5px;color:var(--pink);
   border:1px solid rgba(255,122,217,.4);background:rgba(255,122,217,.08);padding:8px 14px;border-radius:9px;cursor:pointer;transition:.2s}
 .sharebtn:hover{background:rgba(255,122,217,.18);transform:translateY(-1px)}
-#egghud{position:fixed;right:24px;bottom:24px;z-index:26;font-family:var(--mono);font-size:12px;color:var(--gold);cursor:pointer;
-  border:1px solid rgba(255,215,106,.4);background:rgba(255,215,106,.08);padding:7px 12px;border-radius:30px;opacity:0;visibility:hidden;transition:.4s}
-#egghud.on{opacity:1;visibility:visible}
-#egghud:hover{background:rgba(255,215,106,.16);transform:translateY(-1px)}
+.repolink{margin-right:10px}
+#shareov{position:fixed;inset:0;z-index:80;background:rgba(3,4,11,.66);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:20px}
+#shareov.show{display:flex}
+.sharebox{position:relative;width:min(540px,94vw);background:linear-gradient(180deg,var(--bg2),var(--bg1));border:1px solid var(--cardbd);
+  border-radius:16px;padding:22px;box-shadow:0 30px 80px rgba(0,0,0,.55)}
+.sharebox h3{margin:2px 44px 4px 0;font-size:18px}
+.sharebox .shint{color:var(--faint);font-size:12.5px;margin:0 0 14px}
+.sharebox img{width:100%;border-radius:10px;border:1px solid var(--line);display:block}
+.shrow{display:flex;gap:10px;margin-top:14px;align-items:stretch}
+.shurl{flex:1;min-width:0;font-family:var(--mono);font-size:12px;color:var(--muted);background:rgba(10,14,34,.7);border:1px solid var(--cardbd);
+  border-radius:9px;padding:11px 12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.shcopy{font-family:var(--mono);font-size:12.5px;font-weight:700;color:#04050d;background:linear-gradient(100deg,var(--cyan),var(--violet));
+  border:none;border-radius:9px;padding:10px 16px;cursor:pointer;transition:.2s;white-space:nowrap}
+.shcopy:hover{filter:brightness(1.08)}
+.shnative{font-family:var(--mono);font-size:12.5px;color:var(--muted);background:none;border:1px solid var(--cardbd);border-radius:9px;padding:10px 13px;cursor:pointer;transition:.2s;white-space:nowrap}
+.shnative:hover{color:#fff;border-color:var(--cyan)}
+#answer{position:relative}
+#aclose{position:absolute;top:10px;right:12px;width:26px;height:26px;border-radius:50%;border:1px solid var(--cardbd);background:rgba(20,28,62,.5);
+  color:var(--muted);font-size:13px;cursor:pointer;line-height:1;padding:0;transition:.2s;display:none}
+#answer.open #aclose{display:block}
+#aclose:hover{color:#fff;border-color:var(--cyan)}
 @keyframes nova{0%{filter:brightness(1)}16%{filter:brightness(2.7) saturate(1.6)}100%{filter:brightness(1)}}
 body.nova #sky,body.nova #field{animation:nova 1.5s ease}
 #ufo{position:fixed;left:0;top:0;z-index:24;font-size:34px;pointer-events:none;display:none;filter:drop-shadow(0 0 12px rgba(63,231,255,.85))}
 @keyframes ufofly{0%{transform:translate(-8vw,14vh) rotate(9deg)}30%{transform:translate(30vw,34vh) rotate(-7deg)}60%{transform:translate(62vw,16vh) rotate(11deg)}100%{transform:translate(108vw,42vh) rotate(-5deg)}}
 #ufo.fly{display:block;animation:ufofly 7s linear}
-@media (max-width:640px){#egghud{bottom:78px}}
 </style>
 </head>
 <body>
@@ -308,10 +324,24 @@ body.nova #sky,body.nova #field{animation:nova 1.5s ease}
   <a href="https://github.com/leini8891" target="_blank" rel="noopener">GitHub</a>
   <a href="mailto:leini8891@gmail.com">Email</a>
 </div>
-<div id="hud">drag to explore · click a planet</div>
+<div id="hud">drag to explore · click a planet · double-click the sun 💥</div>
 <div id="toast"></div>
-<div id="egghud" role="button" tabindex="0" aria-label="Easter eggs found">🥚 0/3</div>
 <div id="ufo">🛸</div>
+
+<!-- share card preview -->
+<div id="shareov">
+  <div class="sharebox">
+    <button class="pclose" id="shclose" aria-label="close">✕</button>
+    <h3 id="shtitle"></h3>
+    <p class="shint">Paste this link on LinkedIn / X / WeChat — it unfurls into the card below:</p>
+    <img id="shimg" src="og-image.png" alt="share card preview"/>
+    <div class="shrow">
+      <div class="shurl" id="shurl"></div>
+      <button class="shcopy" id="shcopy">Copy link</button>
+      <button class="shnative" id="shnative">⤴ More</button>
+    </div>
+  </div>
+</div>
 
 <!-- detail panel -->
 <div id="scrim"></div>
@@ -322,7 +352,7 @@ body.nova #sky,body.nova #field{animation:nova 1.5s ease}
 
 <!-- ask bar -->
 <div id="ask">
-  <div id="answer"><div class="who">Elena's agent</div><div class="txt" id="atxt"></div><div class="jump" id="ajump"></div></div>
+  <div id="answer"><button id="aclose" aria-label="close answer">✕</button><div class="who">Elena's agent</div><div class="txt" id="atxt"></div><div class="jump" id="ajump"></div></div>
   <div class="chips" id="chips"></div>
   <div class="inputwrap">
     <span class="ic">&gt;_</span>
@@ -547,10 +577,6 @@ const ABOUT="I'm Elena — I build <b>practical AI &amp; data products</b>. Over
 
 /* ============ ASK-ME SCRIPT ============ */
 const ASK = [
-  {k:['42','meaning of life','life, the universe','life the universe','answer to everything','宇宙的答案','生命的意义'],egg:true,
-   focus:null,
-   next:[['Ok — best project?','best project'],['Why hire you?','why hire you']],
-   a:"42. Obviously. 🐋🌷\n\nBut if you mean what gets Elena up in the morning: shipping AI products that make someone's day measurably better — a safer grandma, a calmer family, a faster risk call.\n\n🥚 You found an easter egg."},
   {k:['best','strongest','proud','favorite','favourite','最','厉害','best project','win','won','award','tencent','auntie'],
    focus:'auntie',
    next:[['Why hire you?','why hire you'],['What are you building now?','building now']],
@@ -917,7 +943,6 @@ function ask(qstr){
   if(/^(hi|hey|hello|yo|hiya|hallo|howdy|sup|greetings)\b/.test(qt)||qt.startsWith('你好')||qt.startsWith('哈喽')||qt.startsWith('嗨')){hit=GREETING;}
   else{for(const item of ASK){if(item.k.some(k=>q.includes(k))){hit=item;break;}}}
   answer.classList.add('open');ajump.innerHTML='';
-  if(hit.egg)setTimeout(()=>foundEgg('answer','You asked the right question'),900);
   const render=()=>{typeOut(hit.a.replace(/&amp;/g,'&').replace(/&ldquo;|&rdquo;/g,'"'));renderJumps(hit);};
   if(reduce){render();}
   else{atxt.innerHTML='<span class="think">▌ thinking…</span>';setTimeout(render,420);}
@@ -1000,14 +1025,34 @@ document.getElementById('closeResume').onclick=closeResumeView;
 /* ============ SHARE ============ */
 const SITE='https://leini8891.github.io/';
 const SHARE_PAGES={auntie:'p/auntie.html',baobao:'p/baobao.html'};
+const SHARE_IMGS={auntie:'p/og-auntie.png',baobao:'p/og-baobao.png'};
 function shareURL(id){return SHARE_PAGES[id]?SITE+SHARE_PAGES[id]:SITE+'#'+id;}
 let toastT=null;
 function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');
   clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('show'),2800);}
-function doShare(id,title){const url=shareURL(id);
-  if(navigator.share){navigator.share({title:title+' — Elena Xiao',url}).catch(()=>{});}
-  else if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(()=>toast('🔗 Link copied — paste it anywhere'),()=>toast(url));}
-  else toast(url);}
+const shareov=document.getElementById('shareov');
+let shState={url:'',title:''};
+function doShare(id,title){
+  shState={url:shareURL(id),title:title+' — Elena Xiao'};
+  document.getElementById('shtitle').textContent='⤴ Share: '+title;
+  document.getElementById('shimg').src=SHARE_IMGS[id]||'og-image.png';
+  document.getElementById('shurl').textContent=shState.url;
+  document.getElementById('shnative').style.display=navigator.share?'':'none';
+  shareov.classList.add('show');
+}
+function closeShare(){shareov.classList.remove('show');}
+document.getElementById('shclose').onclick=closeShare;
+shareov.addEventListener('click',e=>{if(e.target===shareov)closeShare();});
+document.getElementById('shcopy').onclick=()=>{
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(shState.url).then(()=>toast('🔗 Link copied — paste it anywhere'),()=>toast(shState.url));
+  }else toast(shState.url);
+};
+document.getElementById('shnative').onclick=()=>{navigator.share({title:shState.title,url:shState.url}).catch(()=>{});};
+addEventListener('keydown',e=>{if(e.key==='Escape')closeShare();});
+
+/* close button on the agent answer box */
+document.getElementById('aclose').onclick=()=>{answer.classList.remove('open');};
 
 /* deep links: /#auntie or /#ailab lands straight in the universe with that panel open */
 function openFromHash(){
@@ -1022,33 +1067,13 @@ function openFromHash(){
 addEventListener('hashchange',openFromHash);
 openFromHash();
 
-/* ============ EASTER EGGS ============ */
-const EGG_TOTAL=3;
-let eggs={};try{eggs=JSON.parse(localStorage.getItem('eggs')||'{}')}catch(e){}
-const egghud=document.getElementById('egghud');
-function eggCount(){return Object.keys(eggs).length}
-function updateEggHud(){if(eggCount()>0){egghud.textContent='🥚 '+eggCount()+'/'+EGG_TOTAL;egghud.classList.add('on');}}
-function foundEgg(k,msg){if(eggs[k])return;eggs[k]=1;
-  try{localStorage.setItem('eggs',JSON.stringify(eggs))}catch(e){}
-  updateEggHud();toast('🥚 '+msg+' — '+eggCount()+'/'+EGG_TOTAL+' eggs found');}
-function eggPanel(){
-  showPanel('<div class="ptag">Easter eggs</div><h2>🥚 '+eggCount()+' / '+EGG_TOTAL+' found</h2>'+
-    '<p>This universe hides a few secrets. Hints:</p><div class="soon">'+
-    (eggs.nova?'✅ <b>Supernova</b> — you tickled the sun.':'① The sun is ticklish. Poke it. Repeatedly.')+'<br><br>'+
-    (eggs.ufo?'✅ <b>First contact</b> — the old code still works.':'② Every old-school gamer knows the code… ↑ ↑ ↓ ↓ ← → ← → B A')+'<br><br>'+
-    (eggs.answer?'✅ <b>The Answer</b> — you asked the right question.':'③ Ask my agent for the answer to life, the universe and everything.')+
-    '</div><p style="font-size:13px">Found all '+EGG_TOTAL+'? Tell Elena — <a href="mailto:leini8891@gmail.com">leini8891@gmail.com</a> 🚀</p>');
-}
-egghud.onclick=eggPanel;
-egghud.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();eggPanel();}});
-updateEggHud();
-
-/* egg 1 — poke the sun (5 quick clicks) */
+/* ============ DELIGHT ============ */
+/* double-click the sun → supernova */
 let sunPokes=0,sunTimer=null;
 els.center.style.cursor='pointer';
 els.center.addEventListener('click',()=>{
-  sunPokes++;clearTimeout(sunTimer);sunTimer=setTimeout(()=>{sunPokes=0},4000);
-  if(sunPokes>=5){sunPokes=0;supernova();}
+  sunPokes++;clearTimeout(sunTimer);sunTimer=setTimeout(()=>{sunPokes=0},900);
+  if(sunPokes>=2){sunPokes=0;supernova();}
 });
 function supernova(){
   document.body.classList.remove('nova');void document.body.offsetWidth;document.body.classList.add('nova');
@@ -1057,21 +1082,13 @@ function supernova(){
     meteors.push({x:c.x*DPR,y:c.y*DPR,vx:Math.cos(a)*v,vy:Math.sin(a)*v,life:1,
       col:['120,232,255','190,160,255','255,215,106','255,122,217'][i%4]});}
   GROUPS.concat(ITEMS,SPARKS).forEach(n=>{const el=els[n.id];el.classList.add('pinged');setTimeout(()=>el.classList.remove('pinged'),2300);});
-  foundEgg('nova','Supernova! The sun has a secret');
 }
 
-/* egg 2 — Konami code summons a UFO */
-const KONAMI=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
-let kpos=0;
-addEventListener('keydown',e=>{
-  const k=e.key.length===1?e.key.toLowerCase():e.key;
-  kpos=(k===KONAMI[kpos])?kpos+1:(k===KONAMI[0]?1:0);
-  if(kpos===KONAMI.length){kpos=0;launchUFO();foundEgg('ufo','First contact established');}
-});
+/* a UFO cruises by on its own — first pass ~15s in, then every minute */
 const ufo=document.getElementById('ufo');
 function launchUFO(){ufo.classList.remove('fly');void ufo.offsetWidth;ufo.classList.add('fly');}
 ufo.addEventListener('animationend',()=>ufo.classList.remove('fly'));
-if(eggs.ufo)setInterval(()=>{if(Math.random()<.2&&!document.hidden)launchUFO();},34000);
+if(!reduce){setTimeout(launchUFO,15000);setInterval(()=>{if(!document.hidden)launchUFO();},60000);}
 </script>
 
 <!-- Privacy-friendly analytics (GoatCounter — no cookies, no banner) -->
