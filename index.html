@@ -3,22 +3,29 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Elena Xiao — AI &amp; Data Product</title>
-<meta name="description" content="Elena Xiao — I build practical AI &amp; data products. FinTech / crypto risk, AI automation, data infrastructure." />
+<title>Elena Xiao — AI &amp; Data Product Lead · Singapore</title>
+<meta name="description" content="Elena Xiao — AI &amp; Data Product Lead in Singapore. Practical AI &amp; data products: LLM &amp; agent workflows, FinTech / crypto risk analytics, AI automation and 0→1 data platforms." />
 <link rel="canonical" href="https://leini8891.github.io/" />
 
 <!-- Open Graph / social share cards -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://leini8891.github.io/" />
-<meta property="og:title" content="Elena Xiao — AI &amp; Data Product" />
+<meta property="og:title" content="Elena Xiao — AI &amp; Data Product Lead · Singapore" />
 <meta property="og:description" content="I build practical AI &amp; data products. LLM &amp; agent tools, FinTech / crypto risk, 0→1 data platforms." />
 <meta property="og:image" content="https://leini8891.github.io/og-image.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Elena Xiao — AI &amp; Data Product" />
+<meta name="twitter:title" content="Elena Xiao — AI &amp; Data Product Lead · Singapore" />
 <meta name="twitter:description" content="I build practical AI &amp; data products. LLM &amp; agent tools, FinTech / crypto risk, 0→1 data platforms." />
 <meta name="twitter:image" content="https://leini8891.github.io/og-image.png" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Elena Xiao","jobTitle":"AI & Data Product Lead",
+ "address":{"@type":"PostalAddress","addressLocality":"Singapore","addressCountry":"SG"},
+ "url":"https://leini8891.github.io/",
+ "sameAs":["https://www.linkedin.com/in/xiao-elena/","https://github.com/leini8891"],
+ "knowsAbout":["AI product design","LLM & agent workflows","data platforms","FinTech risk analytics","crypto market data"]}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -473,15 +480,15 @@ const ITEMS=[
     repo:'https://github.com/leini8891/token-launch-lab',
     stack:['LLM','Adversarial prompting','Risk modeling']},
   {id:'applypilot',group:'ailab',ang:40,rad:74,size:13,col:'cyan',label:'ApplyPilot',featured:true,
-    tag:'AI Product · Agent',title:'ApplyPilot — Job-Application Copilot',sub:'Next.js + Chrome extension + Supabase',
-    body:"A local-first AI job-search assistant that combines role matching, knowledge retrieval, resume/story search, interview prep, application tracking and Chrome-assisted apply workflows — with a human-in-the-loop review queue so automation supports judgment instead of replacing it.",
+    tag:'AI Product · Agent',title:'ApplyPilot — AI Job-Search Assistant',sub:'Local-first · retrieval + human-in-the-loop',
+    body:"Started as a Chrome extension automating the repetitive parts of applying — grown into a local-first AI job-search assistant combining role matching, knowledge retrieval, resume/story search, interview prep, application tracking and Chrome-assisted apply workflows, with a human-in-the-loop review queue so automation supports judgment instead of replacing it.",
     star:{p:"Job applications are repetitive, but blind auto-apply bots are risky and low-quality.",
       a:"A local-first workflow assistant — Next.js dashboard + Chrome MV3 extension on Supabase — combining role matching, private knowledge retrieval, resume/story search, interview prep and application tracking.",
       r:"A human-in-the-loop apply flow: automation handles repetition, while review checkpoints protect quality and judgment.",
       role:"Built it end to end — dashboard, extension, retrieval-assisted workflows and review queue."},
     meta:'Local-first workflow automation · private knowledge base · human-in-the-loop by design',
     repo:'https://github.com/leini8891/ApplyPilot',
-    stack:['Agents','Next.js','Chrome MV3','Supabase','Playwright']},
+    stack:['Agents','Local-first','Retrieval','Next.js','Chrome MV3']},
   {id:'baobao',group:'ailab',ang:108,rad:90,size:16,col:'cyan',label:'BaoBao 💙',featured:true,
     tag:'AI Product · Health',title:'BaoBao — Elderly Wellness Companion',sub:'Family health dashboard · smart ring / watch + companion flows',
     body:"An elderly wellness companion for families — wearable readings from a smart ring / watch, gentle reminders, humanoid-companion support flows and a calm health dashboard the whole family can read at a glance. Next.js, running in Vercel production; demoed in a healthcare hackathon final.",
@@ -535,17 +542,17 @@ const ITEMS=[
 
   {id:'cs660',group:'growthmoon',ang:55,rad:85,size:14,col:'gold',label:'AI CS Analytics',featured:false,
     tag:'Analytics · Bybit',title:'AI Customer-Service Analytics',sub:'KPI frameworks for an AI-assisted CS org',
-    body:"KPI frameworks, user personas and service analytics for Bybit's AI customer-service operation — 80+ agents, saving 660+ CS hours every month.",
-    star:{p:"Bybit's AI customer-service org (80+ agents) had no clear KPI framework to measure service quality.",
-      a:"Built KPI frameworks, user personas and service analytics for the AI-assisted CS operation.",
-      r:"Saved <b>660+ CS hours every month</b> across 80+ agents.",
-      role:"Designed the KPI framework and analytics."},
-    stack:['KPI design','Personas','Service analytics']},
+    body:"The measurement layer for Bybit's AI customer-service operation: a KPI framework spanning bot containment, CSAT/NPS, escalation rate and wait time; user personas by region, language, wallet balance and leverage risk to power differentiated routing; and 3 dashboards shipped with Product, Engineering, UED, Data and CS Ops — saving 660+ CS hours every month across 80+ agents.",
+    star:{p:"Bybit's AI customer-service org (80+ agents) had no KPI framework to tell whether AI was actually helping users.",
+      a:"A KPI framework across bot containment, CSAT/NPS, escalation rate and wait time, plus personas by region, language, wallet balance and leverage risk — shipped as 3 dashboards with Product, Engineering, UED, Data and CS Ops.",
+      r:"Saved <b>660+ CS hours every month</b> across 80+ agents; queue allocation, FAQ indexing and chatbot UX all tuned off the same data.",
+      role:"Designed the KPI framework, personas and analytics."},
+    stack:['KPI design','Personas','CSAT / NPS','Service dashboards']},
   {id:'loyalty',group:'growthmoon',ang:125,rad:78,size:13,col:'gold',label:'Loyalty & NFT Loop',featured:false,
     tag:'Growth · Binance',title:'Loyalty & NFT-Avatar Loop',sub:'Growth mechanics on market-data products',
-    body:"User-growth and loyalty mechanics on Binance's crypto market-data line — a points → reward → NFT-avatar loop — with cross-platform delivery across web, mobile and admin for 60+ engineers.",
-    star:{p:"Binance's crypto market-data line needed user-growth and retention mechanics.",
-      a:"A points → reward → NFT-avatar loyalty loop, delivered cross-platform across web, mobile and admin.",
+    body:"User-growth and loyalty mechanics on Binance's crypto market-data platform — a points → reward → NFT-avatar loop, plus member-acquisition campaigns and retention mechanics — with cross-platform delivery across web, mobile and admin for 60+ engineers.",
+    star:{p:"Binance's crypto market-data platform needed user-growth and retention mechanics.",
+      a:"A points → reward → NFT-avatar loyalty loop plus member-acquisition campaigns and retention mechanics, delivered cross-platform across web, mobile and admin.",
       r:"Growth &amp; loyalty mechanics shipped across platforms, coordinating <b>60+ engineers</b>.",
       role:"Owned the growth-loop product design."},
     stack:['Growth loops','NFT rewards','Cross-platform']},
@@ -589,7 +596,7 @@ const EXPERIENCE=[
   {title:'Bybit Fintech',sub:'Lead Data Product Analyst, BI Center · 2022 – 2024',
    body:"Led the BI Center's product &amp; data work: the Dragon Boat 0→1 platform, compliance self-service analytics (NL/CA/UK), AI customer-service analytics (660+ CS hours saved/month across 80+ agents), a $3M campaign-cost analysis across 27 stakeholders and 9 systems, and the data-governance backbone (18 SOPs)."},
   {title:'Binance',sub:'Senior Product Manager · 2021 – 2022',
-   body:"Owned user-growth and loyalty mechanics for Binance's crypto market-data product line, including a points → reward → NFT-avatar loop, and coordinated cross-platform delivery across web, mobile and admin with 60+ engineers."},
+   body:"Owned user-growth and loyalty mechanics for Binance's crypto market-data platform — a points → reward → NFT-avatar loyalty loop plus member-acquisition and retention mechanics — and coordinated cross-platform delivery across web, mobile and admin with 60+ engineers."},
   {title:'Capgemini China',sub:'Senior Product Manager · 2016 – 2021',
    body:"Led agile teams delivering enterprise commerce and payment platforms for Starbucks and McDonald's across POS, OMS, CRM and payments, reducing order-loss risk by ~30%, with market research across Japan, the US and Hong Kong."},
 ];
