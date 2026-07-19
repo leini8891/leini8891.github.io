@@ -310,6 +310,16 @@ body.nova #sky,body.nova #field{animation:nova 1.5s ease}
 #ufo{position:fixed;left:0;top:0;z-index:24;font-size:34px;pointer-events:none;display:none;filter:drop-shadow(0 0 12px rgba(63,231,255,.85))}
 @keyframes ufofly{0%{transform:translate(-8vw,14vh) rotate(9deg)}30%{transform:translate(30vw,34vh) rotate(-7deg)}60%{transform:translate(62vw,16vh) rotate(11deg)}100%{transform:translate(108vw,42vh) rotate(-5deg)}}
 #ufo.fly{display:block;animation:ufofly 7s linear}
+#wishtoast{position:fixed;left:50%;top:74px;transform:translateX(-50%) translateY(-12px);z-index:26;font-family:var(--mono);font-size:12.5px;color:var(--ink);
+  background:rgba(14,20,50,.94);border:1px solid var(--cardbd);padding:10px 18px;border-radius:30px;opacity:0;pointer-events:none;transition:.3s;cursor:pointer;max-width:88vw;text-align:center}
+#wishtoast.show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
+#wishtoast:hover{border-color:var(--cyan)}
+#wishov{position:fixed;inset:0;z-index:80;background:rgba(3,4,11,.66);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:20px}
+#wishov.show{display:flex}
+#wishtext{width:100%;resize:vertical;min-height:96px;font-family:var(--mono);font-size:13px;color:var(--ink);background:rgba(10,14,34,.7);
+  border:1px solid var(--cardbd);border-radius:9px;padding:11px 12px}
+#wishfrom{flex:1;min-width:0;font-family:var(--mono);font-size:12px;color:var(--ink);background:rgba(10,14,34,.7);border:1px solid var(--cardbd);border-radius:9px;padding:11px 12px}
+#wishtext:focus,#wishfrom:focus{outline:none;border-color:var(--cyan)}
 </style>
 </head>
 <body>
@@ -327,6 +337,21 @@ body.nova #sky,body.nova #field{animation:nova 1.5s ease}
 <div id="hud">drag to explore · click a planet · double-click the sun 💥</div>
 <div id="toast"></div>
 <div id="ufo">🛸</div>
+<div id="wishtoast">🌠 a shooting star just passed — make a wish?</div>
+
+<!-- wish box -->
+<div id="wishov">
+  <div class="sharebox">
+    <button class="pclose" id="wclose" aria-label="close">✕</button>
+    <h3>🌠 You caught a shooting star</h3>
+    <p class="shint">Make a wish — what's been blocking you lately, or what product do you wish existed? I collect interesting problems.</p>
+    <textarea id="wishtext" placeholder="I wish…"></textarea>
+    <div class="shrow">
+      <input id="wishfrom" placeholder="your email / handle (optional)" autocomplete="off"/>
+      <button class="shcopy" id="wishsend">Send the wish ✨</button>
+    </div>
+  </div>
+</div>
 
 <!-- share card preview -->
 <div id="shareov">
@@ -731,7 +756,8 @@ function place(id,x,y){pos[id]={x,y};els[id].style.left=x+'px';els[id].style.top
 function spawnMeteor(){const dir=Math.random()<.5?1:-1;
   meteors.push({x:dir>0?Math.random()*W*.55:W*.45+Math.random()*W*.55,y:Math.random()*H*.42,
     vx:dir*(6.5+Math.random()*4)*DPR,vy:(4+Math.random()*3)*DPR,life:1,
-    col:Math.random()<.5?'190,222,255':'175,145,255'});}
+    col:Math.random()<.5?'190,222,255':'175,145,255'});
+  inviteWish();}
 function loop(){
   const dt=0.016;t+=dt;
   if(introT<1)introT=Math.min(1,introT+dt/1.15);
@@ -1091,6 +1117,31 @@ function supernova(){
       col:['120,232,255','190,160,255','255,215,106','255,122,217'][i%4]});}
   GROUPS.concat(ITEMS,SPARKS).forEach(n=>{const el=els[n.id];el.classList.add('pinged');setTimeout(()=>el.classList.remove('pinged'),2300);});
 }
+
+/* wish on a shooting star — an occasional meteor invites a wish, sent by email */
+const wishToastEl=document.getElementById('wishtoast');
+const wishov=document.getElementById('wishov');
+let wishAt=22,wishHideT=null; // seconds on the t clock; first invite ~22s in, then every ~2min
+function inviteWish(){
+  if(t<wishAt||resumeEl.classList.contains('show')||wishov.classList.contains('show'))return;
+  wishAt=t+110+Math.random()*40;
+  wishToastEl.classList.add('show');
+  clearTimeout(wishHideT);wishHideT=setTimeout(()=>wishToastEl.classList.remove('show'),7000);
+}
+function closeWish(){wishov.classList.remove('show');}
+wishToastEl.onclick=()=>{wishToastEl.classList.remove('show');clearTimeout(wishHideT);
+  wishov.classList.add('show');document.getElementById('wishtext').focus();};
+document.getElementById('wclose').onclick=closeWish;
+wishov.addEventListener('click',e=>{if(e.target===wishov)closeWish();});
+addEventListener('keydown',e=>{if(e.key==='Escape')closeWish();});
+document.getElementById('wishsend').onclick=()=>{
+  const w=document.getElementById('wishtext').value.trim();
+  if(!w){document.getElementById('wishtext').focus();return;}
+  const from=document.getElementById('wishfrom').value.trim();
+  const body='Wish: '+w+(from?'\n\nFrom: '+from:'')+'\n\n— caught on a shooting star at '+SITE;
+  location.href='mailto:leini8891@gmail.com?subject='+encodeURIComponent('🌠 A wish from your universe')+'&body='+encodeURIComponent(body);
+  closeWish();toast('🌠 Wish caught — opening your email app to send it');
+};
 
 /* a UFO cruises by on its own — first pass ~15s in, then every minute */
 const ufo=document.getElementById('ufo');
