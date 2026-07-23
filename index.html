@@ -507,6 +507,18 @@ const ITEMS=[
     demo:'https://hackathon-ba0ba0-mu.vercel.app',
     stack:['LLM','Next.js','Wearables','Companion UX','Health dashboard']},
 
+  {id:'kinkeep',group:'ailab',ang:160,rad:82,size:15,col:'cyan',label:'KinKeep 🫶',featured:true,
+    tag:'AI Agent · Family Care',title:'KinKeep — Family Care Agent',sub:'A companion for an ageing parent that grows into a family early-warning system',
+    body:"A family-care AI agent with a deliberately sharp wedge: it starts as everyday companionship for an ageing parent, and uses that closeness to do the hard part — notice what's quietly changing (a drifting routine, an off day, an early health signal), raise it in plain language before anyone would catch it by hand, and pull the right family member or close friend in. One clear job, not another sprawling health dashboard.",
+    star:{p:"Elderly-care apps pile on wearable charts and dashboards, so the thing that actually matters — noticing a real problem early, and getting the family to act — gets buried.",
+      a:"An AI agent that begins as a companion the parent will actually talk to, watches for meaningful change on its own, raises an early plain-language warning, and routes it to the right family member or close friend as a concrete next step.",
+      r:"Companionship as the way in, early-warning as the payoff — proactive family care instead of one more dashboard to check.",
+      role:"Designed and built the agent, its detection and the family-routing flows end to end."},
+    meta:'A sharper cut of the elderly-care space: companionship first, family health second',
+    demo:'https://kinkeep-family-health.leini9591.chatgpt.site/',
+    repo:'https://github.com/leini8891/KinKeep',
+    stack:['LLM','AI agent','Companion UX','Proactive alerting','Family care']},
+
   {id:'listing',group:'dataorbit',ang:-50,rad:88,size:17,col:'cyan',label:'Listing Monitor',featured:true,
     tag:'AI / Data · Python',title:'Listing Monitor',sub:'Cross-exchange listing intelligence',
     img:'p/listing-monitor.png',
@@ -1015,7 +1027,7 @@ document.getElementById('send').onclick=()=>{if(qin.value.trim()){ask(qin.value)
 qin.addEventListener('keydown',e=>{if(e.key==='Enter'&&qin.value.trim()){ask(qin.value);qin.value='';}});
 
 /* ============ PROFESSIONAL MODE ============ */
-const FEATURED=['auntie','baobao','listing','tokenlab','aibi','dragon','compliance','applypilot','payment'];
+const FEATURED=['auntie','baobao','kinkeep','listing','tokenlab','aibi','dragon','compliance','applypilot','payment'];
 function bookHref(){return CALENDLY||"mailto:leini8891@gmail.com?subject=Let's%20talk%20%E2%80%94%2015%20min%3F";}
 function starHTML(s){
   return '<div class="star">'+
