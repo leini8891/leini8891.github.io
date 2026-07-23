@@ -521,6 +521,19 @@ const ITEMS=[
     repo:'https://github.com/leini8891/KinKeep',
     stack:['LLM','AI agent','Companion UX','Proactive alerting','Family care']},
 
+  {id:'snapcal',group:'ailab',ang:205,rad:82,size:15,col:'cyan',label:'SnapCal 📸',featured:true,
+    tag:'AI Product · Health',title:'SnapCal — Snap a Meal, Log It Fast',sub:'Singapore-first calorie tracking built for hawker food, not Western databases',
+    img:'p/snapcal.png',
+    body:"A mobile-first PWA that logs what you actually eat: snap a photo, upload a receipt, or just type a dish — SnapCal returns an honest calorie range, then lets you tune portion, rice and sauce. Built for local hawker food (bak chor mee, kaya toast, mala) with bilingual EN / 中文 guidance, not a generic Western food database.",
+    star:{p:"Calorie apps run on Western food databases, so logging a plate of chicken rice or bak chor mee is guesswork — and guilt-heavy.",
+      a:"A photo / text / receipt meal logger that gives honest calorie ranges for Singapore hawker food, with local modifiers (less rice, no lard, shared portion) and bilingual guidance.",
+      r:"Low-friction, honest tracking for the food people here actually eat — mobile-first and heading to the App Store.",
+      role:"Designed and built the product end to end — the logging flow, the estimate engine and the PWA."},
+    meta:'Mobile-first PWA · built for local food, heading to the App Store',
+    demo:'https://snapcal-omega.vercel.app',
+    repo:'https://github.com/leini8891/SnapCal',
+    stack:['Next.js','React','Supabase','PWA','AI vision']},
+
   {id:'listing',group:'dataorbit',ang:-50,rad:88,size:17,col:'cyan',label:'Listing Monitor',featured:true,
     tag:'AI / Data · Python',title:'Listing Monitor',sub:'Cross-exchange listing intelligence',
     img:'p/listing-monitor.png',
@@ -1029,7 +1042,7 @@ document.getElementById('send').onclick=()=>{if(qin.value.trim()){ask(qin.value)
 qin.addEventListener('keydown',e=>{if(e.key==='Enter'&&qin.value.trim()){ask(qin.value);qin.value='';}});
 
 /* ============ PROFESSIONAL MODE ============ */
-const FEATURED=['auntie','baobao','kinkeep','listing','tokenlab','aibi','dragon','compliance','applypilot','payment'];
+const FEATURED=['auntie','snapcal','baobao','kinkeep','listing','tokenlab','aibi','dragon','compliance','applypilot','payment'];
 function bookHref(){return CALENDLY||"mailto:leini8891@gmail.com?subject=Let's%20talk%20%E2%80%94%2015%20min%3F";}
 function starHTML(s){
   return '<div class="star">'+
