@@ -498,6 +498,8 @@ const ITEMS=[
       r:"A public BYOK workflow producing source-backed risk, confidence, coverage and unknown-check outputs — validated through <b>6 automated tests</b> covering UNI, honeypot and incomplete-data paths.",
       role:"Designed the product contract, risk rubric, confidence model, evidence schema, engine, fixtures and public skill packaging end to end."},
     meta:'Installable skill · no hosted API · user-owned model and data access',
+    demo:'https://x.com/ElenaX_data/status/2077685705946607951',
+    demoLabel:'Watch 1-min demo',
     repo:'https://github.com/leini8891/Token-Risk-Brief',
     stack:['Agent Skill','Node.js','Risk decisioning','JSON Schema','Fail-closed design']},
   {id:'applypilot',group:'ailab',ang:40,rad:74,size:13,col:'cyan',label:'ApplyPilot',featured:true,
@@ -979,7 +981,7 @@ function openItem(id){
   if(it.star)h+=starHTML(it.star); else h+='<p>'+it.body+'</p>';
   if(it.meta)h+='<div class="meta">→ '+it.meta+'</div>';
   if(it.stack)h+='<div class="stack">'+it.stack.map(s=>'<span class="chip">'+s+'</span>').join('')+'</div>';
-  if(it.demo)h+='<a class="demolink" href="'+it.demo+'" target="_blank" rel="noopener">▶ Live Demo</a>';
+  if(it.demo)h+='<a class="demolink" href="'+it.demo+'" target="_blank" rel="noopener">▶ '+(it.demoLabel||'Live Demo')+'</a>';
   if(it.repo)h+='<a class="repolink" href="'+it.repo+'" target="_blank" rel="noopener">↗ View on GitHub</a>';
   h+='<button class="sharebtn" id="shareItem">⤴ Share</button>';
   if(it.note)h+='<div class="note">'+it.note+'</div>';
@@ -1091,7 +1093,7 @@ function buildResume(){
     if(n.img)h+='<img class="shot" src="'+n.img+'" alt="'+n.title+' — dashboard screenshot" loading="lazy">';
     if(n.star)h+=starHTML(n.star); else h+='<p>'+n.body+'</p>';
     h+='<div class="rstk">'+n.stack.map(s=>'<span>'+s+'</span>').join('')+'</div>';
-    if(n.demo)h+='<a class="demolink" href="'+n.demo+'" target="_blank" rel="noopener">▶ Live Demo</a>';
+    if(n.demo)h+='<a class="demolink" href="'+n.demo+'" target="_blank" rel="noopener">▶ '+(n.demoLabel||'Live Demo')+'</a>';
     if(n.repo)h+='<a class="repolink" href="'+n.repo+'" target="_blank" rel="noopener">↗ View on GitHub</a>';
     h+='</div>';
   });
