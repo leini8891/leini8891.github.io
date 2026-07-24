@@ -126,6 +126,7 @@ a{color:var(--cyan);text-decoration:none}
 .shotlink:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,0,0,.45)}
 img.shot{display:block;width:100%;height:auto;background:#0b1020}
 .rcard img.shot{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:center top;border:1px solid var(--cardbd);border-radius:9px;margin:12px 0 2px}
+img.shot[src$="token-risk-brief.png"]{aspect-ratio:16/9;object-fit:contain;background:#020713}
 .backbtn{display:block;font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:none;cursor:pointer;padding:0 0 16px;transition:.2s;text-align:left}
 .backbtn:hover{color:var(--cyan)}
 .glist{display:flex;flex-direction:column;gap:9px;margin-top:20px}
@@ -426,6 +427,7 @@ body.nova #sky,body.nova #field{animation:nova 1.5s ease}
         <li><a href="https://github.com/leini8891/auntie-ai">Auntie AI</a> — anti-scam AI copilot, 1st place at the Tencent Cloud AI Coding Challenge (35 projects, 279 participants).</li>
         <li><a href="https://hackathon-ba0ba0-mu.vercel.app">BaoBao</a> — elderly wellness companion for families: smart ring/watch readings, reminders, companion flows and a calm health dashboard. Healthcare hackathon final demo, live on Vercel.</li>
         <li><a href="https://github.com/leini8891/token-launch-lab">Token Launch Lab</a> — upload a whitepaper and four adversarial AI reviewers return a GO / NO-GO launch-risk report with the fixes to make first.</li>
+        <li><a href="https://github.com/leini8891/Token-Risk-Brief">Token Risk Brief</a> — installable Agent Skill and deterministic decision engine turning token contract evidence into source-backed risk, confidence, coverage and unknown-check outputs.</li>
         <li><a href="https://github.com/leini8891/Listing-Monitor">Listing Monitor</a> — Python pipeline watching new listings across 7+ exchanges, with a classifier, alerts and a Streamlit dashboard.</li>
         <li><a href="https://github.com/leini8891/ApplyPilot">ApplyPilot</a> — local-first AI job-search assistant for role matching, knowledge retrieval, interview prep, application tracking and Chrome-assisted apply workflows.</li>
         <li>Bybit / Binance / Capgemini — 0→1 data &amp; automation platforms, compliance self-service analytics, LLM-powered risk reporting, growth mechanics and payment reliability workflows.</li>
@@ -444,7 +446,7 @@ const CENTER={id:'center',label:'AI/data products for messy workflows',cname:'El
 const CALENDLY='https://calendly.com/leini8891/talking-with-elena';
 
 /* The pivot narrative (merged with About) — answers a recruiter's first doubt about a career-changer. */
-const NARRATIVE="I turn messy business workflows into practical AI &amp; data products: metrics, dashboards, alerting, governance, adoption playbooks and LLM/agent-assisted automation. For a decade I shipped product and data systems across fintech, crypto and enterprise (Bybit, Binance, Capgemini); lately I have been building the AI layer myself — Auntie AI, ApplyPilot, Listing Monitor and Token Launch Lab — from problem discovery to prototype, demo and safety tradeoffs. My edge is the combination: senior product judgment, risk/compliance instincts and hands-on building. Native Chinese, fluent English, Singapore-based.";
+const NARRATIVE="I turn messy business workflows into practical AI &amp; data products: metrics, dashboards, alerting, governance, adoption playbooks and LLM/agent-assisted automation. For a decade I shipped product and data systems across fintech, crypto and enterprise (Bybit, Binance, Capgemini); lately I have been building the AI layer myself — Auntie AI, ApplyPilot, Listing Monitor, Token Launch Lab and Token Risk Brief — from problem discovery to prototype, demo and safety tradeoffs. My edge is the combination: senior product judgment, risk/compliance instincts and hands-on building. Native Chinese, fluent English, Singapore-based.";
 
 const GROUPS=[
   {id:'ailab',icon:'🤖',name:'AI Lab',ang:-62,rad:240,size:62,col:'cyan',
@@ -487,6 +489,17 @@ const ITEMS=[
     demo:'https://token-launch-lab.onrender.com/',
     repo:'https://github.com/leini8891/token-launch-lab',
     stack:['GLM (Zhipu)','Node.js','PDF → structured findings','Adversarial prompting']},
+  {id:'tokenrisk',group:'riskplanet',ang:155,rad:88,size:16,col:'violet',label:'Token Risk Brief',featured:true,
+    tag:'Agent Skill · Crypto Risk',title:'Token Risk Brief — Explainable Token Risk Skill',sub:'Contract + chain → source-backed risk brief',
+    img:'p/token-risk-brief.png',
+    body:"An installable Agent Skill and deterministic evidence-to-verdict engine for token due diligence. Give a compatible agent an exact contract address and blockchain; it checks contract control, sellability, liquidity and holder concentration, then separates risk from confidence, coverage and unknown evidence instead of repeating a scanner score.",
+    star:{p:"Token scanners surface flags and scores, but rarely explain how contract privileges, sellability, liquidity, concentration and missing evidence should change a decision.",
+      a:"Built an installable Agent Skill plus a deterministic evidence-to-verdict engine, normalized JSON evidence contract and fail-closed handling for unavailable signals.",
+      r:"A public BYOK workflow producing source-backed risk, confidence, coverage and unknown-check outputs — validated through <b>6 automated tests</b> covering UNI, honeypot and incomplete-data paths.",
+      role:"Designed the product contract, risk rubric, confidence model, evidence schema, engine, fixtures and public skill packaging end to end."},
+    meta:'Installable skill · no hosted API · user-owned model and data access',
+    repo:'https://github.com/leini8891/Token-Risk-Brief',
+    stack:['Agent Skill','Node.js','Risk decisioning','JSON Schema','Fail-closed design']},
   {id:'applypilot',group:'ailab',ang:40,rad:74,size:13,col:'cyan',label:'ApplyPilot',featured:true,
     tag:'AI Product · Agent',title:'ApplyPilot — AI Job-Search Assistant',sub:'Local-first · retrieval + human-in-the-loop',
     body:"Started as a Chrome extension automating the repetitive parts of applying — grown into a local-first AI job-search assistant combining role matching, knowledge retrieval, resume/story search, interview prep, application tracking and Chrome-assisted apply workflows, with a human-in-the-loop review queue so automation supports judgment instead of replacing it.",
@@ -629,7 +642,7 @@ const UPCOMING_NOTES=['From writing specs to shipping code','Risk is a product p
 /* ============ PROFESSIONAL MODE DATA ============ */
 const EXPERIENCE=[
   {title:'Independent / Project-based AI & Data Work',sub:'AI & Data Product Lead · 2025 – Present',
-   body:"Building hands-on AI &amp; data products across risk, automation and user-facing agents — including Auntie AI, BaoBao, Listing Monitor, Token Launch Lab and ApplyPilot. I design, code and ship prototypes end to end, combining product judgment, BI automation, LLM workflows and English-first product communication."},
+   body:"Building hands-on AI &amp; data products across risk, automation and user-facing agents — including Auntie AI, BaoBao, Listing Monitor, Token Launch Lab, Token Risk Brief and ApplyPilot. I design, code and ship prototypes end to end, combining product judgment, BI automation, LLM workflows and English-first product communication."},
   {title:'Bybit Fintech',sub:'Lead Data Product Analyst, BI Center · 2022 – 2024',
    body:"Led the BI Center's product &amp; data work: the Dragon Boat 0→1 platform, compliance self-service analytics (NL/CA/UK), AI customer-service analytics (660+ CS hours saved/month across 80+ agents), a $3M campaign-cost analysis across 27 stakeholders and 9 systems, and the data-governance backbone (18 SOPs)."},
   {title:'Binance',sub:'Senior Product Manager · 2021 – 2022',
@@ -669,7 +682,7 @@ const ASK = [
   {k:['now','building','currently','these days','present','在做','切','working on'],
    focus:'ailab',
    next:[['Are you self-taught?','are you self taught'],['What roles?','what roles']],
-   a:"Right now I'm going deep on hands-on AI workflow products — Auntie AI for fraud prevention, ApplyPilot for local-first job-search automation, Listing Monitor for cross-exchange intelligence, Token Launch Lab for adversarial risk checks, and BaoBao 💙 for family health workflows.\n\nI'm looking for AI product / AI-deployment roles where I get to ship real things. This whole site is part of that pivot."},
+   a:"Right now I'm going deep on hands-on AI workflow products — Auntie AI for fraud prevention, ApplyPilot for local-first job-search automation, Token Launch Lab for adversarial launch-risk checks, Token Risk Brief for explainable contract-risk reports, and BaoBao 💙 for family health workflows.\n\nI'm looking for AI product / AI-deployment roles where I get to ship real things. This whole site is part of that pivot."},
   {k:['self','taught','pivot','transition','career change','career-chang','new to ai','bootcamp','trust','转型','自学'],
    focus:'ailab',
    next:[['See your best project','best project'],['What are you building now?','building now']],
@@ -685,7 +698,7 @@ const ASK = [
   {k:['tech','stack','code','coding','python','tools','technical','engineer','sql','技术'],
    focus:'ailab',
    next:[['Show me a project','best project']],
-   a:"Hands-on: Python, SQL, LLM / agent workflows (Dify, prompts + guardrails), ETL &amp; data pipelines, Streamlit, Tableau and on-chain analytics. I design the product AND build the prototype — ApplyPilot, Listing Monitor, Token Launch Lab and Auntie AI are all things I coded and shipped myself."},
+   a:"Hands-on: Python, SQL, LLM / agent workflows (Dify, prompts + guardrails), ETL &amp; data pipelines, Streamlit, Tableau and on-chain analytics. I design the product AND build the prototype — ApplyPilot, Listing Monitor, Token Launch Lab, Token Risk Brief and Auntie AI are all things I coded and shipped myself."},
   {k:['language','english','chinese','mandarin','bilingual','英文','中文','语言'],
    focus:null,
    next:[['A bit about you?','who are you']],
@@ -1043,7 +1056,7 @@ document.getElementById('send').onclick=()=>{if(qin.value.trim()){ask(qin.value)
 qin.addEventListener('keydown',e=>{if(e.key==='Enter'&&qin.value.trim()){ask(qin.value);qin.value='';}});
 
 /* ============ PROFESSIONAL MODE ============ */
-const FEATURED=['auntie','snapcal','baobao','kinkeep','listing','tokenlab','aibi','dragon','compliance','applypilot','payment'];
+const FEATURED=['auntie','snapcal','baobao','kinkeep','listing','tokenlab','tokenrisk','aibi','dragon','compliance','applypilot','payment'];
 function bookHref(){return CALENDLY||"mailto:leini8891@gmail.com?subject=Let's%20talk%20%E2%80%94%2015%20min%3F";}
 function starHTML(s){
   return '<div class="star">'+
