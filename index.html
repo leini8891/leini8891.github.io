@@ -425,7 +425,7 @@ body.nova #sky,body.nova #field{animation:nova 1.5s ease}
       <ul style="color:#cfd6f5;line-height:1.7;max-width:680px">
         <li><a href="https://github.com/leini8891/auntie-ai">Auntie AI</a> — anti-scam AI copilot, 1st place at the Tencent Cloud AI Coding Challenge (35 projects, 279 participants).</li>
         <li><a href="https://hackathon-ba0ba0-mu.vercel.app">BaoBao</a> — elderly wellness companion for families: smart ring/watch readings, reminders, companion flows and a calm health dashboard. Healthcare hackathon final demo, live on Vercel.</li>
-        <li><a href="https://github.com/leini8891/token-launch-lab">Token Launch Lab</a> — adversarial AI harness that stress-tests crypto token launches.</li>
+        <li><a href="https://github.com/leini8891/token-launch-lab">Token Launch Lab</a> — upload a whitepaper and four adversarial AI reviewers return a GO / NO-GO launch-risk report with the fixes to make first.</li>
         <li><a href="https://github.com/leini8891/Listing-Monitor">Listing Monitor</a> — Python pipeline watching new listings across 7+ exchanges, with a classifier, alerts and a Streamlit dashboard.</li>
         <li><a href="https://github.com/leini8891/ApplyPilot">ApplyPilot</a> — local-first AI job-search assistant for role matching, knowledge retrieval, interview prep, application tracking and Chrome-assisted apply workflows.</li>
         <li>Bybit / Binance / Capgemini — 0→1 data &amp; automation platforms, compliance self-service analytics, LLM-powered risk reporting, growth mechanics and payment reliability workflows.</li>
@@ -476,16 +476,16 @@ const ITEMS=[
     repo:'https://github.com/leini8891/auntie-ai',
     stack:['LLM','Prompt + Guardrails','Fraud detection','Product','Demo & pitch']},
   {id:'tokenlab',group:'ailab',ang:-25,rad:88,size:17,col:'cyan',label:'Token Launch Lab',featured:true,
-    tag:'AI · Risk',title:'Token Launch Lab',sub:'Adversarial AI risk harness',
+    tag:'AI · Risk',title:'Token Launch Lab',sub:'Upload a whitepaper → launch-risk report',
     img:'p/token-launch-lab.png',
-    body:"An adversarial AI harness that runs &ldquo;pre-mortems&rdquo; on crypto token launches — stress-testing a launch to surface risk signals, failure modes and go / no-go considerations before anything goes live.",
-    star:{p:"Crypto token launches fail in predictable ways, but teams rarely stress-test them before going live.",
-      a:"An adversarial AI harness that runs &ldquo;pre-mortems&rdquo; — orchestrating agent roles (dump / protocol / regulatory / adversary / judge) to surface risk signals and failure modes.",
-      r:"A go / no-go readiness read scored <b>0–100</b> before anything ships. Defensive-only.",
-      role:"Designed the multi-agent harness and scoring myself."},
+    body:"A pre-mortem for crypto token launches: a founder uploads a whitepaper or tokenomics doc and four adversarial AI reviewers — dump, protocol, regulatory and crypto-Twitter narrative — read it and hand back a GO / NO-GO decision, the P0 blockers to fix first, and the evidence quote behind every finding.",
+    star:{p:"Token launches are irreversible — one bad unlock schedule, a missing audit or a regulatory blind spot can torch a launch in public, and teams rarely stress-test the doc before it ships.",
+      a:"Upload a whitepaper / TGE doc (PDF, markdown or paste) and four adversarial reviewers analyze it into ranked, evidence-cited findings — each with a severity, a concrete fix, and a quote from the document that proves it.",
+      r:"A go / no-go readiness score <b>0–100</b>, a &ldquo;fix first&rdquo; P0 checklist, a shareable read-only report and PDF export. Defensive-only — no exploit instructions, no legal advice.",
+      role:"Built it end to end — upload flow, GLM document analysis and the report UI."},
     meta:'AI as a red-team, not just a chatbot',
     repo:'https://github.com/leini8891/token-launch-lab',
-    stack:['LLM','Adversarial prompting','Risk modeling']},
+    stack:['GLM (Zhipu)','Node.js','PDF → structured findings','Adversarial prompting']},
   {id:'applypilot',group:'ailab',ang:40,rad:74,size:13,col:'cyan',label:'ApplyPilot',featured:true,
     tag:'AI Product · Agent',title:'ApplyPilot — AI Job-Search Assistant',sub:'Local-first · retrieval + human-in-the-loop',
     body:"Started as a Chrome extension automating the repetitive parts of applying — grown into a local-first AI job-search assistant combining role matching, knowledge retrieval, resume/story search, interview prep, application tracking and Chrome-assisted apply workflows, with a human-in-the-loop review queue so automation supports judgment instead of replacing it.",
