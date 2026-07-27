@@ -225,9 +225,30 @@ img.shot[src$="token-risk-brief.png"]{aspect-ratio:16/9;object-fit:contain;backg
   padding:8px 13px;border-radius:9px;transition:.2s}
 .rlinks a:hover{color:#fff;border-color:var(--cyan)}
 .rlinks .cv{color:#04050d;font-weight:700;background:linear-gradient(100deg,var(--cyan),var(--violet));border-color:transparent}
-.rtoggle{flex-shrink:0;font-family:var(--mono);font-size:12px;color:var(--ink);cursor:pointer;border:1px solid var(--cardbd);
-  background:rgba(20,28,62,.6);padding:11px 16px;border-radius:30px;transition:.2s;white-space:nowrap}
-.rtoggle:hover{border-color:var(--cyan);transform:translateY(-1px)}
+/* primary CTA into the interactive universe — deliberately loud, it is the thing people miss */
+.rtoggle{flex-shrink:0;position:relative;font-family:var(--mono);font-size:13.5px;font-weight:700;letter-spacing:.02em;color:#04050d;cursor:pointer;
+  border:none;background:linear-gradient(100deg,var(--cyan),var(--violet));padding:14px 24px;border-radius:30px;white-space:nowrap;
+  transition:transform .2s,filter .2s;animation:rtpulse 2.8s ease-out infinite}
+.rtoggle .arw{display:inline-block;margin-left:6px;transition:transform .2s}
+.rtoggle:hover{transform:translateY(-2px);filter:brightness(1.09)}
+.rtoggle:hover .arw{transform:translateX(3px)}
+.rtoggle:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+/* box-shadow ring (not transform) so the pulse never creates page overflow */
+@keyframes rtpulse{
+  0%{box-shadow:0 8px 26px rgba(63,231,255,.3),0 0 0 0 rgba(63,231,255,.5)}
+  70%{box-shadow:0 10px 30px rgba(163,116,255,.42),0 0 0 13px rgba(63,231,255,0)}
+  100%{box-shadow:0 8px 26px rgba(63,231,255,.3),0 0 0 0 rgba(63,231,255,0)}}
+
+/* same CTA, floating — appears once the header one scrolls away */
+#rfloat{position:fixed;right:26px;bottom:26px;z-index:62;opacity:0;visibility:hidden;transform:translateY(14px);
+  transition:opacity .35s,transform .35s,visibility .35s}
+#rfloat.on{opacity:1;visibility:visible;transform:translateY(0)}
+@media (max-width:640px){
+  .rtoggle{width:100%;padding:15px 20px;font-size:14px}
+  #rfloat{right:16px;left:16px;bottom:16px}
+  #rfloat .rtoggle{width:100%}
+}
+@media (prefers-reduced-motion:reduce){.rtoggle{animation:none;box-shadow:0 8px 26px rgba(63,231,255,.3)}}
 .rsec{margin-top:46px}
 .rsec .rh{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--violet);margin-bottom:18px;
   display:flex;align-items:center;gap:12px}
@@ -414,7 +435,7 @@ body.nova #sky,body.nova #field{animation:nova 1.5s ease}
           <a href="mailto:leini8891@gmail.com">Email</a>
         </div>
       </div>
-      <button class="rtoggle" id="closeResume">✦ Explore my universe</button>
+      <button class="rtoggle" id="closeResume">✦ Explore my universe<span class="arw">→</span></button>
     </div>
     <div id="rbody"></div>
     <noscript>
@@ -435,6 +456,7 @@ body.nova #sky,body.nova #field{animation:nova 1.5s ease}
       <p><a href="Elena_Xiao_CV.pdf">Download CV</a> · <a href="https://www.linkedin.com/in/xiao-elena/">LinkedIn</a> · <a href="https://github.com/leini8891">GitHub</a></p>
     </noscript>
   </div>
+  <div id="rfloat"><button class="rtoggle" id="closeResumeFloat">✦ Explore my universe<span class="arw">→</span></button></div>
 </div>
 
 <script>
@@ -1112,10 +1134,20 @@ function buildResume(){
 }
 buildResume();
 const resumeEl=document.getElementById('resume');
-function openResume(){resumeEl.classList.add('show');resumeEl.scrollTop=0;field.inert=true;}
-function closeResumeView(){showUniverseUI();resumeEl.classList.remove('show');field.inert=false;}
+const rfloat=document.getElementById('rfloat');
+function openResume(){resumeEl.classList.add('show');resumeEl.scrollTop=0;syncFloatCTA();field.inert=true;}
+function closeResumeView(){showUniverseUI();resumeEl.classList.remove('show');rfloat.classList.remove('on');field.inert=false;}
 document.getElementById('resumeViewBtn').onclick=openResume;
 document.getElementById('closeResume').onclick=closeResumeView;
+document.getElementById('closeResumeFloat').onclick=closeResumeView;
+
+/* the header CTA scrolls away fast — bring it back as a floating button once it is gone */
+function syncFloatCTA(){
+  const on=resumeEl.classList.contains('show')&&resumeEl.scrollTop>320;
+  rfloat.classList.toggle('on',on);
+}
+resumeEl.addEventListener('scroll',syncFloatCTA,{passive:true});
+syncFloatCTA();
 
 /* ============ SHARE ============ */
 const SITE='https://leini8891.github.io/';
