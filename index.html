@@ -121,6 +121,37 @@ a{color:var(--cyan);text-decoration:none}
 #panel .stack{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
 #panel .chip{font-family:var(--mono);font-size:11.5px;color:var(--ink);border:1px solid var(--cardbd);background:rgba(30,40,80,.4);padding:5px 10px;border-radius:8px}
 #panel .note{margin-top:16px;font-size:12px;color:var(--faint);font-style:italic}
+.pos-visual{margin:18px 0 20px;border:1px solid var(--cardbd);background:linear-gradient(145deg,rgba(18,27,61,.9),rgba(8,13,31,.96));border-radius:14px;padding:14px;box-shadow:0 14px 38px rgba(0,0,0,.24)}
+.pos-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px}
+.pos-head b{display:block;font-size:12.5px;color:var(--ink)}
+.pos-head span{display:block;font-size:10px;color:var(--faint);margin-top:3px}
+.pos-badge{flex:none;font-family:var(--mono);font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--cyan);border:1px solid rgba(63,231,255,.28);background:rgba(63,231,255,.07);padding:5px 7px;border-radius:20px}
+.pos-screen{display:grid;grid-template-columns:.82fr 1.18fr;border:1px solid var(--line);border-radius:11px;overflow:hidden;background:rgba(5,9,23,.72)}
+.pos-order,.pos-rec{padding:12px}
+.pos-order{border-right:1px solid var(--line)}
+.pos-label{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:9px}
+.order-row,.benefit-row{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:10.5px;color:var(--muted);padding:6px 0;border-bottom:1px solid rgba(122,142,205,.1)}
+.order-row:last-child,.benefit-row:last-child{border-bottom:none}
+.order-row b{color:var(--ink);font-weight:500}
+.benefit-row{align-items:flex-start}
+.benefit-main{min-width:0}
+.benefit-main b{display:block;color:var(--ink);font-size:10.5px;font-weight:600}
+.benefit-main span{display:inline-block;font-family:var(--mono);font-size:7.5px;color:#06101b;background:var(--cyan);border-radius:10px;padding:2px 5px;margin-top:4px}
+.benefit-row.expiring .benefit-main span{background:var(--gold)}
+.benefit-value{color:var(--cyan);font-weight:700;white-space:nowrap}
+.pos-total{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+.pos-total .before{font-size:9px;color:var(--faint);text-decoration:line-through}
+.pos-total .pay{display:block;font-size:10px;color:var(--muted);margin-bottom:2px}
+.pos-total strong{font-size:20px;color:var(--ink);line-height:1}
+.best-pill{font-family:var(--mono);font-size:8px;color:var(--gold);border:1px solid rgba(255,215,106,.28);background:rgba(255,215,106,.07);border-radius:20px;padding:4px 7px;white-space:nowrap}
+.pos-actions{display:grid;grid-template-columns:1.25fr .8fr .9fr;gap:6px;margin-top:10px}
+.pos-action{font-family:var(--mono);font-size:8.5px;text-align:center;color:var(--muted);border:1px solid var(--line);border-radius:7px;padding:7px 5px;background:rgba(20,28,62,.5)}
+.pos-action.primary{color:#06101b;font-weight:700;border-color:transparent;background:linear-gradient(100deg,var(--cyan),var(--violet))}
+.pos-callouts{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}
+.pos-callout{font-size:8.5px;line-height:1.35;color:var(--faint);text-align:center}
+.pos-callout b{display:block;color:var(--cyan);font-size:11px;margin-bottom:2px}
+.rcard .pos-visual{margin:14px 0 16px;padding:12px}
+@media (max-width:430px){.pos-screen{grid-template-columns:1fr}.pos-order{border-right:none;border-bottom:1px solid var(--line)}.pos-actions{grid-template-columns:1fr}.pos-callouts{grid-template-columns:1fr;gap:4px}.pos-callout{display:flex;align-items:center;gap:7px;text-align:left}.pos-callout b{margin:0}}
 .shotlink{display:block;margin:16px 0 4px;line-height:0;border-radius:10px;overflow:hidden;
   border:1px solid var(--cardbd);transition:transform .18s,box-shadow .18s}
 .shotlink:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,0,0,.45)}
@@ -638,15 +669,16 @@ const ITEMS=[
       r:"A defensible, auditable view of <b>$3M</b> in spend for leadership decisions.",
       role:"Led the analysis and stakeholder alignment."},
     stack:['Cost analysis','Stakeholder mgmt','BI']},
-  {id:'payment',group:'riskplanet',ang:148,rad:93,size:13,col:'violet',label:'Payment Reliability',featured:false,
-    tag:'Enterprise · Payments',title:"Payment Reliability — Starbucks / McDonald's",sub:'Capgemini China · POS / OMS / CRM / payments',
-    body:"Payment-success / order-generation failures are where customer experience, reconciliation and platform trust break. I improved idempotency, callback compensation and monitoring workflows across enterprise commerce systems, reducing order-loss risk by ~30%.",
-    star:{p:"Enterprise commerce systems were exposed to payment-success / order-generation mismatch and callback failure patterns.",
-      a:"Improved idempotency, callback compensation and monitoring workflows across POS, OMS, CRM, mobile app and payment/order systems.",
-      r:"Reduced order-loss risk by <b>~30%</b> for Starbucks / McDonald's delivery programs.",
-      role:"Led requirement discovery, delivery coordination, UAT and post-launch operations across business, engineering and vendor teams."},
-    meta:'Enterprise payments · exception handling · monitoring',
-    stack:['Payments','Reliability','Idempotency','UAT','Enterprise delivery']},
+  {id:'payment',group:'growthmoon',ang:240,rad:82,size:13,col:'gold',label:'Loyalty Recommendation',featured:false,
+    tag:'Enterprise Product · Loyalty',title:'Explainable Loyalty Redemption',sub:'Starbucks China · POS / promotion engine / CRM · Sanitized case',
+    visual:'loyalty',
+    body:'A sanitized case study in translating complex loyalty rules into a clear, reversible checkout workflow.',
+    star:{p:'At checkout, baristas had to navigate stars, coupons, eligibility, expiry and non-stackable offers while keeping the line moving.',
+      a:'Prototyped an explainable POS journey that prioritized customer-redeemed benefits, near-expiry value and minimum payment, with clear eligible / ineligible states and accept, modify or reject controls.',
+      r:'Turned complex promotion-engine rules into an implementation-ready, QA-testable interaction flow across POS, CRM, order and promotion systems.',
+      role:'Owned the POS interaction prototype and rule-to-workflow translation; coordinated requirements and integration delivery across business, product and engineering teams.'},
+    meta:'Sanitized case · deterministic rules, not AI · no confidential screens shown',
+    stack:['Loyalty','Explainable recommendations','POS workflow','Human-in-the-loop','Cross-system delivery']},
 ];
 
 const SPARKS=[
@@ -672,7 +704,7 @@ const EXPERIENCE=[
   {title:'Binance',sub:'Senior Product Manager · 2021 – 2022',
    body:"Owned user-growth and loyalty mechanics for Binance's crypto market-data platform — a points → reward → NFT-avatar loyalty loop plus member-acquisition and retention mechanics — and coordinated cross-platform delivery across web, mobile and admin with 60+ engineers."},
   {title:'Capgemini China',sub:'Senior Product Manager · 2016 – 2021',
-   body:"Led agile teams delivering enterprise commerce and payment platforms for Starbucks and McDonald's across POS, OMS, CRM and payments, reducing order-loss risk by ~30%, with market research across Japan, the US and Hong Kong."},
+   body:"Led agile product delivery across Starbucks and McDonald's programs, translating retail workflows into requirements and prototypes spanning POS, OMS, CRM, loyalty, payments and order systems; supported integration, UAT and cross-vendor delivery, with market research across Japan, the US and Hong Kong."},
 ];
 
 const SERVICES=[
@@ -1000,6 +1032,7 @@ function openItem(id){
   if(it.sub)h+='<div class="sub">'+it.sub+'</div>';
   if(it.award)h+='<div class="award">'+it.award+'</div>';
   if(it.img)h+='<a class="shotlink" href="'+(it.demo||it.repo||it.img)+'" target="_blank" rel="noopener"><img class="shot" src="'+it.img+'" alt="'+it.title+' — dashboard screenshot" loading="lazy"></a>';
+  if(it.visual==='loyalty')h+=loyaltyVisualHTML();
   if(it.star)h+=starHTML(it.star); else h+='<p>'+it.body+'</p>';
   if(it.meta)h+='<div class="meta">→ '+it.meta+'</div>';
   if(it.stack)h+='<div class="stack">'+it.stack.map(s=>'<span class="chip">'+s+'</span>').join('')+'</div>';
@@ -1089,6 +1122,25 @@ function starHTML(s){
     '<div class="row"><span class="k">Result</span><span class="v">'+s.r+'</span></div>'+
     '<div class="row"><span class="k">My role</span><span class="v">'+s.role+'</span></div></div>';
 }
+function loyaltyVisualHTML(){
+  return '<div class="pos-visual" role="img" aria-label="Sanitized reconstruction of a point-of-sale loyalty recommendation showing an order, selected benefits, a lower payment and barista controls">'+
+    '<div class="pos-head"><div><b>Recommended benefits</b><span>Illustrative data · no internal screens</span></div><div class="pos-badge">POS prototype</div></div>'+
+    '<div class="pos-screen">'+
+      '<section class="pos-order"><div class="pos-label">Current order</div>'+
+        '<div class="order-row"><b>Handcrafted drink</b><span>¥32</span></div>'+
+        '<div class="order-row"><b>Sandwich</b><span>¥28</span></div>'+
+        '<div class="order-row"><b>Fresh salad</b><span>¥18</span></div>'+
+      '</section>'+
+      '<section class="pos-rec"><div class="pos-label">Why these benefits</div>'+
+        '<div class="benefit-row"><div class="benefit-main"><b>Drink reward</b><span>Customer redeemed</span></div><span class="benefit-value">−¥12</span></div>'+
+        '<div class="benefit-row expiring"><div class="benefit-main"><b>Stars redemption</b><span>Expiring soon</span></div><span class="benefit-value">−¥8</span></div>'+
+        '<div class="pos-total"><div><span class="before">Original ¥78</span><span class="pay">Recommended payment</span><strong>¥58</strong></div><span class="best-pill">Lowest payment</span></div>'+
+      '</section>'+
+    '</div>'+
+    '<div class="pos-actions" aria-hidden="true"><div class="pos-action primary">Apply recommendation</div><div class="pos-action">Modify</div><div class="pos-action">Continue without</div></div>'+
+    '<div class="pos-callouts"><div class="pos-callout"><b>✓</b>Explains why</div><div class="pos-callout"><b>✓</b>Barista stays in control</div><div class="pos-callout"><b>✓</b>Updates payment instantly</div></div>'+
+  '</div>';
+}
 function buildResume(){
   let h='';
   // hero spike + trust band
@@ -1113,6 +1165,7 @@ function buildResume(){
     if(n.award)h+='<div class="rsub" style="color:var(--gold)">'+n.award+'</div>';
     else if(n.sub)h+='<div class="rsub">'+n.sub+'</div>';
     if(n.img)h+='<img class="shot" src="'+n.img+'" alt="'+n.title+' — dashboard screenshot" loading="lazy">';
+    if(n.visual==='loyalty')h+=loyaltyVisualHTML();
     if(n.star)h+=starHTML(n.star); else h+='<p>'+n.body+'</p>';
     h+='<div class="rstk">'+n.stack.map(s=>'<span>'+s+'</span>').join('')+'</div>';
     if(n.demo)h+='<a class="demolink" href="'+n.demo+'" target="_blank" rel="noopener">▶ '+(n.demoLabel||'Live Demo')+'</a>';
