@@ -297,6 +297,16 @@ img.shot[src$="token-risk-brief.png"]{aspect-ratio:16/9;object-fit:contain;backg
 .rcard p{color:var(--muted);font-size:14px;line-height:1.55;margin:0 0 12px}
 .rcard .rstk{display:flex;flex-wrap:wrap;gap:6px}
 .rcard .rstk span{font-family:var(--mono);font-size:10.5px;color:var(--ink);border:1px solid var(--cardbd);background:rgba(30,40,80,.4);padding:4px 8px;border-radius:7px}
+.rmore{margin-top:18px;border:1px solid var(--cardbd);background:rgba(18,24,54,.42);border-radius:14px;overflow:hidden}
+.rmore summary{cursor:pointer;list-style:none;padding:15px 18px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.rmore summary::-webkit-details-marker{display:none}
+.rmore summary::after{content:'＋';font-size:16px;color:var(--violet)}
+.rmore[open] summary::after{content:'−'}
+.rmoregrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:0 14px 14px}
+.rmoreitem{display:block;border:1px solid var(--line);background:rgba(10,15,36,.58);border-radius:10px;padding:12px 13px;transition:.2s}
+.rmoreitem:hover{border-color:var(--cyan);transform:translateY(-1px)}
+.rmoreitem b{display:block;color:var(--ink);font-size:13.5px;margin-bottom:4px}
+.rmoreitem span{font-family:var(--mono);font-size:9.5px;color:var(--faint)}
 .rexp{border-left:2px solid var(--line);padding:2px 0 2px 22px;margin-left:6px}
 .rexp .ritem{position:relative;padding-bottom:26px}
 .rexp .ritem::before{content:"";position:absolute;left:-29px;top:5px;width:11px;height:11px;border-radius:50%;
@@ -344,7 +354,7 @@ img.shot[src$="token-risk-brief.png"]{aspect-ratio:16/9;object-fit:contain;backg
   color:#04050d;background:linear-gradient(100deg,var(--cyan),var(--violet));padding:9px 15px;border-radius:9px;transition:.2s}
 .demolink:hover{filter:brightness(1.08);transform:translateY(-1px)}
 .rcard .demolink{margin-top:12px;padding:7px 12px;font-size:11.5px}
-@media (max-width:640px){.rgrid,.rgrid.three{grid-template-columns:1fr}.rhead{flex-direction:column}.rwrap{padding:40px 20px 100px}.rstats{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.rgrid,.rgrid.three,.rmoregrid{grid-template-columns:1fr}.rhead{flex-direction:column}.rwrap{padding:40px 20px 100px}.rstats{grid-template-columns:repeat(2,1fr)}}
 
 /* ---------- share + delight ---------- */
 #toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%) translateY(14px);z-index:90;font-family:var(--mono);font-size:12.5px;color:var(--ink);
@@ -483,6 +493,7 @@ body.nova #sky,body.nova #field{animation:nova 1.5s ease}
         <li><a href="https://github.com/leini8891/auntie-ai">Auntie AI</a> — anti-scam AI copilot, 1st place at the Tencent Cloud AI Coding Challenge (35 projects, 279 participants).</li>
         <li><a href="https://github.com/leini8891/KinKeep">KinKeep</a> — a consent-aware family care agent that turns scattered updates into one shared care episode.</li>
         <li><a href="https://github.com/leini8891/SnapCal">SnapCal</a> — Singapore-first meal logging built around local food, honest calorie ranges and fast correction.</li>
+        <li>AI + BI Risk Reporting Automation — a Dify-based workflow over trusted risk data that reduced leadership-report turnaround from hours to minutes.</li>
         <li>Dragon Boat — a 0→1 internal demand-management workflow spanning 17 business lines and 8 data categories.</li>
         <li>Explainable Loyalty Redemption — a sanitized POS case translating complex benefit rules into a reversible checkout workflow.</li>
         <li>Payment Success, Missing Order — incident analysis and reconciliation for 48 affected payment records in a global quick-service restaurant program.</li>
@@ -1148,7 +1159,8 @@ document.getElementById('send').onclick=()=>{if(qin.value.trim()){ask(qin.value)
 qin.addEventListener('keydown',e=>{if(e.key==='Enter'&&qin.value.trim()){ask(qin.value);qin.value='';}});
 
 /* ============ PROFESSIONAL MODE ============ */
-const FEATURED=['auntie','kinkeep','snapcal','dragon','payment','paymentincident'];
+const FEATURED=['auntie','kinkeep','snapcal','aibi','tokenrisk','dragon','payment','paymentincident'];
+const MORE_PROJECTS=['baobao','listing','tokenlab','compliance','applypilot'];
 function bookHref(){return CALENDLY||"mailto:leini8891@gmail.com?subject=Let's%20talk%20%E2%80%94%2015%20min%3F";}
 function starHTML(s){
   return '<div class="star">'+
@@ -1193,7 +1205,7 @@ function buildResume(){
     h+='<div class="rcard"><div class="rt">'+s.t+'</div><h3>'+s.h+'</h3><p>'+s.d+'</p></div>';
   });
   h+='</div><div class="rcred">Open to full-time AI product roles and project-based collaborations — <a href="mailto:leini8891@gmail.com">leini8891@gmail.com</a></div></div>';
-  h+='<div class="rsec"><div class="rh">Selected Case Studies · 6</div><div class="rgrid">';
+  h+='<div class="rsec"><div class="rh">Selected Case Studies · 8</div><div class="rgrid">';
   FEATURED.map(id=>ITEMS.find(it=>it.id===id)).forEach(n=>{
     h+='<div class="rcard'+(n.col==='gold'?' gold':'')+'">';
     h+='<div class="rt">'+n.tag+'</div><h3>'+n.title.replace(/ — /,' · ')+'</h3>';
@@ -1207,7 +1219,11 @@ function buildResume(){
     if(n.repo)h+='<a class="repolink" href="'+n.repo+'" target="_blank" rel="noopener">↗ View on GitHub</a>';
     h+='</div>';
   });
-  h+='</div><div class="rcred">Six representative stories are shown here. Explore the interactive universe for the broader project archive.</div></div>';
+  h+='</div><details class="rmore"><summary>More projects · 5</summary><div class="rmoregrid">';
+  MORE_PROJECTS.map(id=>ITEMS.find(it=>it.id===id)).forEach(n=>{
+    h+='<a class="rmoreitem" href="#'+n.id+'"><b>'+n.title.replace(/ — /,' · ')+'</b><span>'+n.tag+'</span></a>';
+  });
+  h+='</div></details><div class="rcred">The interactive universe keeps the complete project archive; this view only changes the reading hierarchy.</div></div>';
   h+='<div class="rsec"><div class="rh">Experience</div><div class="rexp">';
   EXPERIENCE.forEach(n=>{
     h+='<div class="ritem"><h3>'+n.title+'</h3><div class="rsub">'+n.sub+'</div><p>'+n.body+'</p>';
