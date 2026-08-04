@@ -304,6 +304,10 @@ img.shot[src$="token-risk-brief.png"]{aspect-ratio:16/9;object-fit:contain;backg
 .rexp .ritem h3{font-size:17px;margin:0 0 2px}
 .rexp .ritem .rsub{color:var(--violet);font-family:var(--mono);font-size:12px;margin-bottom:8px}
 .rexp .ritem p{color:var(--muted);font-size:14px;line-height:1.55;margin:0;max-width:660px}
+.rexp .expnote{max-width:660px;margin-top:14px;padding:13px 15px;border:1px solid rgba(63,231,255,.2);background:rgba(63,231,255,.055);border-radius:11px}
+.rexp .expnote .et{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:5px}
+.rexp .expnote b{display:block;font-size:13px;color:var(--ink);margin-bottom:5px}
+.rexp .expnote p{font-size:12.5px;line-height:1.5;color:var(--faint)}
 .rskills{display:flex;flex-wrap:wrap;gap:9px}
 .rskills span{font-family:var(--mono);font-size:13px;color:var(--ink);border:1px solid var(--cardbd);background:rgba(24,32,66,.45);padding:8px 13px;border-radius:9px}
 .rcred{margin-top:14px;font-size:12.5px;color:var(--faint)}
@@ -477,13 +481,13 @@ body.nova #sky,body.nova #field{animation:nova 1.5s ease}
       <h2 style="color:#eaeefb">Selected projects</h2>
       <ul style="color:#cfd6f5;line-height:1.7;max-width:680px">
         <li><a href="https://github.com/leini8891/auntie-ai">Auntie AI</a> — anti-scam AI copilot, 1st place at the Tencent Cloud AI Coding Challenge (35 projects, 279 participants).</li>
-        <li><a href="https://hackathon-ba0ba0-mu.vercel.app">BaoBao</a> — elderly wellness companion for families: smart ring/watch readings, reminders, companion flows and a calm health dashboard. Healthcare hackathon final demo, live on Vercel.</li>
-        <li><a href="https://github.com/leini8891/token-launch-lab">Token Launch Lab</a> — upload a whitepaper and four adversarial AI reviewers return a GO / NO-GO launch-risk report with the fixes to make first.</li>
-        <li><a href="https://github.com/leini8891/Token-Risk-Brief">Token Risk Brief</a> — installable Agent Skill and deterministic decision engine turning token contract evidence into source-backed risk, confidence, coverage and unknown-check outputs.</li>
-        <li><a href="https://github.com/leini8891/Listing-Monitor">Listing Monitor</a> — Python pipeline watching new listings across 7+ exchanges, with a classifier, alerts and a Streamlit dashboard.</li>
-        <li><a href="https://github.com/leini8891/ApplyPilot">ApplyPilot</a> — local-first AI job-search assistant for role matching, knowledge retrieval, interview prep, application tracking and Chrome-assisted apply workflows.</li>
-        <li>Bybit / Binance / Capgemini — 0→1 data &amp; automation platforms, compliance self-service analytics, LLM-powered risk reporting, growth mechanics and payment reliability workflows.</li>
+        <li><a href="https://github.com/leini8891/KinKeep">KinKeep</a> — a consent-aware family care agent that turns scattered updates into one shared care episode.</li>
+        <li><a href="https://github.com/leini8891/SnapCal">SnapCal</a> — Singapore-first meal logging built around local food, honest calorie ranges and fast correction.</li>
+        <li>Dragon Boat — a 0→1 internal demand-management workflow spanning 17 business lines and 8 data categories.</li>
+        <li>Explainable Loyalty Redemption — a sanitized POS case translating complex benefit rules into a reversible checkout workflow.</li>
+        <li>Payment Success, Missing Order — incident analysis and reconciliation for 48 affected payment records in a global quick-service restaurant program.</li>
       </ul>
+      <p style="color:#8f99c6;max-width:680px;line-height:1.6">Earlier enterprise AI exposure: supported vendor coordination, knowledge-transfer sessions and portfolio reporting for a facial-analysis consultation prototype developed by a cloud AI partner. The vendor owned model development.</p>
       <p><a href="Elena_Xiao_CV.pdf">Download CV</a> · <a href="https://www.linkedin.com/in/xiao-elena/">LinkedIn</a> · <a href="https://github.com/leini8891">GitHub</a></p>
     </noscript>
   </div>
@@ -617,22 +621,42 @@ const ITEMS=[
     stack:['Python','REST APIs','ETL','Classifier','Streamlit','Lark']},
   {id:'dragon',group:'dataorbit',ang:38,rad:80,size:15,col:'cyan',label:'Dragon Boat',featured:true,
     tag:'Data Platform · Bybit',title:'Dragon Boat — 0→1 Platform',sub:'Demand & automation platform @ Bybit',
-    body:"A 0→1 automation and demand-management platform stitching Lark, Jira and Confluence into one flow — standardizing BI / product intake, SLA tracking, delivery alerts and value-feedback loops across business teams — backed by 18 data-governance SOPs.",
-    star:{p:"BI / product intake at Bybit was scattered across Lark, Jira and Confluence with no SLA visibility.",
-      a:"A 0→1 demand &amp; automation platform stitching them into one flow — standardizing intake, SLA tracking, delivery alerts and a value-feedback loop, backed by 18 data-governance SOPs.",
-      r:"One intake-to-delivery flow across business teams — the BI Center's flagship <b>0→1</b> build.",
-      role:"Led the platform end to end as Lead Data Product Analyst."},
-    meta:'Flagship 0→1 build at Bybit BI Center',
-    stack:['Automation','Data governance','Lark/Jira/Confluence','SOPs']},
+    body:"A 0→1 internal demand-management product connecting Lark, Jira and Confluence into one workflow — standardizing intake, business-value scoring, priority, ownership, delivery alerts and value feedback across 17 business lines and 8 data categories.",
+    star:{p:"BI and product requests were scattered across tools, with inconsistent ownership, priority and delivery visibility.",
+      a:"Designed one intake-to-feedback workflow across Lark, Jira and Confluence, with shared fields for value, priority, ownership, status and delivery follow-up.",
+      r:"Reached a <b>95% completion rate</b> across 17 business lines and 8 data categories.",
+      role:"Owned the workflow product and operating model, from requirements and configuration through training, adoption and iteration."},
+    meta:'Internal workflow product · verified adoption scope',
+    stack:['Workflow design','Automation','Lark/Jira/Confluence','Adoption']},
+
+  {id:'bybitindex',group:'dataorbit',ang:126,rad:79,size:13,col:'cyan',label:'Bybit Index',featured:false,
+    tag:'Data Product Delivery · Bybit',title:'Bybit Index',sub:'Requirements → review → launch',
+    body:"An early-tenure market-information product I helped move from requirement confirmation to launch — creating the meeting cadence, coordinating reviews, tracking dependencies and keeping product, data and business teams aligned.",
+    star:{p:"As a new joiner, I had to create delivery clarity across a product with multiple business and data dependencies.",
+      a:"Partnered with my BI leader, organized cross-functional meetings, coordinated requirement confirmation and reviews, tracked schedules and dependencies, and followed delivery through launch.",
+      r:"Took the project through the full requirement-to-launch cycle with a clear cross-functional operating rhythm.",
+      role:"Served as project manager; I did not claim sole product strategy, index-methodology design or full technical implementation."},
+    meta:'Cross-functional delivery · full launch cycle',
+    stack:['Requirements','Project delivery','Cross-functional alignment','Launch']},
+
+  {id:'competitorpipe',group:'dataorbit',ang:216,rad:80,size:13,col:'cyan',label:'Exchange Data Handover',featured:false,
+    tag:'Data Delivery · Bybit',title:'Competitor-Exchange Data Pipeline',sub:'Delivery continuity through team transition',
+    body:"A handover-period delivery program that absorbed 56 competitor-data requests and kept the pipeline moving through team change — spanning K-line, social and funding data.",
+    star:{p:"A team transition put a large competitor-data backlog and its delivery continuity at risk.",
+      a:"Stabilized scope, dependencies and handover, then coordinated delivery across data and business teams.",
+      r:"Delivered <b>69 new tables</b> and <b>260 scheduling tasks</b> in 2.5 months while absorbing 56 requests.",
+      role:"Owned delivery continuity and handover; the underlying engineering was cross-functional, not a solo build."},
+    meta:'56 requests · 69 tables · 260 scheduling tasks',
+    stack:['Delivery resilience','Data pipelines','Handover','Stakeholder alignment']},
 
   {id:'compliance',group:'riskplanet',ang:8,rad:88,size:15,col:'violet',label:'Compliance Self-Service',featured:true,
     tag:'Risk · Bybit',title:'Compliance Self-Service Analytics',sub:'Legal / Compliance dashboards @ Bybit',
-    body:"Self-service dashboards for Legal &amp; Compliance across NL / CA / UK markets — surfacing KYC status, user holdings, fund size, product exposure and risk insights for auditable decisions — cutting ad-hoc data pulls from days to minutes.",
-    star:{p:"Legal &amp; Compliance needed KYC, holdings and risk data across NL/CA/UK, but every question meant a days-long ad-hoc data pull.",
-      a:"Self-service dashboards surfacing KYC status, user holdings, fund size, product exposure and risk insights for auditable decisions.",
-      r:"Cut ad-hoc data pulls from <b>days to minutes</b> across three markets.",
-      role:"Designed the dashboards and metrics with Legal / Compliance stakeholders."},
-    meta:'NL · CA · UK · KYC & risk insight',
+    body:"Self-service operating views for Legal &amp; Compliance across regulated-market work — aligning KYC status, user holdings, product exposure and operational follow-up so teams could reduce repeated ad-hoc pulls and make more auditable decisions.",
+    star:{p:"Legal &amp; Compliance relied on fragmented definitions and repeated manual data pulls for market-impact assessments.",
+      a:"Defined the core metrics, source logic and operating views with Legal / Compliance stakeholders across KYC, holdings, product exposure and follow-up status.",
+      r:"Created a shared, auditable operating view for compliance impact assessment and follow-up.",
+      role:"Owned the monitoring and data-product layer; I did not own the underlying KYC/KYB vendor product."},
+    meta:'Regulated-market workflows · KYC & risk visibility',
     stack:['Tableau','Data warehouse','KYC','Compliance']},
   {id:'aibi',group:'riskplanet',ang:85,rad:78,size:15,col:'violet',label:'AI + BI Risk Automation',featured:true,
     tag:'AI / Data · Project-based',title:'AI + BI Risk Reporting Automation',sub:'LLM-powered risk reporting',
@@ -645,13 +669,23 @@ const ITEMS=[
     note:'Independent / project-based work',
     stack:['LLM / Dify','SQL','AML signals','Alerting']},
 
+  {id:'paymentincident',group:'riskplanet',ang:228,rad:88,size:13,col:'violet',label:'Payment / Order Recovery',featured:false,
+    tag:'Enterprise Reliability · Payments',title:'Payment Success, Missing Order',sub:'Global quick-service restaurant · Sanitized incident case',
+    body:'A payment-and-order consistency incident in which successful payments did not create the corresponding orders, leaving paid customers without a usable order and requiring manual recovery.',
+    star:{p:'Payment records showed success while the order system had no corresponding order, creating customer, reconciliation and refund risk.',
+      a:'Investigated the incident records, traced affected transactions, aligned business, support, payment and system teams, and coordinated reconciliation and refund follow-up.',
+      r:'Recovered <b>48 affected payment records</b> through the reconciliation / refund process and translated the incident into clearer exception-handling and monitoring requirements.',
+      role:'Owned incident analysis, coordination and reconciliation follow-up; I do not claim implementation ownership for idempotency, retry or compensation controls.'},
+    meta:'Sanitized case · business-state consistency · no internal tools shown',
+    stack:['Incident analysis','Payments','Reconciliation','Exception handling','Cross-team coordination']},
+
   {id:'cs660',group:'growthmoon',ang:55,rad:85,size:14,col:'gold',label:'AI CS Analytics',featured:false,
     tag:'Analytics · Bybit',title:'AI Customer-Service Analytics',sub:'KPI frameworks for an AI-assisted CS org',
-    body:"The measurement layer for Bybit's AI customer-service operation: a KPI framework spanning bot containment, CSAT/NPS, escalation rate and wait time; user personas by region, language, wallet balance and leverage risk to power differentiated routing; and 3 dashboards shipped with Product, Engineering, UED, Data and CS Ops — saving 660+ CS hours every month across 80+ agents.",
-    star:{p:"Bybit's AI customer-service org (80+ agents) had no KPI framework to tell whether AI was actually helping users.",
-      a:"A KPI framework across bot containment, CSAT/NPS, escalation rate and wait time, plus personas by region, language, wallet balance and leverage risk — shipped as 3 dashboards with Product, Engineering, UED, Data and CS Ops.",
-      r:"Saved <b>660+ CS hours every month</b> across 80+ agents; queue allocation, FAQ indexing and chatbot UX all tuned off the same data.",
-      role:"Designed the KPI framework, personas and analytics."},
+    body:"The data workstream for Bybit's intelligent customer-service product: defining deflection, satisfaction and funnel metrics; aligning instrumentation and DWD/DWS requirements; building user profiles and 3 dashboard iterations; and monitoring feature impact across language, topic, service time and user segment.",
+    star:{p:"Product and CS Ops lacked a trustworthy measurement layer for deciding whether the bot was resolving user needs or merely changing contact patterns.",
+      a:"Defined metrics and instrumentation, aligned data requirements, built user profiles and iterated 3 dashboards with Product, Engineering, Data and CS Ops.",
+      r:"Gave Product and CS Ops one view for bot evaluation and iteration; a related CS reporting-automation stream saved approximately <b>660 staff hours per month</b>.",
+      role:"Owned the data workstream; the product manager owned the overall intelligent-CS roadmap."},
     stack:['KPI design','Personas','CSAT / NPS','Service dashboards']},
   {id:'loyalty',group:'growthmoon',ang:125,rad:78,size:13,col:'gold',label:'Loyalty & NFT Loop',featured:false,
     tag:'Growth · Binance',title:'Loyalty & NFT-Avatar Loop',sub:'Growth mechanics on market-data products',
@@ -661,13 +695,13 @@ const ITEMS=[
       r:"Growth &amp; loyalty mechanics shipped across platforms, coordinating <b>60+ engineers</b>.",
       role:"Owned the growth-loop product design."},
     stack:['Growth loops','NFT rewards','Cross-platform']},
-  {id:'campaign',group:'growthmoon',ang:185,rad:70,size:12,col:'gold',label:'$3M Campaign Analysis',featured:false,
-    tag:'Analytics · Bybit',title:'$3M Campaign-Cost Analysis',sub:'27 stakeholders · 9 systems',
-    body:"A campaign-cost analysis across 27 stakeholders and 9 systems, giving Bybit leadership a defensible, auditable view of $3M in marketing spend.",
-    star:{p:"Leadership needed a defensible view of $3M in marketing spend, scattered across 9 systems and 27 stakeholders.",
-      a:"A campaign-cost analysis consolidating 9 systems and aligning 27 stakeholders into one auditable view.",
-      r:"A defensible, auditable view of <b>$3M</b> in spend for leadership decisions.",
-      role:"Led the analysis and stakeholder alignment."},
+  {id:'campaign',group:'growthmoon',ang:185,rad:70,size:12,col:'gold',label:'$3.22M Award-Cost Analysis',featured:false,
+    tag:'Analytics · Bybit',title:'$3.22M Award-Cost Analysis',sub:'27 stakeholders · 10 departments · 9 systems',
+    body:"A cross-functional analysis of approximately $3.22M in award costs across 9 systems, creating a more auditable view of campaign cost, attribution gaps and high-cost / poor-ROI activities to improve future award allocation.",
+    star:{p:"Award costs were fragmented across systems, making campaign comparison and future allocation difficult.",
+      a:"Led the project and stakeholder alignment across 27 stakeholders and 10 departments; phase one focused on 3 usable award systems and analyzed costs by region, channel and event.",
+      r:"Created an auditable view of <b>~$3.22M in analyzed award costs</b> to identify inefficient campaigns and guide future allocation — not a claim of $3.22M in savings.",
+      role:"Led end-to-end project delivery and stakeholder alignment; contributed to the analysis and dashboard rather than claiming a solo technical build."},
     stack:['Cost analysis','Stakeholder mgmt','BI']},
   {id:'payment',group:'growthmoon',ang:240,rad:82,size:13,col:'gold',label:'Loyalty Recommendation',featured:false,
     tag:'Enterprise Product · Loyalty',title:'Explainable Loyalty Redemption',sub:'Starbucks China · POS / promotion engine / CRM · Sanitized case',
@@ -699,12 +733,13 @@ const UPCOMING_NOTES=['From writing specs to shipping code','Risk is a product p
 const EXPERIENCE=[
   {title:'Independent / Project-based AI & Data Work',sub:'AI & Data Product Lead · 2025 – Present',
    body:"Building hands-on AI &amp; data products across risk, automation and user-facing agents — including Auntie AI, BaoBao, Listing Monitor, Token Launch Lab, Token Risk Brief and ApplyPilot. I design, code and ship prototypes end to end, combining product judgment, BI automation, LLM workflows and English-first product communication."},
-  {title:'Bybit Fintech',sub:'Lead Data Product Analyst, BI Center · 2022 – 2024',
-   body:"Led the BI Center's product &amp; data work: the Dragon Boat 0→1 platform, compliance self-service analytics (NL/CA/UK), AI customer-service analytics (660+ CS hours saved/month across 80+ agents), a $3M campaign-cost analysis across 27 stakeholders and 9 systems, and the data-governance backbone (18 SOPs)."},
+  {title:'Bybit Fintech',sub:'Lead Data Product Analyst · 2022 – 2024',
+   body:"Led internal workflow and data-product work including the Dragon Boat 0→1 platform, Smart Customer Service measurement, compliance operating views, Bybit Index project delivery, campaign award-cost visibility and a competitor-data transition. Results included a 95% demand-completion rate and approximately 660 staff hours per month saved through CS reporting automation."},
   {title:'Binance',sub:'Senior Product Manager · 2021 – 2022',
    body:"Owned user-growth and loyalty mechanics for Binance's crypto market-data platform — a points → reward → NFT-avatar loyalty loop plus member-acquisition and retention mechanics — and coordinated cross-platform delivery across web, mobile and admin with 60+ engineers."},
   {title:'Capgemini China',sub:'Senior Product Manager · 2016 – 2021',
-   body:"Led agile product delivery across Starbucks and McDonald's programs, translating retail workflows into requirements and prototypes spanning POS, OMS, CRM, loyalty, payments and order systems; supported integration, UAT and cross-vendor delivery, with market research across Japan, the US and Hong Kong."},
+   body:"Led agile product delivery across Starbucks and McDonald's programs, translating retail workflows into requirements and prototypes spanning POS, OMS, CRM, loyalty, payments and order systems; supported integration, UAT and cross-vendor delivery, with market research across Japan, the US and Hong Kong.",
+   supporting:{label:'Earlier enterprise AI exposure',title:'Global medical-aesthetics company × cloud AI vendor',body:'Supported vendor coordination, knowledge-transfer sessions and portfolio reporting for an early facial-analysis consultation prototype developed by a cloud AI partner. The vendor owned model development; my role focused on enterprise-side collaboration and delivery enablement.'}},
 ];
 
 const SERVICES=[
@@ -744,9 +779,9 @@ const ASK = [
    next:[['See your best project','best project'],['What are you building now?','building now']],
    a:"Fair question. I spent a decade in product &amp; data — then taught myself to build instead of just writing specs. In the last year I've shipped my own LLM &amp; agent prototypes end to end, and one of them won a national AI challenge.\n\nSo it's not a blank-slate switch — it's a decade of product judgment, now paired with actually building the thing."},
   {k:['crypto','risk','compliance','aml','exchange','web3','bybit','fintech','风控','风险'],
-   focus:'riskplanet',
-   next:[['What are you building now?','building now']],
-   a:"Five years in crypto, mostly around risk. At Bybit I built compliance self-service dashboards (NL/CA/UK), AML &amp; large-withdrawal alert logic, and the data-governance backbone — plus an LLM workflow that cut risk reporting from ~8 hours to ~3 minutes. It's all on Risk Planet."},
+    focus:'riskplanet',
+    next:[['What are you building now?','building now']],
+    a:"Five years in crypto across product, data, growth, customer service and risk. At Bybit I led compliance-data visibility, Smart Customer Service measurement and the Dragon Boat internal workflow product. Separately, in later project-based work, I designed an LLM reporting workflow over transaction and risk data. It's all on Risk Planet."},
   {k:['baobao','health','elder','wellness','wearable','医疗','健康','养老','宝宝'],
    focus:'baobao',
    next:[['See your best project','best project'],['What are you building now?','building now']],
@@ -1113,7 +1148,7 @@ document.getElementById('send').onclick=()=>{if(qin.value.trim()){ask(qin.value)
 qin.addEventListener('keydown',e=>{if(e.key==='Enter'&&qin.value.trim()){ask(qin.value);qin.value='';}});
 
 /* ============ PROFESSIONAL MODE ============ */
-const FEATURED=['auntie','snapcal','baobao','kinkeep','listing','tokenlab','tokenrisk','aibi','dragon','compliance','applypilot','payment'];
+const FEATURED=['auntie','kinkeep','snapcal','dragon','payment','paymentincident'];
 function bookHref(){return CALENDLY||"mailto:leini8891@gmail.com?subject=Let's%20talk%20%E2%80%94%2015%20min%3F";}
 function starHTML(s){
   return '<div class="star">'+
@@ -1148,9 +1183,9 @@ function buildResume(){
   h+='<div class="rlogos"><span class="lg">Bybit</span><span class="sep">·</span><span class="lg">Binance</span><span class="sep">·</span><span class="lg">Capgemini</span><span class="sep">·</span><span class="lg" style="color:var(--gold)">🏆 Tencent&nbsp;AI&nbsp;Winner</span></div>';
   h+='<div class="rstats">'
     +'<div class="rstat"><div class="num">1st</div><div class="lbl">of 35 · national AI challenge</div></div>'
-    +'<div class="rstat"><div class="num">660+</div><div class="lbl">CS hours saved / month</div></div>'
-    +'<div class="rstat"><div class="num">$3M</div><div class="lbl">marketing spend analyzed</div></div>'
-    +'<div class="rstat"><div class="num">8h→3min</div><div class="lbl">risk reporting turnaround</div></div>'
+    +'<div class="rstat"><div class="num">660+</div><div class="lbl">staff reporting hours saved / month</div></div>'
+    +'<div class="rstat"><div class="num">$3.22M</div><div class="lbl">award costs analyzed</div></div>'
+    +'<div class="rstat"><div class="num">95%</div><div class="lbl">demand completion · Bybit</div></div>'
     +'</div>';
   h+='<div class="rsec"><div class="rh">About · Why AI, Why Now</div><p class="rnarr">'+NARRATIVE+'</p></div>';
   h+='<div class="rsec"><div class="rh">What I Can Do For You</div><div class="rgrid three">';
@@ -1158,7 +1193,7 @@ function buildResume(){
     h+='<div class="rcard"><div class="rt">'+s.t+'</div><h3>'+s.h+'</h3><p>'+s.d+'</p></div>';
   });
   h+='</div><div class="rcred">Open to full-time AI product roles and project-based collaborations — <a href="mailto:leini8891@gmail.com">leini8891@gmail.com</a></div></div>';
-  h+='<div class="rsec"><div class="rh">Featured Projects</div><div class="rgrid">';
+  h+='<div class="rsec"><div class="rh">Selected Case Studies · 6</div><div class="rgrid">';
   FEATURED.map(id=>ITEMS.find(it=>it.id===id)).forEach(n=>{
     h+='<div class="rcard'+(n.col==='gold'?' gold':'')+'">';
     h+='<div class="rt">'+n.tag+'</div><h3>'+n.title.replace(/ — /,' · ')+'</h3>';
@@ -1172,9 +1207,13 @@ function buildResume(){
     if(n.repo)h+='<a class="repolink" href="'+n.repo+'" target="_blank" rel="noopener">↗ View on GitHub</a>';
     h+='</div>';
   });
-  h+='</div></div>';
+  h+='</div><div class="rcred">Six representative stories are shown here. Explore the interactive universe for the broader project archive.</div></div>';
   h+='<div class="rsec"><div class="rh">Experience</div><div class="rexp">';
-  EXPERIENCE.forEach(n=>{h+='<div class="ritem"><h3>'+n.title+'</h3><div class="rsub">'+n.sub+'</div><p>'+n.body+'</p></div>';});
+  EXPERIENCE.forEach(n=>{
+    h+='<div class="ritem"><h3>'+n.title+'</h3><div class="rsub">'+n.sub+'</div><p>'+n.body+'</p>';
+    if(n.supporting)h+='<div class="expnote"><div class="et">'+n.supporting.label+'</div><b>'+n.supporting.title+'</b><p>'+n.supporting.body+'</p></div>';
+    h+='</div>';
+  });
   h+='</div></div>';
   h+='<div class="rsec"><div class="rh">Skills</div><div class="rskills">'+SKILLS.map(s=>'<span>'+s+'</span>').join('')+'</div>';
   h+='<div class="rcred">Finance background · B.A. Finance · CFA Level I · PMP · Chinese (native) · English (fluent)</div></div>';
