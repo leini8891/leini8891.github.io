@@ -150,8 +150,30 @@ a{color:var(--cyan);text-decoration:none}
 .pos-callouts{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}
 .pos-callout{font-size:8.5px;line-height:1.35;color:var(--faint);text-align:center}
 .pos-callout b{display:block;color:var(--cyan);font-size:11px;margin-bottom:2px}
+.pos-mini-controls{display:flex;gap:6px;margin-top:9px}
+.pos-mini-controls span{flex:1;font-family:var(--mono);font-size:7.5px;color:var(--muted);text-align:center;border:1px solid var(--line);background:rgba(20,28,62,.5);border-radius:6px;padding:5px 3px}
 .rcard .pos-visual{margin:14px 0 16px;padding:12px}
 @media (max-width:430px){.pos-screen{grid-template-columns:1fr}.pos-order{border-right:none;border-bottom:1px solid var(--line)}.pos-actions{grid-template-columns:1fr}.pos-callouts{grid-template-columns:1fr;gap:4px}.pos-callout{display:flex;align-items:center;gap:7px;text-align:left}.pos-callout b{margin:0}}
+.ai-visual{margin:18px 0 20px;border:1px solid var(--cardbd);background:radial-gradient(120% 150% at 100% 0%,rgba(163,116,255,.16),transparent 45%),linear-gradient(145deg,rgba(18,27,61,.94),rgba(6,11,28,.98));border-radius:14px;padding:14px;box-shadow:0 14px 38px rgba(0,0,0,.24)}
+.ai-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px}
+.ai-head b{display:block;font-size:12.5px;color:var(--ink)}
+.ai-head span{display:block;font-size:9.5px;color:var(--faint);margin-top:3px}
+.ai-time{flex:none;display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:8px;color:var(--faint);border:1px solid rgba(63,231,255,.28);background:rgba(63,231,255,.07);border-radius:20px;padding:5px 7px}
+.ai-time b{font-size:9px;color:var(--cyan)}
+.ai-flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch;gap:6px}
+.ai-node{min-width:0;display:flex;flex-direction:column;justify-content:center;border:1px solid var(--line);background:rgba(7,12,31,.78);border-radius:9px;padding:9px 7px;text-align:center}
+.ai-node.core{border-color:rgba(163,116,255,.45);background:rgba(163,116,255,.1);box-shadow:inset 0 0 18px rgba(163,116,255,.07)}
+.ai-node.review{border-color:rgba(63,231,255,.36);background:rgba(63,231,255,.07)}
+.ai-node em{align-self:center;font-family:var(--mono);font-size:7px;font-style:normal;color:var(--cyan);border:1px solid rgba(63,231,255,.25);border-radius:20px;padding:2px 5px;margin-bottom:5px}
+.ai-node b{font-size:9.5px;line-height:1.25;color:var(--ink)}
+.ai-node small{font-size:7.5px;line-height:1.3;color:var(--faint);margin-top:4px}
+.ai-arrow{align-self:center;font-family:var(--mono);font-size:11px;color:var(--violet)}
+.ai-controls{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:9px}
+.ai-controls span{font-family:var(--mono);font-size:7px;line-height:1.25;color:var(--muted);text-align:center;border-top:1px solid rgba(122,142,205,.16);padding-top:6px}
+.ai-ownership{display:flex;justify-content:space-between;gap:8px;margin-top:8px;font-size:7px;color:var(--faint)}
+.ai-ownership b{color:var(--cyan);font-weight:500}
+.rcard .ai-visual{margin:14px 0 16px;padding:12px}
+@media (max-width:430px){.ai-flow{grid-template-columns:1fr}.ai-arrow{transform:rotate(90deg)}.ai-controls{grid-template-columns:1fr}.ai-ownership{display:none}}
 .shotlink{display:block;margin:16px 0 4px;line-height:0;border-radius:10px;overflow:hidden;
   border:1px solid var(--cardbd);transition:transform .18s,box-shadow .18s}
 .shotlink:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,0,0,.45)}
@@ -297,6 +319,31 @@ img.shot[src$="token-risk-brief.png"]{aspect-ratio:16/9;object-fit:contain;backg
 .rcard p{color:var(--muted);font-size:14px;line-height:1.55;margin:0 0 12px}
 .rcard .rstk{display:flex;flex-wrap:wrap;gap:6px}
 .rcard .rstk span{font-family:var(--mono);font-size:10.5px;color:var(--ink);border:1px solid var(--cardbd);background:rgba(30,40,80,.4);padding:4px 8px;border-radius:7px}
+.featured-grid{align-items:stretch}
+.featured-card{display:flex;flex-direction:column;min-height:100%}
+.featured-card.active{border-color:var(--cyan);box-shadow:0 14px 34px rgba(0,0,0,.26),inset 0 0 0 1px rgba(63,231,255,.08)}
+.featured-card h3{min-height:44px;line-height:1.22;margin-bottom:7px}
+.featured-card .rsub{min-height:38px;line-height:1.4;margin-bottom:0}
+.featured-card .visual-cover{display:block;width:100%;height:auto;aspect-ratio:16/10;margin:14px 0 15px;overflow:hidden;border-radius:10px}
+.featured-card img.shot.visual-cover{aspect-ratio:16/10;object-fit:cover;object-position:center top;background:#070b1b;border:1px solid var(--cardbd);margin:14px 0 15px}
+.featured-card img.shot.visual-cover[src$="token-risk-brief.png"]{aspect-ratio:16/10;object-fit:contain;background:#020713}
+.featured-card .pos-visual.visual-cover,.featured-card .ai-visual.visual-cover{display:flex;flex-direction:column;padding:11px}
+.featured-card .pos-visual.visual-cover .pos-screen,.featured-card .ai-visual.visual-cover .ai-flow{flex:1}
+.featured-card .featured-blurb{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;min-height:65px;color:var(--muted);font-size:13.5px;line-height:1.55;margin:0 0 12px}
+.featured-proof{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:51px;border-top:1px solid rgba(122,142,205,.16);border-bottom:1px solid rgba(122,142,205,.16);padding:9px 0;margin-bottom:9px}
+.featured-proof span{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint)}
+.featured-proof b{font-family:var(--mono);font-size:10px;line-height:1.3;text-align:right;color:var(--cyan)}
+.featured-role{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;min-height:35px;color:var(--faint);font-size:11.5px;line-height:1.45}
+.casebtn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding:12px 0 0;font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;color:var(--cyan);cursor:pointer;border:0;background:none;text-align:left}
+.casebtn span{font-size:15px;color:var(--violet)}
+.casebtn:hover{color:#fff}
+.casebtn:focus-visible{outline:2px solid var(--gold);outline-offset:5px;border-radius:4px}
+.rfeaturedetail{display:none;position:relative;margin-top:16px}
+.rfeaturedetail.show{display:block;animation:moreReveal .24s ease-out}
+.rfeaturedetail .rcard{padding-top:28px}
+.rfeaturedetail .rcard:hover{transform:none}
+.detailclose{position:absolute;right:13px;top:11px;z-index:2;font-family:var(--mono);font-size:10px;color:var(--faint);cursor:pointer;border:1px solid var(--line);background:rgba(7,12,31,.9);border-radius:20px;padding:5px 8px}
+.detailclose:hover{color:#fff;border-color:var(--cyan)}
 .rmore{margin-top:18px;border:1px solid var(--cardbd);background:rgba(18,24,54,.42);border-radius:14px;overflow:hidden}
 .rmore summary{cursor:pointer;list-style:none;padding:15px 18px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);display:flex;align-items:center;justify-content:space-between;gap:12px}
 .rmore summary::-webkit-details-marker{display:none}
@@ -363,7 +410,15 @@ img.shot[src$="token-risk-brief.png"]{aspect-ratio:16/9;object-fit:contain;backg
   color:#04050d;background:linear-gradient(100deg,var(--cyan),var(--violet));padding:9px 15px;border-radius:9px;transition:.2s}
 .demolink:hover{filter:brightness(1.08);transform:translateY(-1px)}
 .rcard .demolink{margin-top:12px;padding:7px 12px;font-size:11.5px}
-@media (max-width:640px){.rgrid,.rgrid.three,.rmoregrid{grid-template-columns:1fr}.rhead{flex-direction:column}.rwrap{padding:40px 20px 100px}.rstats{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.rgrid,.rgrid.three,.rmoregrid{grid-template-columns:1fr}.rhead{flex-direction:column}.rwrap{padding:40px 20px 100px}.rstats{grid-template-columns:repeat(2,1fr)}.featured-card h3,.featured-card .rsub,.featured-card .featured-blurb,.featured-card .featured-role{min-height:0}}
+@media (max-width:430px){
+  .featured-card .pos-visual.visual-cover .pos-screen{grid-template-columns:.82fr 1.18fr}
+  .featured-card .pos-visual.visual-cover .pos-order{border-right:1px solid var(--line);border-bottom:none}
+  .featured-card .ai-visual.visual-cover .ai-flow{grid-template-columns:1fr auto 1fr auto 1fr}
+  .featured-card .ai-visual.visual-cover .ai-arrow{transform:none}
+  .featured-card .ai-visual.visual-cover .ai-controls{grid-template-columns:repeat(3,1fr)}
+  .featured-card .ai-visual.visual-cover .ai-ownership{display:none}
+}
 
 /* ---------- share + delight ---------- */
 #toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%) translateY(14px);z-index:90;font-family:var(--mono);font-size:12.5px;color:var(--ink);
@@ -500,12 +555,11 @@ body.nova #sky,body.nova #field{animation:nova 1.5s ease}
       <h2 style="color:#eaeefb">Selected projects</h2>
       <ul style="color:#cfd6f5;line-height:1.7;max-width:680px">
         <li><a href="https://github.com/leini8891/auntie-ai">Auntie AI</a> — anti-scam AI copilot, 1st place at the Tencent Cloud AI Coding Challenge (35 projects, 279 participants).</li>
+        <li>AI + BI Risk Reporting Automation — an in-house Dify workflow over trusted operational data that reduced leadership-report turnaround from approximately 8 hours to under 3 minutes.</li>
         <li><a href="https://github.com/leini8891/KinKeep">KinKeep</a> — a consent-aware family care agent that turns scattered updates into one shared care episode.</li>
         <li><a href="https://github.com/leini8891/SnapCal">SnapCal</a> — Singapore-first meal logging built around local food, honest calorie ranges and fast correction.</li>
-        <li>AI + BI Risk Reporting Automation — a Dify-based workflow over trusted risk data that reduced leadership-report turnaround from hours to minutes.</li>
-        <li>Dragon Boat — a 0→1 internal demand-management workflow spanning 17 business lines and 8 data categories.</li>
+        <li>Token Risk Brief — an explainable Agent Skill that separates source-backed risk from confidence, coverage and unknown evidence.</li>
         <li>Explainable Loyalty Redemption — a sanitized POS case translating complex benefit rules into a reversible checkout workflow.</li>
-        <li>Payment Success, Missing Order — incident analysis and reconciliation for 48 affected payment records in a global quick-service restaurant program.</li>
       </ul>
       <p style="color:#8f99c6;max-width:680px;line-height:1.6">Earlier enterprise AI exposure: supported vendor coordination, knowledge-transfer sessions and portfolio reporting for a facial-analysis consultation prototype developed by a cloud AI partner. The vendor owned model development.</p>
       <p><a href="Elena_Xiao_CV.pdf">Download CV</a> · <a href="https://www.linkedin.com/in/xiao-elena/">LinkedIn</a> · <a href="https://github.com/leini8891">GitHub</a></p>
@@ -544,6 +598,9 @@ const ITEMS=[
   {id:'auntie',group:'ailab',ang:-100,rad:95,size:26,col:'gold',label:'Auntie AI 🏆',featured:true,
     tag:'AI Product · 1st place',title:'Auntie AI — Anti-Scam Co-Pilot',sub:'Tencent Cloud AI Coding Challenge · Winner',
     img:'p/auntie.png',
+    cardSummary:'A senior-friendly copilot that detects scam signals, explains the risk in plain language and brings family into the decision.',
+    cardProof:'1st of 35 · 279 participants',
+    cardRole:'Solo product ownership · shipped and demoed',
     award:'🏆 1st of 35 projects · 279 participants',
     body:"A senior-friendly AI copilot that flags scam &amp; fraud signals before a risky transaction happens, explains the risk in plain language, and loops in family members. I owned the scam-detection logic, the explanation UX, the false-positive / false-negative tradeoffs and the AI safety guardrails — then shipped and demoed it.",
     star:{p:"Elderly users are the #1 target for scams, but fraud warnings are technical and arrive too late.",
@@ -569,6 +626,9 @@ const ITEMS=[
   {id:'tokenrisk',group:'riskplanet',ang:155,rad:88,size:16,col:'violet',label:'Token Risk Brief',featured:true,
     tag:'Agent Skill · Crypto Risk',title:'Token Risk Brief — Explainable Token Risk Skill',sub:'Contract + chain → source-backed risk brief',
     img:'p/token-risk-brief.png',
+    cardSummary:'A source-backed Agent Skill that separates token risk from confidence, coverage and unknown evidence.',
+    cardProof:'6 automated evidence-path tests',
+    cardRole:'Product contract, risk rubric and engine · end to end',
     body:"An installable Agent Skill and deterministic evidence-to-verdict engine for token due diligence. Give a compatible agent an exact contract address and blockchain; it checks contract control, sellability, liquidity and holder concentration, then separates risk from confidence, coverage and unknown evidence instead of repeating a scanner score.",
     star:{p:"Token scanners surface flags and scores, but rarely explain how contract privileges, sellability, liquidity, concentration and missing evidence should change a decision.",
       a:"Built an installable Agent Skill plus a deterministic evidence-to-verdict engine, normalized JSON evidence contract and fail-closed handling for unavailable signals.",
@@ -604,6 +664,9 @@ const ITEMS=[
   {id:'kinkeep',group:'ailab',ang:160,rad:82,size:15,col:'cyan',label:'KinKeep 🫶',featured:true,
     tag:'AI Agent · Family Care',title:'KinKeep — Family Care Agent',sub:'A companion for an ageing parent that grows into a family early-warning system',
     img:'p/kinkeep.png',
+    cardSummary:'Companion-led early warnings that turn a meaningful change into one clear next step for the right family member.',
+    cardProof:'Consent-aware Care Episode Loop',
+    cardRole:'Product, agent logic and safety flows · end to end',
     body:"A family-care AI agent with a deliberately sharp wedge: it starts as everyday companionship for an ageing parent, and uses that closeness to do the hard part — notice what's quietly changing (a drifting routine, an off day, an early health signal), raise it in plain language before anyone would catch it by hand, and pull the right family member or close friend in. One clear job, not another sprawling health dashboard.",
     star:{p:"Elderly-care apps pile on wearable charts and dashboards, so the thing that actually matters — noticing a real problem early, and getting the family to act — gets buried.",
       a:"An AI agent that begins as a companion the parent will actually talk to, watches for meaningful change on its own, raises an early plain-language warning, and routes it to the right family member or close friend as a concrete next step.",
@@ -617,6 +680,9 @@ const ITEMS=[
   {id:'snapcal',group:'ailab',ang:205,rad:82,size:15,col:'cyan',label:'SnapCal 📸',featured:true,
     tag:'AI Product · Health',title:'SnapCal — Snap a Meal, Log It Fast',sub:'Singapore-first calorie tracking built for hawker food, not Western databases',
     img:'p/snapcal.png',
+    cardSummary:'Photo, receipt and text meal logging with honest calorie ranges for Singapore hawker food and fast correction.',
+    cardProof:'Singapore-first · bilingual PWA',
+    cardRole:'Product, estimate logic and experience · end to end',
     body:"A mobile-first PWA that logs what you actually eat: snap a photo, upload a receipt, or just type a dish — SnapCal returns an honest calorie range, then lets you tune portion, rice and sauce. Built for local hawker food (bak chor mee, kaya toast, mala) with bilingual EN / 中文 guidance, not a generic Western food database.",
     star:{p:"Calorie apps run on Western food databases, so logging a plate of chicken rice or bak chor mee is guesswork — and guilt-heavy.",
       a:"A photo / text / receipt meal logger that gives honest calorie ranges for Singapore hawker food, with local modifiers (less rice, no lard, shared portion) and bilingual guidance.",
@@ -679,15 +745,19 @@ const ITEMS=[
     meta:'Regulated-market workflows · KYC & risk visibility',
     stack:['Tableau','Data warehouse','KYC','Compliance']},
   {id:'aibi',group:'riskplanet',ang:85,rad:78,size:15,col:'violet',label:'AI + BI Risk Automation',featured:true,
-    tag:'AI / Data · Project-based',title:'AI + BI Risk Reporting Automation',sub:'LLM-powered risk reporting',
-    body:"LLM / Dify reporting workflows over transaction, fund-flow, market-feed and user-behavior data that cut risk-report turnaround from <b>hours to minutes</b> for leadership decisions — and translated large withdrawals &amp; suspicious transfers into risk indicators and alert rules.",
-    star:{p:"Risk reporting took hours of manual data pulls before leadership could act on large withdrawals &amp; suspicious flows.",
-      a:"LLM/Dify reporting workflows over transaction, fund-flow, market and behavior data; turned big withdrawals &amp; suspicious transfers into risk indicators and alert rules.",
-      r:"Cut risk-report turnaround from <b>~8 hours to ~3 minutes</b> for leadership decisions.",
-      role:"Owned the workflow design and guardrails, partnering with BI, data &amp; AI engineering."},
-    meta:'Partnered with BI, data &amp; AI engineering on guardrails',
-    note:'Independent / project-based work',
-    stack:['LLM / Dify','SQL','AML signals','Alerting']},
+    tag:'AI / Data · In-house product',title:'AI + BI Risk Reporting Automation',sub:'Dify workflow over trusted operational data',
+    visual:'aibi',
+    cardSummary:'A source-linked AI reporting workflow that turned trusted transaction and fund-flow signals into decision-ready briefs.',
+    cardProof:'~8 hours → under 3 minutes',
+    cardRole:'Business and product-side project lead',
+    body:"An in-house AI-assisted reporting product over trusted transaction and fund-flow data. I led the business and product workstream — from problem framing and analytical logic through acceptance criteria, validation and human review — while partnering with AI and data engineers on implementation.",
+    star:{p:"Leadership reporting required approximately eight hours of manual data work before decision-makers could review a trustworthy explanation.",
+      a:"Defined the problem, metric logic, data sources, report structure, deterministic checks, source references, acceptance criteria and human-review controls; worked hands-on with Dify workflow orchestration and clarified where rules, LLM explanation and separate classifiers fit.",
+      r:"Reduced report turnaround from <b>approximately 8 hours to under 3 minutes</b> while keeping the underlying evidence reviewable.",
+      role:"Business and product-side project lead; AI and data engineering partners owned model and data-pipeline implementation."},
+    meta:'Reliable decision insight · source-linked output · human review',
+    note:'In-house product · 2025',
+    stack:['Dify','Workflow orchestration','Data validation','Human review']},
 
   {id:'paymentincident',group:'riskplanet',ang:228,rad:88,size:13,col:'violet',label:'Payment / Order Recovery',featured:false,
     tag:'Enterprise Reliability · Payments',title:'Payment Success, Missing Order',sub:'Global quick-service restaurant · Sanitized incident case',
@@ -726,6 +796,9 @@ const ITEMS=[
   {id:'payment',group:'growthmoon',ang:240,rad:82,size:13,col:'gold',label:'Loyalty Recommendation',featured:false,
     tag:'Enterprise Product · Loyalty',title:'Explainable Loyalty Redemption',sub:'Starbucks China · POS / promotion engine / CRM · Sanitized case',
     visual:'loyalty',
+    cardSummary:'A clear, reversible checkout flow that translates complex loyalty rules into an explainable recommendation.',
+    cardProof:'Implementation-ready · QA-testable',
+    cardRole:'POS interaction and rule-to-workflow ownership',
     body:'A sanitized case study in translating complex loyalty rules into a clear, reversible checkout workflow.',
     star:{p:'At checkout, baristas had to navigate stars, coupons, eligibility, expiry and non-stackable offers while keeping the line moving.',
       a:'Prototyped an explainable POS journey that prioritized customer-redeemed benefits, near-expiry value and minimum payment, with clear eligible / ineligible states and accept, modify or reject controls.',
@@ -1088,6 +1161,7 @@ function openItem(id){
   if(it.award)h+='<div class="award">'+it.award+'</div>';
   if(it.img)h+='<a class="shotlink" href="'+(it.demo||it.repo||it.img)+'" target="_blank" rel="noopener"><img class="shot" src="'+it.img+'" alt="'+it.title+' — dashboard screenshot" loading="lazy"></a>';
   if(it.visual==='loyalty')h+=loyaltyVisualHTML();
+  if(it.visual==='aibi')h+=aibiVisualHTML();
   if(it.star)h+=starHTML(it.star); else h+='<p>'+it.body+'</p>';
   if(it.meta)h+='<div class="meta">→ '+it.meta+'</div>';
   if(it.stack)h+='<div class="stack">'+it.stack.map(s=>'<span class="chip">'+s+'</span>').join('')+'</div>';
@@ -1168,8 +1242,8 @@ document.getElementById('send').onclick=()=>{if(qin.value.trim()){ask(qin.value)
 qin.addEventListener('keydown',e=>{if(e.key==='Enter'&&qin.value.trim()){ask(qin.value);qin.value='';}});
 
 /* ============ PROFESSIONAL MODE ============ */
-const FEATURED=['auntie','kinkeep','snapcal','aibi','tokenrisk','dragon','payment','paymentincident'];
-const MORE_PROJECTS=['baobao','listing','tokenlab','compliance','applypilot'];
+const FEATURED=['auntie','aibi','kinkeep','snapcal','tokenrisk','payment'];
+const MORE_PROJECTS=['dragon','paymentincident','baobao','listing','tokenlab','compliance','applypilot'];
 function bookHref(){return CALENDLY||"mailto:leini8891@gmail.com?subject=Let's%20talk%20%E2%80%94%2015%20min%3F";}
 function starHTML(s){
   return '<div class="star">'+
@@ -1178,8 +1252,12 @@ function starHTML(s){
     '<div class="row"><span class="k">Result</span><span class="v">'+s.r+'</span></div>'+
     '<div class="row"><span class="k">My role</span><span class="v">'+s.role+'</span></div></div>';
 }
-function loyaltyVisualHTML(){
-  return '<div class="pos-visual" role="img" aria-label="Sanitized reconstruction of a point-of-sale loyalty recommendation showing an order, selected benefits, a lower payment and barista controls">'+
+function loyaltyVisualHTML(compact=false){
+  const cover=compact?' visual-cover':'';
+  const controls=compact
+    ?'<div class="pos-mini-controls" aria-hidden="true"><span>Explain</span><span>Modify</span><span>Stay in control</span></div>'
+    :'<div class="pos-actions" aria-hidden="true"><div class="pos-action primary">Apply recommendation</div><div class="pos-action">Modify</div><div class="pos-action">Continue without</div></div><div class="pos-callouts"><div class="pos-callout"><b>✓</b>Explains why</div><div class="pos-callout"><b>✓</b>Barista stays in control</div><div class="pos-callout"><b>✓</b>Updates payment instantly</div></div>';
+  return '<div class="pos-visual'+cover+'" role="img" aria-label="Sanitized reconstruction of a point-of-sale loyalty recommendation showing an order, selected benefits, a lower payment and barista controls">'+
     '<div class="pos-head"><div><b>Recommended benefits</b><span>Illustrative data · no internal screens</span></div><div class="pos-badge">POS prototype</div></div>'+
     '<div class="pos-screen">'+
       '<section class="pos-order"><div class="pos-label">Current order</div>'+
@@ -1193,17 +1271,46 @@ function loyaltyVisualHTML(){
         '<div class="pos-total"><div><span class="before">Original ¥78</span><span class="pay">Recommended payment</span><strong>¥58</strong></div><span class="best-pill">Lowest payment</span></div>'+
       '</section>'+
     '</div>'+
-    '<div class="pos-actions" aria-hidden="true"><div class="pos-action primary">Apply recommendation</div><div class="pos-action">Modify</div><div class="pos-action">Continue without</div></div>'+
-    '<div class="pos-callouts"><div class="pos-callout"><b>✓</b>Explains why</div><div class="pos-callout"><b>✓</b>Barista stays in control</div><div class="pos-callout"><b>✓</b>Updates payment instantly</div></div>'+
+    controls+
   '</div>';
+}
+function aibiVisualHTML(compact=false){
+  const cover=compact?' visual-cover':'';
+  return '<div class="ai-visual'+cover+'" role="img" aria-label="Sanitized AI reporting workflow from trusted data and validation through Dify orchestration to a source-linked brief with human review">'+
+    '<div class="ai-head"><div><b>Trusted insight workflow</b><span>Illustrative architecture · no internal data</span></div><div class="ai-time"><span>~8h</span>→<b>&lt;3m</b></div></div>'+
+    '<div class="ai-flow">'+
+      '<div class="ai-node"><em>01</em><b>Trusted data</b><small>Metrics · freshness · access</small></div><div class="ai-arrow" aria-hidden="true">→</div>'+
+      '<div class="ai-node core"><em>Dify</em><b>Analysis workflow</b><small>Rules · context · explanation</small></div><div class="ai-arrow" aria-hidden="true">→</div>'+
+      '<div class="ai-node review"><em>03</em><b>Decision brief</b><small>Sources · unknowns · approval</small></div>'+
+    '</div>'+
+    '<div class="ai-controls"><span>Deterministic checks</span><span>Source-linked output</span><span>Human review ✓</span></div>'+
+    '<div class="ai-ownership"><span><b>Product logic</b> · Elena</span><span>Model &amp; pipeline · engineering partners</span></div>'+
+  '</div>';
+}
+function projectVisualHTML(n,compact=false){
+  if(n.img)return '<img class="shot'+(compact?' visual-cover':'')+'" src="'+n.img+'" alt="Product visual for '+n.title+'" loading="lazy">';
+  if(n.visual==='loyalty')return loyaltyVisualHTML(compact);
+  if(n.visual==='aibi')return aibiVisualHTML(compact);
+  return '';
+}
+function compactProjectCardHTML(n){
+  let h='<article class="rcard featured-card'+(n.col==='gold'?' gold':'')+'" data-featured-card="'+n.id+'">';
+  h+='<div class="rt">'+n.tag+'</div><h3>'+n.title.replace(/ — /,' · ')+'</h3>';
+  if(n.award)h+='<div class="rsub" style="color:var(--gold)">'+n.award+'</div>';
+  else h+='<div class="rsub">'+(n.sub||'')+'</div>';
+  h+=projectVisualHTML(n,true);
+  h+='<p class="featured-blurb">'+(n.cardSummary||n.body)+'</p>';
+  h+='<div class="featured-proof"><span>Proof</span><b>'+(n.cardProof||n.meta||'Case study')+'</b></div>';
+  h+='<div class="featured-role">'+(n.cardRole||'Product ownership and cross-functional delivery')+'</div>';
+  h+='<button class="casebtn" type="button" data-featured-id="'+n.id+'" aria-expanded="false" aria-controls="rfeaturedetail">View full case <span aria-hidden="true">＋</span></button>';
+  return h+'</article>';
 }
 function resumeProjectCardHTML(n,includeUniverseLink=false){
   let h='<div class="rcard'+(n.col==='gold'?' gold':'')+'">';
   h+='<div class="rt">'+n.tag+'</div><h3>'+n.title.replace(/ — /,' · ')+'</h3>';
   if(n.award)h+='<div class="rsub" style="color:var(--gold)">'+n.award+'</div>';
   else if(n.sub)h+='<div class="rsub">'+n.sub+'</div>';
-  if(n.img)h+='<img class="shot" src="'+n.img+'" alt="'+n.title+' — dashboard screenshot" loading="lazy">';
-  if(n.visual==='loyalty')h+=loyaltyVisualHTML();
+  h+=projectVisualHTML(n,false);
   if(n.star)h+=starHTML(n.star); else h+='<p>'+n.body+'</p>';
   h+='<div class="rstk">'+n.stack.map(s=>'<span>'+s+'</span>').join('')+'</div>';
   if(n.demo)h+='<a class="demolink" href="'+n.demo+'" target="_blank" rel="noopener">▶ '+(n.demoLabel||'Live Demo')+'</a>';
@@ -1228,11 +1335,11 @@ function buildResume(){
     h+='<div class="rcard"><div class="rt">'+s.t+'</div><h3>'+s.h+'</h3><p>'+s.d+'</p></div>';
   });
   h+='</div><div class="rcred">Open to full-time AI product roles and project-based collaborations — <a href="mailto:leini8891@gmail.com">leini8891@gmail.com</a></div></div>';
-  h+='<div class="rsec"><div class="rh">Selected Case Studies · 8</div><div class="rgrid">';
+  h+='<div class="rsec"><div class="rh">Selected Case Studies · '+FEATURED.length+'</div><div class="rgrid featured-grid">';
   FEATURED.map(id=>ITEMS.find(it=>it.id===id)).forEach(n=>{
-    h+=resumeProjectCardHTML(n);
+    h+=compactProjectCardHTML(n);
   });
-  h+='</div><details class="rmore"><summary>More projects · 5</summary><div class="rmoregrid">';
+  h+='</div><div class="rfeaturedetail" id="rfeaturedetail" aria-live="polite"></div><details class="rmore"><summary>More projects · '+MORE_PROJECTS.length+'</summary><div class="rmoregrid">';
   MORE_PROJECTS.map(id=>ITEMS.find(it=>it.id===id)).forEach(n=>{
     h+='<button class="rmoreitem" type="button" data-more-id="'+n.id+'" aria-expanded="false" aria-controls="rmoredetail"><span class="rmorecopy"><b>'+n.title.replace(/ — /,' · ')+'</b><span class="rmoretag">'+n.tag+'</span></span><span class="rmorearrow" aria-hidden="true">＋</span></button>';
   });
@@ -1254,6 +1361,39 @@ function buildResume(){
   document.getElementById('rbody').innerHTML=h;
 }
 buildResume();
+const featuredDetail=document.getElementById('rfeaturedetail');
+const featuredButtons=[...document.querySelectorAll('.casebtn[data-featured-id]')];
+let activeFeaturedTrigger=null;
+function closeFeaturedProject(restoreFocus=false){
+  const trigger=activeFeaturedTrigger;
+  featuredButtons.forEach(btn=>{
+    btn.setAttribute('aria-expanded','false');
+    btn.querySelector('span').textContent='＋';
+  });
+  document.querySelectorAll('[data-featured-card]').forEach(card=>card.classList.remove('active'));
+  featuredDetail.classList.remove('show');featuredDetail.innerHTML='';
+  activeFeaturedTrigger=null;
+  if(restoreFocus&&trigger&&document.contains(trigger))setTimeout(()=>trigger.focus(),0);
+}
+featuredButtons.forEach(btn=>{btn.onclick=()=>{
+  const wasOpen=btn.getAttribute('aria-expanded')==='true';
+  if(wasOpen){closeFeaturedProject();return;}
+  closeFeaturedProject();
+  const n=ITEMS.find(it=>it.id===btn.dataset.featuredId);if(!n)return;
+  activeFeaturedTrigger=btn;
+  btn.setAttribute('aria-expanded','true');btn.querySelector('span').textContent='−';
+  btn.closest('[data-featured-card]').classList.add('active');
+  featuredDetail.innerHTML='<button class="detailclose" type="button" data-close-featured>Close ×</button>'+resumeProjectCardHTML(n,true);
+  void featuredDetail.offsetWidth;featuredDetail.classList.add('show');
+  setTimeout(()=>{featuredDetail.scrollIntoView({behavior:'smooth',block:'nearest'});featuredDetail.querySelector('[data-close-featured]').focus({preventScroll:true});},40);
+};});
+featuredDetail.addEventListener('click',e=>{
+  if(e.target.closest('[data-close-featured]')){closeFeaturedProject(true);return;}
+  const btn=e.target.closest('[data-universe-id]');if(!btn)return;
+  const id=btn.dataset.universeId;
+  if((location.hash||'').slice(1)===id){closeResumeView();setTimeout(()=>openItem(id),300);}
+  else location.hash=id;
+});
 const moreWrap=document.querySelector('.rmore');
 const moreDetail=document.getElementById('rmoredetail');
 const moreButtons=[...document.querySelectorAll('.rmoreitem')];
