@@ -302,11 +302,20 @@ img.shot[src$="token-risk-brief.png"]{aspect-ratio:16/9;object-fit:contain;backg
 .rmore summary::-webkit-details-marker{display:none}
 .rmore summary::after{content:'＋';font-size:16px;color:var(--violet)}
 .rmore[open] summary::after{content:'−'}
-.rmoregrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:0 14px 14px}
-.rmoreitem{display:block;border:1px solid var(--line);background:rgba(10,15,36,.58);border-radius:10px;padding:12px 13px;transition:.2s}
+.rmoregrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:0 14px 10px}
+.rmoreitem{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;font-family:var(--sans);cursor:pointer;color:inherit;border:1px solid var(--line);background:rgba(10,15,36,.58);border-radius:10px;padding:12px 13px;transition:.2s}
 .rmoreitem:hover{border-color:var(--cyan);transform:translateY(-1px)}
+.rmoreitem.active{border-color:var(--cyan);background:rgba(63,231,255,.08)}
+.rmoreitem .rmorecopy{min-width:0}
 .rmoreitem b{display:block;color:var(--ink);font-size:13.5px;margin-bottom:4px}
-.rmoreitem span{font-family:var(--mono);font-size:9.5px;color:var(--faint)}
+.rmoreitem .rmoretag{display:block;font-family:var(--mono);font-size:9.5px;color:var(--faint)}
+.rmoreitem .rmorearrow{flex:none;font-family:var(--mono);font-size:15px;color:var(--violet)}
+.rmoredetail{display:none;padding:4px 14px 14px}
+.rmoredetail.show{display:block;animation:moreReveal .24s ease-out}
+.rmoredetail .rcard:hover{transform:none}
+.universebtn{margin-top:14px;font-family:var(--mono);font-size:11.5px;color:var(--pink);cursor:pointer;border:1px solid rgba(255,122,217,.38);background:rgba(255,122,217,.07);padding:7px 12px;border-radius:9px;transition:.2s}
+.universebtn:hover{border-color:var(--pink);background:rgba(255,122,217,.14);transform:translateY(-1px)}
+@keyframes moreReveal{from{opacity:0;transform:translateY(-7px)}to{opacity:1;transform:translateY(0)}}
 .rexp{border-left:2px solid var(--line);padding:2px 0 2px 22px;margin-left:6px}
 .rexp .ritem{position:relative;padding-bottom:26px}
 .rexp .ritem::before{content:"";position:absolute;left:-29px;top:5px;width:11px;height:11px;border-radius:50%;
@@ -1188,6 +1197,20 @@ function loyaltyVisualHTML(){
     '<div class="pos-callouts"><div class="pos-callout"><b>✓</b>Explains why</div><div class="pos-callout"><b>✓</b>Barista stays in control</div><div class="pos-callout"><b>✓</b>Updates payment instantly</div></div>'+
   '</div>';
 }
+function resumeProjectCardHTML(n,includeUniverseLink=false){
+  let h='<div class="rcard'+(n.col==='gold'?' gold':'')+'">';
+  h+='<div class="rt">'+n.tag+'</div><h3>'+n.title.replace(/ — /,' · ')+'</h3>';
+  if(n.award)h+='<div class="rsub" style="color:var(--gold)">'+n.award+'</div>';
+  else if(n.sub)h+='<div class="rsub">'+n.sub+'</div>';
+  if(n.img)h+='<img class="shot" src="'+n.img+'" alt="'+n.title+' — dashboard screenshot" loading="lazy">';
+  if(n.visual==='loyalty')h+=loyaltyVisualHTML();
+  if(n.star)h+=starHTML(n.star); else h+='<p>'+n.body+'</p>';
+  h+='<div class="rstk">'+n.stack.map(s=>'<span>'+s+'</span>').join('')+'</div>';
+  if(n.demo)h+='<a class="demolink" href="'+n.demo+'" target="_blank" rel="noopener">▶ '+(n.demoLabel||'Live Demo')+'</a>';
+  if(n.repo)h+='<a class="repolink" href="'+n.repo+'" target="_blank" rel="noopener">↗ View on GitHub</a>';
+  if(includeUniverseLink)h+='<button class="universebtn" type="button" data-universe-id="'+n.id+'">✦ Explore in the universe</button>';
+  return h+'</div>';
+}
 function buildResume(){
   let h='';
   // hero spike + trust band
@@ -1207,23 +1230,13 @@ function buildResume(){
   h+='</div><div class="rcred">Open to full-time AI product roles and project-based collaborations — <a href="mailto:leini8891@gmail.com">leini8891@gmail.com</a></div></div>';
   h+='<div class="rsec"><div class="rh">Selected Case Studies · 8</div><div class="rgrid">';
   FEATURED.map(id=>ITEMS.find(it=>it.id===id)).forEach(n=>{
-    h+='<div class="rcard'+(n.col==='gold'?' gold':'')+'">';
-    h+='<div class="rt">'+n.tag+'</div><h3>'+n.title.replace(/ — /,' · ')+'</h3>';
-    if(n.award)h+='<div class="rsub" style="color:var(--gold)">'+n.award+'</div>';
-    else if(n.sub)h+='<div class="rsub">'+n.sub+'</div>';
-    if(n.img)h+='<img class="shot" src="'+n.img+'" alt="'+n.title+' — dashboard screenshot" loading="lazy">';
-    if(n.visual==='loyalty')h+=loyaltyVisualHTML();
-    if(n.star)h+=starHTML(n.star); else h+='<p>'+n.body+'</p>';
-    h+='<div class="rstk">'+n.stack.map(s=>'<span>'+s+'</span>').join('')+'</div>';
-    if(n.demo)h+='<a class="demolink" href="'+n.demo+'" target="_blank" rel="noopener">▶ '+(n.demoLabel||'Live Demo')+'</a>';
-    if(n.repo)h+='<a class="repolink" href="'+n.repo+'" target="_blank" rel="noopener">↗ View on GitHub</a>';
-    h+='</div>';
+    h+=resumeProjectCardHTML(n);
   });
   h+='</div><details class="rmore"><summary>More projects · 5</summary><div class="rmoregrid">';
   MORE_PROJECTS.map(id=>ITEMS.find(it=>it.id===id)).forEach(n=>{
-    h+='<a class="rmoreitem" href="#'+n.id+'"><b>'+n.title.replace(/ — /,' · ')+'</b><span>'+n.tag+'</span></a>';
+    h+='<button class="rmoreitem" type="button" data-more-id="'+n.id+'" aria-expanded="false" aria-controls="rmoredetail"><span class="rmorecopy"><b>'+n.title.replace(/ — /,' · ')+'</b><span class="rmoretag">'+n.tag+'</span></span><span class="rmorearrow" aria-hidden="true">＋</span></button>';
   });
-  h+='</div></details><div class="rcred">The interactive universe keeps the complete project archive; this view only changes the reading hierarchy.</div></div>';
+  h+='</div><div class="rmoredetail" id="rmoredetail" aria-live="polite"></div></details><div class="rcred">The interactive universe keeps the complete project archive; this view only changes the reading hierarchy.</div></div>';
   h+='<div class="rsec"><div class="rh">Experience</div><div class="rexp">';
   EXPERIENCE.forEach(n=>{
     h+='<div class="ritem"><h3>'+n.title+'</h3><div class="rsub">'+n.sub+'</div><p>'+n.body+'</p>';
@@ -1241,6 +1254,29 @@ function buildResume(){
   document.getElementById('rbody').innerHTML=h;
 }
 buildResume();
+const moreWrap=document.querySelector('.rmore');
+const moreDetail=document.getElementById('rmoredetail');
+const moreButtons=[...document.querySelectorAll('.rmoreitem')];
+function closeMoreProject(){
+  moreButtons.forEach(btn=>{btn.classList.remove('active');btn.setAttribute('aria-expanded','false');btn.querySelector('.rmorearrow').textContent='＋';});
+  moreDetail.classList.remove('show');moreDetail.innerHTML='';
+}
+moreButtons.forEach(btn=>{btn.onclick=()=>{
+  const wasActive=btn.classList.contains('active');
+  closeMoreProject();
+  if(wasActive)return;
+  const n=ITEMS.find(it=>it.id===btn.dataset.moreId);if(!n)return;
+  btn.classList.add('active');btn.setAttribute('aria-expanded','true');btn.querySelector('.rmorearrow').textContent='−';
+  moreDetail.innerHTML=resumeProjectCardHTML(n,true);
+  void moreDetail.offsetWidth;moreDetail.classList.add('show');
+};});
+moreWrap.addEventListener('toggle',()=>{if(!moreWrap.open)closeMoreProject();});
+moreDetail.addEventListener('click',e=>{
+  const btn=e.target.closest('[data-universe-id]');if(!btn)return;
+  const id=btn.dataset.universeId;
+  if((location.hash||'').slice(1)===id){closeResumeView();setTimeout(()=>openItem(id),300);}
+  else location.hash=id;
+});
 const resumeEl=document.getElementById('resume');
 const rfloat=document.getElementById('rfloat');
 function openResume(){resumeEl.classList.add('show');resumeEl.scrollTop=0;syncFloatCTA();field.inert=true;}
