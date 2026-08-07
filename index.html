@@ -1274,14 +1274,6 @@ qin.addEventListener('keydown',e=>{if(e.key==='Enter'&&qin.value.trim()){ask(qin
 /* ============ PROFESSIONAL MODE ============ */
 const FEATURED=['auntie','aibi','kinkeep','snapcal','tokenrisk','payment'];
 const MORE_PROJECTS=['dragon','dqrsecurity','originalreturn','paymentincident','baobao','listing','tokenlab','compliance','applypilot'];
-function trackPortfolioEvent(path,title){
-  const send=()=>{
-    if(!window.goatcounter||typeof window.goatcounter.count!=='function')return false;
-    window.goatcounter.count({path,title,event:true});
-    return true;
-  };
-  if(!send())setTimeout(send,800);
-}
 function bookHref(){return CALENDLY||"mailto:leini8891@gmail.com?subject=Let's%20talk%20%E2%80%94%2015%20min%3F";}
 function starHTML(s){
   return '<div class="star">'+
@@ -1444,15 +1436,11 @@ moreButtons.forEach(btn=>{btn.onclick=()=>{
   closeMoreProject();
   if(wasActive)return;
   const n=ITEMS.find(it=>it.id===btn.dataset.moreId);if(!n)return;
-  trackPortfolioEvent('project-'+n.id+'-open','Opened project: '+n.title);
   btn.classList.add('active');btn.setAttribute('aria-expanded','true');btn.querySelector('.rmorearrow').textContent='−';
   moreDetail.innerHTML=resumeProjectCardHTML(n,true);
   void moreDetail.offsetWidth;moreDetail.classList.add('show');
 };});
-moreWrap.addEventListener('toggle',()=>{
-  if(moreWrap.open)trackPortfolioEvent('more-projects-open','Opened More projects');
-  else closeMoreProject();
-});
+moreWrap.addEventListener('toggle',()=>{if(!moreWrap.open)closeMoreProject();});
 moreDetail.addEventListener('click',e=>{
   const btn=e.target.closest('[data-universe-id]');if(!btn)return;
   const id=btn.dataset.universeId;
