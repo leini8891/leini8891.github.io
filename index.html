@@ -560,6 +560,8 @@ body.nova #sky,body.nova #field{animation:nova 1.5s ease}
         <li><a href="https://github.com/leini8891/SnapCal">SnapCal</a> — Singapore-first meal logging built around local food, honest calorie ranges and fast correction.</li>
         <li>Token Risk Brief — an explainable Agent Skill that separates source-backed risk from confidence, coverage and unknown evidence.</li>
         <li>Explainable Loyalty Redemption — a sanitized POS case translating complex benefit rules into a reversible checkout workflow.</li>
+        <li>Starbucks DQR — a production mobile-credential security remediation spanning vendor investigation, solution and cost review, and cross-team release delivery.</li>
+        <li>Starbucks Original-Order Return — a barcode-driven POS workflow preserving product and discount-allocation consistency with the source transaction.</li>
       </ul>
       <p style="color:#8f99c6;max-width:680px;line-height:1.6">Earlier enterprise AI exposure: supported vendor coordination, knowledge-transfer sessions and portfolio reporting for a facial-analysis consultation prototype developed by a cloud AI partner. The vendor owned model development.</p>
       <p><a href="Elena_Xiao_CV.pdf">Download CV</a> · <a href="https://www.linkedin.com/in/xiao-elena/">LinkedIn</a> · <a href="https://github.com/leini8891">GitHub</a></p>
@@ -769,6 +771,16 @@ const ITEMS=[
     meta:'Sanitized case · business-state consistency · no internal tools shown',
     stack:['Incident analysis','Payments','Reconciliation','Exception handling','Cross-team coordination']},
 
+  {id:'dqrsecurity',group:'riskplanet',ang:300,rad:82,size:14,col:'violet',label:'DQR Security Remediation',featured:false,
+    tag:'Enterprise Security · Production Launch',title:'DQR — Mobile Credential Security Remediation',sub:'Starbucks China · Mobile / API / vendor delivery',
+    body:'A production security-remediation program that strengthened the integrity of a mobile membership-credential flow across app and API dependencies.',
+    star:{p:'A high-risk mobile membership flow required stronger credential-integrity controls and coordinated remediation across several app, API and vendor dependencies.',
+      a:'Worked with the vendor to map the end-to-end data flow, shaped the remediation options and cost estimate, participated in vendor-quote approval, and coordinated security, mobile, backend, infrastructure and QA teams through release.',
+      r:'Delivered the cross-platform remediation through <b>production launch</b>.',
+      role:'Served as Engineering Project Manager and documented project lead; owned cross-functional delivery and technical-commercial alignment, while engineering teams owned detailed security design and implementation.'},
+    meta:'Production launch · vendor + security + mobile / backend delivery',
+    stack:['Security remediation','Vendor management','Mobile / API','Release governance','Cross-functional delivery']},
+
   {id:'cs660',group:'growthmoon',ang:55,rad:85,size:14,col:'gold',label:'AI CS Analytics',featured:false,
     tag:'Analytics · Bybit',title:'AI Customer-Service Analytics',sub:'KPI frameworks for an AI-assisted CS org',
     body:"The data workstream for Bybit's intelligent customer-service product: defining deflection, satisfaction and funnel metrics; aligning instrumentation and DWD/DWS requirements; building user profiles and 3 dashboard iterations; and monitoring feature impact across language, topic, service time and user segment.",
@@ -806,6 +818,16 @@ const ITEMS=[
       role:'Owned the POS interaction prototype and rule-to-workflow translation; coordinated requirements and integration delivery across business, product and engineering teams.'},
     meta:'Sanitized case · deterministic rules, not AI · no confidential screens shown',
     stack:['Loyalty','Explainable recommendations','POS workflow','Human-in-the-loop','Cross-system delivery']},
+
+  {id:'originalreturn',group:'growthmoon',ang:315,rad:82,size:13,col:'gold',label:'Original-Order Return',featured:false,
+    tag:'Retail Operations · Transaction Integrity',title:'Original-Order Return',sub:'Starbucks China · POS / Order Center / CRM',
+    body:'A production barcode-driven return workflow that retrieved the source transaction instead of asking store partners to rebuild it manually.',
+    star:{p:'Store partners manually re-entered products during returns, creating mismatch risk between the return and the original transaction.',
+      a:'Partnered closely with the POS owner to translate the barcode-driven flow into cross-system requirements and acceptance criteria covering order retrieval, products, discount allocation, payment paths and loyalty-benefit restoration.',
+      r:'Launched the flow to <b>production</b>, removing manual product re-entry for covered returns while preserving product and discount-allocation consistency with the original transaction.',
+      role:'Owned requirements clarification, acceptance boundaries and launch coordination in close partnership with the POS owner; engineering teams owned implementation.'},
+    meta:'Production launch · barcode-driven transaction consistency',
+    stack:['POS workflow','Returns','Transaction integrity','Acceptance criteria','Cross-system delivery']},
 ];
 
 const SPARKS=[
@@ -875,6 +897,14 @@ const ASK = [
     focus:'riskplanet',
     next:[['What are you building now?','building now']],
     a:"Five years in crypto across product, data, growth, customer service and risk. At Bybit I led compliance-data visibility, Smart Customer Service measurement and the Dragon Boat internal workflow product. Separately, in later project-based work, I designed an LLM reporting workflow over transaction and risk data. It's all on Risk Planet."},
+  {k:['dqr','qr security','mobile security','security remediation','cybersecurity','二维码安全','安全项目'],
+    focus:'dqrsecurity',
+    next:[['Why hire you?','why hire you'],['Tell me about returns','refund and return']],
+    a:"At Starbucks I served as Engineering Project Manager and project lead for DQR, a mobile-credential security remediation. I worked with the vendor on the end-to-end investigation, solution and cost review, then coordinated security, mobile, backend, infrastructure and QA teams through production launch. Engineering teams owned detailed security design and implementation; I owned cross-functional delivery and technical-commercial alignment."},
+  {k:['refund','return','original order','original-order','transaction integrity','退货','退款','原单退'],
+    focus:'originalreturn',
+    next:[['Tell me about security','DQR security'],['Why hire you?','why hire you']],
+    a:"For Starbucks original-order returns, I partnered closely with the POS owner to turn a barcode-driven flow into clear cross-system requirements and acceptance boundaries. The production launch removed manual product re-entry for covered returns while preserving products and discount allocation from the source transaction."},
   {k:['baobao','health','elder','wellness','wearable','医疗','健康','养老','宝宝'],
    focus:'baobao',
    next:[['See your best project','best project'],['What are you building now?','building now']],
@@ -1243,7 +1273,15 @@ qin.addEventListener('keydown',e=>{if(e.key==='Enter'&&qin.value.trim()){ask(qin
 
 /* ============ PROFESSIONAL MODE ============ */
 const FEATURED=['auntie','aibi','kinkeep','snapcal','tokenrisk','payment'];
-const MORE_PROJECTS=['dragon','paymentincident','baobao','listing','tokenlab','compliance','applypilot'];
+const MORE_PROJECTS=['dragon','dqrsecurity','originalreturn','paymentincident','baobao','listing','tokenlab','compliance','applypilot'];
+function trackPortfolioEvent(path,title){
+  const send=()=>{
+    if(!window.goatcounter||typeof window.goatcounter.count!=='function')return false;
+    window.goatcounter.count({path,title,event:true});
+    return true;
+  };
+  if(!send())setTimeout(send,800);
+}
 function bookHref(){return CALENDLY||"mailto:leini8891@gmail.com?subject=Let's%20talk%20%E2%80%94%2015%20min%3F";}
 function starHTML(s){
   return '<div class="star">'+
@@ -1406,11 +1444,15 @@ moreButtons.forEach(btn=>{btn.onclick=()=>{
   closeMoreProject();
   if(wasActive)return;
   const n=ITEMS.find(it=>it.id===btn.dataset.moreId);if(!n)return;
+  trackPortfolioEvent('project-'+n.id+'-open','Opened project: '+n.title);
   btn.classList.add('active');btn.setAttribute('aria-expanded','true');btn.querySelector('.rmorearrow').textContent='−';
   moreDetail.innerHTML=resumeProjectCardHTML(n,true);
   void moreDetail.offsetWidth;moreDetail.classList.add('show');
 };});
-moreWrap.addEventListener('toggle',()=>{if(!moreWrap.open)closeMoreProject();});
+moreWrap.addEventListener('toggle',()=>{
+  if(moreWrap.open)trackPortfolioEvent('more-projects-open','Opened More projects');
+  else closeMoreProject();
+});
 moreDetail.addEventListener('click',e=>{
   const btn=e.target.closest('[data-universe-id]');if(!btn)return;
   const id=btn.dataset.universeId;
